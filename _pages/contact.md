@@ -1,52 +1,67 @@
 ---
-layout: single
-title: "Let's Talk"
+layout: default
+title: "Contact Oleksandr Sobol"
 permalink: /contact/
-excerpt: "Tell me about your workflow problem"
 ---
 
-## Start a Conversation
+<div style="margin-bottom: 2.5rem;">
+  <h1 class="md-hero-title">Let's Work Together</h1>
+  <p class="md-hero-sub">Have a manual workflow that needs automation, an open engineering role, or a project in mind? Drop me a line below.</p>
+</div>
 
-The best projects start with a clear problem statement. Tell me what's eating your team's time.
+<div class="md-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+  <div class="md-card">
+    <h2 style="font-size: 1.5rem; margin-bottom: 1.25rem;"><i class="fas fa-paper-plane" style="color: var(--md-sys-color-primary);"></i> Send a Message</h2>
+    
+    <form action="https://formspree.io/f/mlgwqlel" method="POST">
+      <div style="margin-bottom: 1.25rem;">
+        <label for="name" style="display: block; font-size: 0.85rem; margin-bottom: 0.35rem; color: var(--md-sys-color-on-surface-variant);">Name</label>
+        <input type="text" id="name" name="name" class="md-input" required placeholder="Your name">
+      </div>
 
-<form action="https://formspree.io/f/mlgwqlel" method="POST" style="max-width: 600px; margin: 2rem 0;">
+      <div style="margin-bottom: 1.25rem;">
+        <label for="email" style="display: block; font-size: 0.85rem; margin-bottom: 0.35rem; color: var(--md-sys-color-on-surface-variant);">Email Address</label>
+        <input type="email" id="email" name="email" class="md-input" required placeholder="you@company.com">
+      </div>
 
-  <div style="margin-bottom: 1.5rem;">
-    <label for="name" style="display: block; margin-bottom: 0.5rem; color: var(--text-secondary, #b0b0b0); font-size: 0.9rem;">Name</label>
-    <input type="text" id="name" name="name" required style="width: 100%; padding: 0.75rem; background: var(--background-secondary, #1a1a1a); border: 1px solid var(--border-color, #3a3a3a); border-radius: 6px; color: var(--text-primary, #e2e2e2); font-size: 1rem;">
+      <div style="margin-bottom: 1.25rem;">
+        <label for="type" style="display: block; font-size: 0.85rem; margin-bottom: 0.35rem; color: var(--md-sys-color-on-surface-variant);">Topic</label>
+        <select id="type" name="type" class="md-select">
+          <option value="automation">Backend Automation & System Design</option>
+          <option value="employment">Full-time / Contracting Role</option>
+          <option value="aerial">Drone Cinematography Services</option>
+          <option value="other">Other Inquiry</option>
+        </select>
+      </div>
+
+      <div style="margin-bottom: 1.5rem;">
+        <label for="message" style="display: block; font-size: 0.85rem; margin-bottom: 0.35rem; color: var(--md-sys-color-on-surface-variant);">Message</label>
+        <textarea id="message" name="message" class="md-textarea" rows="5" required placeholder="Describe your project, timeline, or workflow goals..."></textarea>
+      </div>
+
+      <button type="submit" class="md-btn md-btn-filled" style="width: 100%;"><i class="fas fa-paper-plane"></i> Send Message</button>
+    </form>
   </div>
 
-  <div style="margin-bottom: 1.5rem;">
-    <label for="email" style="display: block; margin-bottom: 0.5rem; color: var(--text-secondary, #b0b0b0); font-size: 0.9rem;">Email</label>
-    <input type="email" id="email" name="email" required style="width: 100%; padding: 0.75rem; background: var(--background-secondary, #1a1a1a); border: 1px solid var(--border-color, #3a3a3a); border-radius: 6px; color: var(--text-primary, #e2e2e2); font-size: 1rem;">
+  <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+    <div class="md-card">
+      <h3 class="md-card-title"><i class="fas fa-envelope" style="color: var(--md-sys-color-secondary);"></i> Direct Email</h3>
+      <p class="md-card-desc">For urgent requests or direct correspondence.</p>
+      <a href="mailto:olekssobol@gmail.com" class="md-btn md-btn-tonal" style="width: fit-content;"><i class="fas fa-at"></i> olekssobol@gmail.com</a>
+    </div>
+
+    <div class="md-card">
+      <h3 class="md-card-title"><i class="fas fa-globe" style="color: var(--md-sys-color-primary);"></i> Professional Profiles</h3>
+      <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.5rem;">
+        <a href="https://github.com/OleksSobol" target="_blank" rel="noopener" class="md-btn md-btn-tonal" style="justify-content: flex-start;"><i class="fab fa-github"></i> GitHub (@OleksSobol)</a>
+        <a href="https://www.linkedin.com/in/olekssobol/" target="_blank" rel="noopener" class="md-btn md-btn-tonal" style="justify-content: flex-start;"><i class="fab fa-linkedin"></i> LinkedIn (/in/olekssobol)</a>
+        <a href="https://www.youtube.com/@Life2freedom" target="_blank" rel="noopener" class="md-btn md-btn-tonal" style="justify-content: flex-start;"><i class="fab fa-youtube"></i> YouTube (@Life2freedom)</a>
+      </div>
+    </div>
+
+    <div class="md-card" style="background: var(--md-sys-color-surface-container-high);">
+      <h4 style="margin-bottom: 0.25rem;"><i class="fas fa-map-marker-alt"></i> Location</h4>
+      <p style="margin: 0; color: var(--md-sys-color-on-surface-variant);">Washington, USA • Available for remote worldwide</p>
+    </div>
   </div>
-
-  <div style="margin-bottom: 1.5rem;">
-    <label for="type" style="display: block; margin-bottom: 0.5rem; color: var(--text-secondary, #b0b0b0); font-size: 0.9rem;">I'm reaching out about</label>
-    <select id="type" name="type" style="width: 100%; padding: 0.75rem; background: var(--background-secondary, #1a1a1a); border: 1px solid var(--border-color, #3a3a3a); border-radius: 6px; color: var(--text-primary, #e2e2e2); font-size: 1rem;">
-      <option value="automation">Automation project</option>
-      <option value="employment">Employment opportunity</option>
-      <option value="freelance">Freelance engagement</option>
-      <option value="other">Something else</option>
-    </select>
-  </div>
-
-  <div style="margin-bottom: 1.5rem;">
-    <label for="message" style="display: block; margin-bottom: 0.5rem; color: var(--text-secondary, #b0b0b0); font-size: 0.9rem;">Describe your situation</label>
-    <textarea id="message" name="message" rows="6" required placeholder="What manual process is costing you time? What have you tried so far?" style="width: 100%; padding: 0.75rem; background: var(--background-secondary, #1a1a1a); border: 1px solid var(--border-color, #3a3a3a); border-radius: 6px; color: var(--text-primary, #e2e2e2); font-size: 1rem; resize: vertical;"></textarea>
-  </div>
-
-  <button type="submit" class="btn btn--primary" style="width: 100%;">Send Message</button>
-
-</form>
-
----
-
-## Other Ways to Reach Me
-
-**LinkedIn:** [linkedin.com/in/olekssobol](https://www.linkedin.com/in/olekssobol/)
-**GitHub:** [github.com/OleksSobol](https://github.com/OleksSobol)
-**Resume:** [Download PDF](/assets/resume.pdf)
-
-Based in Washington, USA. Open to remote work.
-I respond within 24-48 hours on business days.
+</div>

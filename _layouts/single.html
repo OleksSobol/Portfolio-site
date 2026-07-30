@@ -1,0 +1,36 @@
+---
+layout: default
+---
+
+<article class="md-article">
+  {% if page.title %}
+    <header class="md-article-header">
+      <h1 class="md-hero-title" style="font-size: clamp(2rem, 4.5vw, 3rem);">{{ page.title }}</h1>
+      {% if page.subtitle %}
+        <p class="md-hero-sub" style="margin-top: 0.75rem;">{{ page.subtitle }}</p>
+      {% endif %}
+
+      {% if page.date or page.read_time %}
+        <div class="md-article-meta">
+          {% if page.date %}
+            <span><i class="far fa-calendar-alt"></i> {{ page.date | date: "%B %d, %Y" }}</span>
+          {% endif %}
+          {% if page.read_time %}
+            <span><i class="far fa-clock"></i> {{ page.content | number_of_words | divided_by: 200 | plus: 1 }} min read</span>
+          {% endif %}
+          {% if page.categories %}
+            <div class="md-chip-group" style="display: inline-flex;">
+              {% for category in page.categories %}
+                <span class="md-chip">{{ category }}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+    </header>
+  {% endif %}
+
+  <div class="md-article-content">
+    {{ content }}
+  </div>
+</article>
