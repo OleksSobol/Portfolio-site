@@ -15,17 +15,17 @@ permalink: /projects/
   <div class="md-card">
     <div class="md-chip-group">
       <span class="md-chip">PHP</span>
-      <span class="md-chip">JavaScript</span>
-      <span class="md-chip">AJAX</span>
+      <span class="md-chip">CSS3 / UI Redesign</span>
+      <span class="md-chip">JavaScript / AJAX</span>
       <span class="md-chip">MySQL</span>
       <span class="md-chip">Supply Chain</span>
     </div>
     <h2 class="md-card-title">ProVar Agricultural Variety Management</h2>
     <p class="md-card-desc">
-      Full-stack web application built for <a href="https://provarmanagement.com/pvm/about-pvm/" target="_blank" rel="noopener" style="color: var(--md-sys-color-primary);">ProVar Management</a> to manage tree fruit variety licensing, agricultural logistics, grower production reporting, and intellectual property tracking.
+      Full-stack web application for <a href="https://provarmanagement.com/pvm/about-pvm/" target="_blank" rel="noopener" style="color: var(--md-sys-color-primary);">ProVar Management</a>. Architected a complete CSS theme redesign and modern UI overhaul for tree fruit variety licensing, agricultural logistics, grower production reporting, and IP tracking.
     </p>
     <div style="margin-top: 0.5rem; color: var(--md-sys-color-secondary); font-size: 0.85rem; font-family: var(--md-font-mono);">
-      Impact: Streamlined fruit variety licensing & agricultural supply chain workflows
+      Impact: Modern CSS theme redesign & streamlined agricultural supply chain workflows
     </div>
   </div>
 
@@ -33,16 +33,19 @@ permalink: /projects/
   <div class="md-card">
     <div class="md-chip-group">
       <span class="md-chip">PHP</span>
+      <span class="md-chip">CSS3 / UI Theme</span>
       <span class="md-chip">MySQL</span>
-      <span class="md-chip">AJAX</span>
       <span class="md-chip">Payroll Engine</span>
       <span class="md-chip">Multi-tenant</span>
     </div>
     <h2 class="md-card-title">NRS Agricultural Accounting & Payroll Platform</h2>
     <p class="md-card-desc">
-      Specialized financial and payroll platform for <a href="https://www.nrsaccounting.com/" target="_blank" rel="noopener" style="color: var(--md-sys-color-primary);">NRS Accounting Systems</a>. Engineered server-side validation, complex database queries, and custom payroll processing engines for commercial and agricultural businesses.
+      Specialized financial and payroll platform for <a href="https://www.nrsaccounting.com/" target="_blank" rel="noopener" style="color: var(--md-sys-color-primary);">NRS Accounting Systems</a>. Executed a full CSS theme redesign alongside backend validation, complex database queries, and custom payroll processing engines.
     </p>
     <div style="margin-top: 0.5rem; color: var(--md-sys-color-secondary); font-size: 0.85rem; font-family: var(--md-font-mono);">
+      Impact: Full UI/CSS theme transformation & multi-tenant payroll engine
+    </div>
+  </div>
       Impact: Multi-tenant agricultural payroll calculation & compliance reporting
     </div>
   </div>

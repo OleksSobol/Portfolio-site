@@ -109,25 +109,25 @@ title: "Oleksandr Sobol — Full Stack & Backend Engineer"
   </div>
 
   <div class="md-grid">
-    <a href="{{ '/projects/provar/' | relative_url }}" class="md-card">
+    <a href="{{ '/projects/' | relative_url }}" class="md-card">
       <div class="md-chip-group">
         <span class="md-chip">PHP & JS</span>
-        <span class="md-chip">MySQL</span>
+        <span class="md-chip">CSS Theme</span>
         <span class="md-chip">Ag Logistics</span>
       </div>
       <h3 class="md-card-title">ProVar Agricultural Variety Management</h3>
-      <p class="md-card-desc">Full-stack web application built for ProVar Management to streamline tree fruit variety licensing, agricultural logistics, grower production reporting, and IP tracking.</p>
+      <p class="md-card-desc">Architected a complete CSS theme redesign and modern UI overhaul for ProVar Management, streamlining fruit variety licensing, agricultural logistics, and grower reporting.</p>
       <div style="color: var(--md-sys-color-primary); font-size: 0.875rem; font-weight: 600;">Learn More <i class="fas fa-arrow-right"></i></div>
     </a>
 
-    <a href="{{ '/projects/nrs/' | relative_url }}" class="md-card">
+    <a href="{{ '/projects/' | relative_url }}" class="md-card">
       <div class="md-chip-group">
         <span class="md-chip">PHP & AJAX</span>
+        <span class="md-chip">UI Overhaul</span>
         <span class="md-chip">Payroll Engine</span>
-        <span class="md-chip">Multi-tenant</span>
       </div>
       <h3 class="md-card-title">NRS Accounting & Payroll Platform</h3>
-      <p class="md-card-desc">Engineered custom server-side validation, multi-tenant database queries, and payroll processing engines for NRS Accounting Systems serving commercial and agricultural operations.</p>
+      <p class="md-card-desc">Executed a full CSS theme redesign alongside custom server-side validation and payroll processing engines for NRS Accounting Systems serving agricultural operations.</p>
       <div style="color: var(--md-sys-color-primary); font-size: 0.875rem; font-weight: 600;">Learn More <i class="fas fa-arrow-right"></i></div>
     </a>
 
