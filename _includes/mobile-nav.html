@@ -1,0 +1,22 @@
+<nav class="md-nav-mobile">
+  <a href="{{ '/' | relative_url }}" class="md-mobile-item {% if page.url == '/' %}active{% endif %}">
+    <div class="md-mobile-icon"><i class="fas fa-home"></i></div>
+    <span>Home</span>
+  </a>
+  <a href="{{ '/projects/' | relative_url }}" class="md-mobile-item {% if page.url contains '/projects' %}active{% endif %}">
+    <div class="md-mobile-icon"><i class="fas fa-code-branch"></i></div>
+    <span>Projects</span>
+  </a>
+  <a href="{{ '/playground/' | relative_url }}" class="md-mobile-item {% if page.url contains '/playground' %}active{% endif %}">
+    <div class="md-mobile-icon"><i class="fas fa-terminal"></i></div>
+    <span>Tools</span>
+  </a>
+  <a href="{{ '/blog/' | relative_url }}" class="md-mobile-item {% if page.url contains '/blog' %}active{% endif %}">
+    <div class="md-mobile-icon"><i class="fas fa-pen-nib"></i></div>
+    <span>Blog</span>
+  </a>
+  <a href="{{ '/about/' | relative_url }}" class="md-mobile-item {% if page.url contains '/about' %}active{% endif %}">
+    <div class="md-mobile-icon"><i class="fas fa-user-astronaut"></i></div>
+    <span>About</span>
+  </a>
+</nav>

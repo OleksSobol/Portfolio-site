@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% include head.html %}
+</head>
+<body>
+  {% include header.html %}
+
+  <main class="md-container">
+    {{ content }}
+  </main>
+
+  {% include footer.html %}
+  {% include mobile-nav.html %}
+
+  <!-- Code Copy Script & Micro Interactions -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Add copy button to pre code blocks
+      document.querySelectorAll('pre').forEach(pre => {
+        const btn = document.createElement('button');
+        btn.className = 'md-btn md-btn-tonal';
+        btn.style.cssText = 'position: absolute; top: 0.5rem; right: 0.5rem; padding: 0.25rem 0.6rem; font-size: 0.75rem;';
+        btn.innerHTML = '<i class="far fa-copy"></i> Copy';
+        pre.style.position = 'relative';
+        pre.appendChild(btn);
+
+        btn.addEventListener('click', () => {
+          const code = pre.querySelector('code');
+          if (code) {
+            navigator.clipboard.writeText(code.innerText);
+            btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            setTimeout(() => {
+              btn.innerHTML = '<i class="far fa-copy"></i> Copy';
+            }, 2000);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

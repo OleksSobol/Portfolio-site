@@ -1,154 +1,100 @@
 ---
-layout: single
-title: "Aerial Drone Portfolio"
-permalink: /lab/aerial/
-sitemap: false
-excerpt: "Cinematic 4K drone footage — FAA Part 107 certified remote pilot"
+layout: default
+title: "Aerial Drone Cinematography"
+permalink: /videos/
 ---
 
-<div class="cert-banner">
-  <div class="cert-icon">✈️</div>
-  <div class="cert-text">
-    <strong>FAA Part 107 Certified Remote Pilot</strong> — All flights conducted in compliant airspace with situational awareness, weather + NOTAM review, and VLOS maintained. Professional aerial cinematography with safety as the top priority.
+<div style="margin-bottom: 2.5rem;">
+  <div class="md-hero-badge" style="margin-bottom: 1rem;">
+    <i class="fas fa-plane"></i> FAA Part 107 Commercial Drone Remote Pilot
+  </div>
+  <h1 class="md-hero-title">Aerial Drone Cinematography</h1>
+  <p class="md-hero-sub">4K cinematic aerial footage, tower inspections, and stock footage filmed across Washington & Montana.</p>
+</div>
+
+<div class="md-stats-grid" style="margin-bottom: 3rem;">
+  <div class="md-stat-card">
+    <div class="md-stat-num">4K</div>
+    <div class="md-stat-label">Ultra HD Quality</div>
+  </div>
+  <div class="md-stat-card">
+    <div class="md-stat-num">Part 107</div>
+    <div class="md-stat-label">FAA Licensed</div>
+  </div>
+  <div class="md-stat-card">
+    <div class="md-stat-num">WA & MT</div>
+    <div class="md-stat-label">Locations</div>
+  </div>
+  <div class="md-stat-card">
+    <div class="md-stat-num">100%</div>
+    <div class="md-stat-label">Safety & Compliance</div>
   </div>
 </div>
 
-<div class="stats-row">
-  <div class="stat-card">
-    <div class="stat-number">4K</div>
-    <div class="stat-label">Resolution</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-number">Part 107</div>
-    <div class="stat-label">FAA Certified</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-number">MT & WA</div>
-    <div class="stat-label">Locations</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-number">Cinematic</div>
-    <div class="stat-label">Quality</div>
-  </div>
-</div>
-
-<div class="aerial-intro">
-  <p>Precision aerial cinematography combining technical expertise from software development with creative composition. Each shot carefully planned for lighting, movement, and visual impact.</p>
-</div>
-
----
-
-<div class="badge-row">
-  <span class="badge">🎬 Cinematic</span>
-  <span class="badge">📹 4K Ultra HD</span>
-  <span class="badge">✈️ Licensed Pilot</span>
-  <span class="badge">🛡️ Insured</span>
-</div>
-
-<div class="video-grid">
-
-  <div class="video-card">
-    <div class="responsive-video">
-      <iframe
-        src="https://www.youtube-nocookie.com/embed/-yqcvhoB6Cs"
-        title="Beautiful sunrise with winter touch over Cattail Pond | 4K Drone Footage"
-        loading="lazy"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen></iframe>
+<div class="md-grid">
+  <div class="md-card">
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; margin-bottom: 1rem;">
+      <iframe src="https://www.youtube-nocookie.com/embed/-yqcvhoB6Cs" title="Cattail Pond Sunrise" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allowfullscreen></iframe>
     </div>
-    <h3>Beautiful Sunrise with Winter Touch over Cattail Pond</h3>
-    <p class="video-description">Soft winter palette, gradual reveal of the pond under early golden light. Focus on subtle exposure control in shifting low-angle sun.</p>
-    <div class="video-meta">📹 4K Resolution • 🎬 Cinematic • 🌅 Landscape</div>
-  </div>
-
-  <div class="video-card">
-    <div class="responsive-video">
-      <iframe
-        src="https://www.youtube-nocookie.com/embed/UzItAFlkepA"
-        title="2022 Bozeman, MT Summer 4K Drone Stock Footage by Oleks Sobol Licensed Part 107 Pilot"
-        loading="lazy"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen></iframe>
+    <h3 class="md-card-title">Cattail Pond Winter Sunrise</h3>
+    <p class="md-card-desc">Soft winter palette and gradual reveal of Cattail Pond under early morning sun. Low-angle exposure control.</p>
+    <div class="md-chip-group">
+      <span class="md-chip">4K UHD</span>
+      <span class="md-chip">Landscape</span>
+      <span class="md-chip">Cinematic</span>
     </div>
-    <h3>Bozeman, MT Summer Aerial Stock (2022)</h3>
-    <p class="video-description">Seasonal stock set: valley expanses, ridgelines, and town context shots designed for editorial or promo overlays.</p>
-    <div class="video-meta">📹 4K Resolution • 📦 Stock Footage • 🏔️ Montana</div>
   </div>
 
-  <div class="video-card">
-    <div class="responsive-video">
-      <iframe
-        src="https://www.youtube-nocookie.com/embed/vpCcIjhkdK8"
-        title="100ft WISP Tower & Climber 4K Drone Footage by Oleks Sobol Licensed Part 107 Pilot"
-        loading="lazy"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen></iframe>
+  <div class="md-card">
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; margin-bottom: 1rem;">
+      <iframe src="https://www.youtube-nocookie.com/embed/UzItAFlkepA" title="Bozeman MT Summer 4K" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allowfullscreen></iframe>
     </div>
-    <h3>100ft WISP Tower & Climber</h3>
-    <p class="video-description">Precision lateral + vertical tracking of a tower ascent. Emphasis on smooth parallax while maintaining safe lateral separation.</p>
-    <div class="video-meta">📹 4K Resolution • 🏗️ Industrial • 🎯 Technical</div>
-  </div>
-
-  <div class="video-card">
-    <div class="responsive-video">
-      <iframe
-        src="https://www.youtube-nocookie.com/embed/Q3ZjZTtpEk8"
-        title="Day in the field - Cinematic 4K Drone Footage"
-        loading="lazy"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen></iframe>
+    <h3 class="md-card-title">Bozeman, MT Summer Stock</h3>
+    <p class="md-card-desc">Valley expanses, mountain ridgelines, and commercial stock shots designed for promotional overlays.</p>
+    <div class="md-chip-group">
+      <span class="md-chip">4K UHD</span>
+      <span class="md-chip">Montana</span>
+      <span class="md-chip">Stock Footage</span>
     </div>
-    <h3>Day in the Field – Cinematic</h3>
-    <p class="video-description">Narrative-style sequence blending reveal, push-in, and lateral passes for a grounded cinematic feel.</p>
-    <div class="video-meta">📹 4K Resolution • 🎬 Cinematic • 🌾 Landscape</div>
   </div>
 
+  <div class="md-card">
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; margin-bottom: 1rem;">
+      <iframe src="https://www.youtube-nocookie.com/embed/vpCcIjhkdK8" title="100ft WISP Tower Climber" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allowfullscreen></iframe>
+    </div>
+    <h3 class="md-card-title">100ft WISP Tower & Climber</h3>
+    <p class="md-card-desc">Precision lateral & vertical tracking of WISP tower ascent with smooth parallax and safe separation distance.</p>
+    <div class="md-chip-group">
+      <span class="md-chip">4K UHD</span>
+      <span class="md-chip">Industrial</span>
+      <span class="md-chip">Inspection</span>
+    </div>
+  </div>
+
+  <div class="md-card">
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; margin-bottom: 1rem;">
+      <iframe src="https://www.youtube-nocookie.com/embed/Q3ZjZTtpEk8" title="Day in the field" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allowfullscreen></iframe>
+    </div>
+    <h3 class="md-card-title">Day in the Field</h3>
+    <p class="md-card-desc">Narrative sequence blending push-in reveals and lateral passes over rural Washington terrain.</p>
+    <div class="md-chip-group">
+      <span class="md-chip">4K UHD</span>
+      <span class="md-chip">Cinematic</span>
+      <span class="md-chip">Landscape</span>
+    </div>
+  </div>
 </div>
 
----
-
-## Services & Collaboration
-
-<div class="aerial-services">
-
-### Available for Hire
-
-Need custom aerial footage, inspection passes, or raw D-Log clips? I provide professional drone cinematography services for:
-
-- **Real Estate** — Showcase properties with stunning aerial perspectives
-- **Commercial Projects** — Promotional videos, marketing content, and brand storytelling
-- **Industrial Inspections** — Tower inspections, infrastructure surveys, construction progress
-- **Events** — Weddings, outdoor events, and special occasions
-- **Stock Footage** — Custom aerial shots for your specific needs
-
-**Contact:** [olekssobol@gmail.com](mailto:olekssobol@gmail.com)
-
-Include: location, project purpose, desired deliverables, and timeline.
-
-</div>
-
----
-
-## Flight Operations & Safety
-
-<div class="aerial-safety">
-
-**Professional Standards:**
-- ✈️ Pre-flight airspace authorization & NOTAM review
-- 🌦️ Weather assessment and risk evaluation
-- 👁️ Visual observer deployment when required
-- 🔋 Battery health monitoring & compass calibration
-- 📋 Post-flight media integrity verification
-- 🛡️ Full liability insurance coverage
-
-Every flight follows FAA regulations and industry best practices. Safety is never compromised for the shot.
-
-</div>
-
----
-
-<div class="aerial-cta">
-  <a href="https://www.youtube.com/@Life2freedom" class="btn btn--primary" style="margin: 0.5rem;">View More on YouTube</a>
-  <a href="/contact/" class="btn btn--info" style="margin: 0.5rem;">Request Quote</a>
-  <a href="/" class="btn" style="margin: 0.5rem;">Back to Portfolio</a>
+<div class="md-card" style="margin-top: 3rem; background: var(--md-sys-color-surface-container-high);">
+  <h2 style="font-size: 1.5rem; margin-bottom: 1rem;"><i class="fas fa-shield-alt" style="color: var(--md-sys-color-primary);"></i> Flight Operations & Safety Standards</h2>
+  <ul style="color: var(--md-sys-color-on-surface-variant); line-height: 1.8; margin-left: 1.25rem;">
+    <li>FAA Part 107 Certified Remote Pilot with active airspace authorization</li>
+    <li>Pre-flight weather assessment, NOTAM review, and risk mitigation protocols</li>
+    <li>Full liability insurance coverage for all commercial flight missions</li>
+    <li>Calibrated 4K D-Log video capture for maximum post-production dynamic range</li>
+  </ul>
+  <div style="margin-top: 1.5rem;">
+    <a href="https://www.youtube.com/@Life2freedom" target="_blank" rel="noopener" class="md-btn md-btn-filled"><i class="fab fa-youtube"></i> Watch More on YouTube</a>
+    <a href="{{ '/contact/' | relative_url }}" class="md-btn md-btn-tonal"><i class="fas fa-envelope"></i> Inquire About Services</a>
+  </div>
 </div>
