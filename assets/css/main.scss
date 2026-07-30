@@ -637,3 +637,51 @@ pre code {
 .md-footer-link:hover {
   color: var(--md-sys-color-primary);
 }
+
+/* Mobile Responsiveness Refinements */
+.md-btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+@media (max-width: 767px) {
+  .md-container {
+    padding: 1.25rem 1rem 5rem;
+  }
+
+  .md-hero-title {
+    font-size: clamp(1.75rem, 7vw, 2.75rem);
+    line-height: 1.15;
+  }
+
+  .md-tool-card {
+    padding: 1.25rem 1rem;
+    border-radius: 16px;
+  }
+
+  .md-btn {
+    padding: 0.6rem 1.15rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    border-radius: 20px;
+  }
+
+  .md-btn-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .md-btn-group .md-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .pg-output {
+    padding: 1rem;
+    font-size: 0.825rem;
+  }
+}
