@@ -1,122 +1,147 @@
 ---
 layout: default
 permalink: /
-title: "Oleksandr Sobol — Full Stack & Backend Developer"
+title: "Oleksandr Sobol — Full Stack & Backend Engineer"
 ---
 
 <div class="md-hero">
   <div class="md-hero-badge">
     <span class="md-hero-badge-pulse"></span>
-    Full Stack Developer @ Abstract Software LLC
+    Available for High-Impact Software Engineering Roles & Projects
   </div>
 
-  <h1 class="md-hero-title">Oleksandr Sobol</h1>
+  <h1 class="md-hero-title">I turn complex operational bottlenecks into fast, reliable software.</h1>
   
   <p class="md-hero-sub">
-    Full Stack & Backend Developer based in Yakima, WA. Specializing in PHP, Python, JavaScript, Go, MySQL, Docker, and resilient network/backend automation.
+    Full Stack & Backend Developer based in Yakima, WA. I bring an infrastructure-first mindset, relentless problem-solving, and complete end-to-end ownership to every project I build.
   </p>
 
-  <div class="md-chip-group">
-    <span class="md-chip">PHP</span>
-    <span class="md-chip">Python</span>
-    <span class="md-chip">JavaScript / AJAX</span>
-    <span class="md-chip">MySQL</span>
-    <span class="md-chip">Go</span>
-    <span class="md-chip">Docker</span>
-    <span class="md-chip">REST APIs</span>
-    <span class="md-chip">Linux</span>
-  </div>
-
   <div class="md-hero-actions">
-    <a href="{{ '/about/' | relative_url }}" class="md-btn md-btn-filled"><i class="fas fa-file-alt"></i> View Full Resume</a>
-    <a href="{{ '/projects/' | relative_url }}" class="md-btn md-btn-tonal"><i class="fas fa-code-branch"></i> Projects & Work</a>
-    <a href="https://github.com/OleksSobol" target="_blank" rel="noopener" class="md-btn md-btn-tonal"><i class="fab fa-github"></i> GitHub Profile</a>
+    <a href="{{ '/contact/' | relative_url }}" class="md-btn md-btn-filled"><i class="fas fa-paper-plane"></i> Let's Build Something</a>
+    <a href="{{ '/about/' | relative_url }}" class="md-btn md-btn-tonal"><i class="fas fa-file-alt"></i> My Background & Resume</a>
+    <a href="https://github.com/OleksSobol" target="_blank" rel="noopener" class="md-btn md-btn-tonal"><i class="fab fa-github"></i> GitHub Repos</a>
   </div>
 </div>
 
-<!-- Experience Highlights Grid -->
-<section style="margin: 3rem 0;">
-  <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem;"><i class="fas fa-briefcase" style="color: var(--md-sys-color-primary);"></i> Professional Experience</h2>
+<!-- What I Stand For / Core Principles -->
+<section style="margin: 4rem 0;">
+  <div style="text-align: center; max-width: 700px; margin: 0 auto 3rem;">
+    <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem;">What I Stand For As An Engineer</h2>
+    <p style="color: var(--md-sys-color-on-surface-variant); font-size: 1.1rem;">Why businesses and engineering teams love working with me</p>
+  </div>
 
-  <div style="display: flex; flex-direction: column; gap: 1.5rem;">
-    <!-- Abstract Software LLC -->
+  <div class="md-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+    
     <div class="md-card">
-      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem;">
-        <div>
-          <h3 class="md-card-title" style="color: var(--md-sys-color-primary);">Full Stack Developer</h3>
-          <p style="margin: 0; font-weight: 600; color: var(--md-sys-color-on-surface);">Abstract Software LLC — Yakima, WA</p>
-        </div>
-        <span class="md-chip" style="background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container);">Dec 2025 – Present</span>
+      <div style="width: 48px; height: 48px; border-radius: 12px; background: var(--md-sys-color-primary-container); color: var(--md-sys-color-primary); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 0.5rem;">
+        <i class="fas fa-bolt"></i>
       </div>
-      <ul style="margin-top: 1rem; margin-left: 1.25rem; color: var(--md-sys-color-on-surface-variant); line-height: 1.7;">
-        <li>Develop end-to-end features using <strong>PHP, JavaScript, AJAX, and MySQL</strong> to streamline agricultural logistics and international supply chain management.</li>
-        <li>Engineer server-side validation and security-filtered database queries to ensure accuracy and compliance in multi-tenant environments.</li>
-      </ul>
-      <div class="md-chip-group" style="margin-top: 0.75rem;">
-        <span class="md-chip">PHP</span>
-        <span class="md-chip">JavaScript</span>
-        <span class="md-chip">AJAX</span>
-        <span class="md-chip">MySQL</span>
-        <span class="md-chip">Multi-tenant</span>
-      </div>
+      <h3 class="md-card-title" style="font-size: 1.3rem;">Pragmatic Execution</h3>
+      <p class="md-card-desc">
+        No over-engineering or unnecessary bloat. I write clean, maintainable code focused directly on solving the business problem at hand.
+      </p>
     </div>
 
-    <!-- GlobalNet Inc -->
     <div class="md-card">
-      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem;">
-        <div>
-          <h3 class="md-card-title" style="color: var(--md-sys-color-secondary);">Backend Developer & Network Engineer (Various Roles)</h3>
-          <p style="margin: 0; font-weight: 600; color: var(--md-sys-color-on-surface);">GlobalNet Inc. — Belgrade, MT</p>
-        </div>
-        <span class="md-chip">Nov 2019 – Dec 2025</span>
+      <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(112, 239, 222, 0.15); color: var(--md-sys-color-secondary); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 0.5rem;">
+        <i class="fas fa-shield-alt"></i>
       </div>
-      <ul style="margin-top: 1rem; margin-left: 1.25rem; color: var(--md-sys-color-on-surface-variant); line-height: 1.7;">
-        <li><strong>Backend Developer (June 2025 – Dec 2025):</strong> Built the Utopia API Handler integrating Utopia webhook events with PowerCode, reducing manual workload by 99% for 4,000+ clients. Developed equipment automation tools with Mikrotik & PowerCode APIs.</li>
-        <li><strong>Tower Lead / Network Engineer (Jan 2022 – May 2025):</strong> Managed backhaul capacity planning and enterprise wireless infrastructure supporting 4,000+ customers. Designed automated firmware deployment pipelines.</li>
-        <li><strong>Network Operations Tech (Nov 2019 – Jan 2022):</strong> Led network performance analysis, capacity planning, and troubleshooting.</li>
-      </ul>
-      <div class="md-chip-group" style="margin-top: 0.75rem;">
-        <span class="md-chip">Python</span>
-        <span class="md-chip">PowerCode API</span>
-        <span class="md-chip">Mikrotik API</span>
-        <span class="md-chip">Wireless Backhaul</span>
-        <span class="md-chip">Automation</span>
+      <h3 class="md-card-title" style="font-size: 1.3rem;">End-to-End Ownership</h3>
+      <p class="md-card-desc">
+        From packet-level network protocols to full-stack user interfaces, I take complete responsibility for security, performance, and uptime.
+      </p>
+    </div>
+
+    <div class="md-card">
+      <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(252, 165, 165, 0.15); color: var(--md-sys-color-tertiary); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 0.5rem;">
+        <i class="fas fa-microchip"></i>
       </div>
+      <h3 class="md-card-title" style="font-size: 1.3rem;">Systems & Real-World Depth</h3>
+      <p class="md-card-desc">
+        With years managing mission-critical wireless infrastructure and multi-tenant web systems, I build software designed for high load and 99.9% uptime.
+      </p>
+    </div>
+
+    <div class="md-card">
+      <div style="width: 48px; height: 48px; border-radius: 12px; background: var(--md-sys-color-primary-container); color: var(--md-sys-color-primary); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 0.5rem;">
+        <i class="fas fa-fire"></i>
+      </div>
+      <h3 class="md-card-title" style="font-size: 1.3rem;">High Agency & Adaptability</h3>
+      <p class="md-card-desc">
+        Hand me an unformatted problem, a legacy codebase, or an API specification — I adapt fast and deliver working solutions without needing hand-holding.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Technical Stack Showcase -->
+<section style="margin: 4rem 0;">
+  <div class="md-card" style="background: var(--md-sys-color-surface-container-high); padding: 2.5rem 2rem;">
+    <h2 style="font-size: 1.8rem; margin-bottom: 1rem;"><i class="fas fa-layer-group" style="color: var(--md-sys-color-primary);"></i> Technical Toolkit</h2>
+    <p style="color: var(--md-sys-color-on-surface-variant); margin-bottom: 1.5rem; font-size: 1.05rem;">
+      Languages and technologies I use to build scalable web applications and automation engines:
+    </p>
+
+    <div class="md-chip-group" style="gap: 0.6rem;">
+      <span class="md-chip" style="font-size: 0.85rem; padding: 0.4rem 0.9rem;">PHP</span>
+      <span class="md-chip" style="font-size: 0.85rem; padding: 0.4rem 0.9rem;">Python (Flask & FastAPI)</span>
+      <span class="md-chip" style="font-size: 0.85rem; padding: 0.4rem 0.9rem;">JavaScript / AJAX</span>
+      <span class="md-chip" style="font-size: 0.85rem; padding: 0.4rem 0.9rem;">MySQL & SQLite</span>
+      <span class="md-chip" style="font-size: 0.85rem; padding: 0.4rem 0.9rem;">Go</span>
+      <span class="md-chip" style="font-size: 0.85rem; padding: 0.4rem 0.9rem;">Docker & Compose</span>
+      <span class="md-chip" style="font-size: 0.85rem; padding: 0.4rem 0.9rem;">REST APIs & Webhooks</span>
+      <span class="md-chip" style="font-size: 0.85rem; padding: 0.4rem 0.9rem;">CI/CD Pipelines</span>
+      <span class="md-chip" style="font-size: 0.85rem; padding: 0.4rem 0.9rem;">Linux Systems</span>
     </div>
   </div>
 </section>
 
-<!-- Featured Projects -->
+<!-- Selected Work Highlights -->
 <section style="margin: 4rem 0;">
   <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 1.5rem;">
     <div>
-      <h2 style="font-size: 1.8rem;">Projects & Engineering Work</h2>
-      <p style="margin: 0; color: var(--md-sys-color-on-surface-variant);">Key software & automation systems</p>
+      <h2 style="font-size: 1.8rem;">Selected Work Highlights</h2>
+      <p style="margin: 0; color: var(--md-sys-color-on-surface-variant);">Software solutions with proven business impact</p>
     </div>
-    <a href="https://github.com/OleksSobol?tab=repositories" target="_blank" rel="noopener" class="md-btn md-btn-tonal" style="padding: 0.4rem 1rem; font-size: 0.85rem;">GitHub Repos <i class="fas fa-external-link-alt"></i></a>
+    <a href="{{ '/projects/' | relative_url }}" class="md-btn md-btn-tonal" style="padding: 0.4rem 1rem; font-size: 0.85rem;">View All Projects <i class="fas fa-arrow-right"></i></a>
   </div>
 
   <div class="md-grid">
-    <div class="md-card">
+    <a href="{{ '/projects/' | relative_url }}" class="md-card">
       <div class="md-chip-group">
         <span class="md-chip">Python</span>
-        <span class="md-chip">Flask</span>
-        <span class="md-chip">Webhooks</span>
-        <span class="md-chip">PowerCode</span>
+        <span class="md-chip">Webhook API</span>
+        <span class="md-chip">Automation</span>
       </div>
-      <h3 class="md-card-title">Utopia Account Creation (UAC)</h3>
-      <p class="md-card-desc">Production API integration handler connecting Utopia Fiber webhook events directly into PowerCode ISP management, reducing manual provisioning workload by 99% for 4,000+ subscribers.</p>
-    </div>
+      <h3 class="md-card-title">Utopia API Handler</h3>
+      <p class="md-card-desc">Built production API handler connecting webhook events with PowerCode, cutting manual provisioning workload by 99% for 4,000+ active subscribers.</p>
+      <div style="color: var(--md-sys-color-primary); font-size: 0.875rem; font-weight: 600;">Learn More <i class="fas fa-arrow-right"></i></div>
+    </a>
 
-    <div class="md-card">
+    <a href="{{ '/projects/' | relative_url }}" class="md-card">
       <div class="md-chip-group">
-        <span class="md-chip">Python</span>
-        <span class="md-chip">DHCP</span>
-        <span class="md-chip">Mikrotik API</span>
-        <span class="md-chip">Multi-threading</span>
+        <span class="md-chip">PHP & JS</span>
+        <span class="md-chip">MySQL</span>
+        <span class="md-chip">Supply Chain</span>
       </div>
-      <h3 class="md-card-title">DHCP Lease Runner (DLR)</h3>
-      <p class="md-card-desc">Equipment management and lease automation runner interfacing with Mikrotik router hardware and PowerCode APIs to automate IP resolution and device discovery across field operations.</p>
+      <h3 class="md-card-title">Logistics & Multi-Tenant Features</h3>
+      <p class="md-card-desc">Engineered full-stack features using PHP, JavaScript, and AJAX for international supply chain management and agricultural logistics platform.</p>
+      <div style="color: var(--md-sys-color-primary); font-size: 0.875rem; font-weight: 600;">Learn More <i class="fas fa-arrow-right"></i></div>
+    </a>
+  </div>
+</section>
+
+<!-- Call to Action Banner -->
+<section style="margin: 4rem 0; text-align: center;">
+  <div class="md-card" style="background: linear-gradient(135deg, var(--md-sys-color-surface-container-low), var(--md-sys-color-surface-container-high)); border-color: var(--md-sys-color-primary); padding: 3rem 2rem;">
+    <h2 style="font-size: 2rem; margin-bottom: 0.75rem;">Have a tough problem to solve or an engineering role open?</h2>
+    <p style="color: var(--md-sys-color-on-surface-variant); max-width: 650px; margin: 0 auto 1.5rem; font-size: 1.1rem;">
+      Whether you need robust backend APIs, full-stack web development, or workflow automation, let's talk about how I can add value to your team.
+    </p>
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="{{ '/contact/' | relative_url }}" class="md-btn md-btn-filled"><i class="fas fa-paper-plane"></i> Get In Touch</a>
+      <a href="{{ '/about/' | relative_url }}" class="md-btn md-btn-tonal"><i class="fas fa-file-alt"></i> View Full Resume</a>
     </div>
   </div>
 </section>
