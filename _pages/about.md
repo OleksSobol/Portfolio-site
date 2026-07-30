@@ -40,8 +40,8 @@ permalink: /about/
         <span class="md-chip" style="background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); font-size: 0.85rem;">Dec 2025 – Present</span>
       </div>
       <ul style="margin-top: 1rem; margin-left: 1.25rem; color: var(--md-sys-color-on-surface-variant); line-height: 1.8;">
-        <li>Develop end-to-end features using <strong>PHP, JavaScript, AJAX, and MySQL</strong> to streamline agricultural logistics and international supply chain management.</li>
-        <li>Engineer server-side validation and security-filtered database queries to ensure accuracy and compliance in multi-tenant environments.</li>
+        <li>Develop full-stack web features using <strong>PHP, JavaScript, AJAX, and MySQL</strong> for <strong><a href="https://provarmanagement.com/pvm/about-pvm/" target="_blank" rel="noopener" style="color: var(--md-sys-color-primary);">ProVar Management</a></strong> (agricultural produce logistics and tree fruit variety tracking) and <strong><a href="https://www.nrsaccounting.com/" target="_blank" rel="noopener" style="color: var(--md-sys-color-primary);">NRS Accounting Systems</a></strong> (agricultural payroll and financial management).</li>
+        <li>Engineer server-side validation, multi-tenant database queries, and custom reporting engines to ensure financial accuracy, compliance, and operational efficiency.</li>
       </ul>
     </div>
 

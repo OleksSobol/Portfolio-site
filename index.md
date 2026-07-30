@@ -109,24 +109,37 @@ title: "Oleksandr Sobol — Full Stack & Backend Engineer"
   </div>
 
   <div class="md-grid">
-    <a href="{{ '/projects/' | relative_url }}" class="md-card">
+    <a href="{{ '/projects/provar/' | relative_url }}" class="md-card">
+      <div class="md-chip-group">
+        <span class="md-chip">PHP & JS</span>
+        <span class="md-chip">MySQL</span>
+        <span class="md-chip">Ag Logistics</span>
+      </div>
+      <h3 class="md-card-title">ProVar Agricultural Variety Management</h3>
+      <p class="md-card-desc">Full-stack web application built for ProVar Management to streamline tree fruit variety licensing, agricultural logistics, grower production reporting, and IP tracking.</p>
+      <div style="color: var(--md-sys-color-primary); font-size: 0.875rem; font-weight: 600;">Learn More <i class="fas fa-arrow-right"></i></div>
+    </a>
+
+    <a href="{{ '/projects/nrs/' | relative_url }}" class="md-card">
+      <div class="md-chip-group">
+        <span class="md-chip">PHP & AJAX</span>
+        <span class="md-chip">Payroll Engine</span>
+        <span class="md-chip">Multi-tenant</span>
+      </div>
+      <h3 class="md-card-title">NRS Accounting & Payroll Platform</h3>
+      <p class="md-card-desc">Engineered custom server-side validation, multi-tenant database queries, and payroll processing engines for NRS Accounting Systems serving commercial and agricultural operations.</p>
+      <div style="color: var(--md-sys-color-primary); font-size: 0.875rem; font-weight: 600;">Learn More <i class="fas fa-arrow-right"></i></div>
+    </a>
+
+    <a href="{{ '/projects/utopia/' | relative_url }}" class="md-card">
       <div class="md-chip-group">
         <span class="md-chip">Python</span>
         <span class="md-chip">Webhook API</span>
+        <span class="md-chip">Automation</span>
       </div>
       <h3 class="md-card-title">Utopia API Handler</h3>
-      <p class="md-card-desc">Built a custom API service connecting Utopia Fiber webhook events directly to PowerCode management, eliminating 99% of manual customer provisioning work for 4,000+ subscribers.</p>
-      <div style="color: var(--md-sys-color-primary); font-size: 0.875rem; font-weight: 600;">Read Story <i class="fas fa-arrow-right"></i></div>
-    </a>
-
-    <a href="{{ '/projects/' | relative_url }}" class="md-card">
-      <div class="md-chip-group">
-        <span class="md-chip">PHP & JS</span>
-        <span class="md-chip">Supply Chain</span>
-      </div>
-      <h3 class="md-card-title">Agricultural Logistics Platform</h3>
-      <p class="md-card-desc">Engineered full-stack features using PHP, JavaScript, AJAX, and MySQL at Abstract Software to streamline international supply chain logistics and multi-tenant reporting.</p>
-      <div style="color: var(--md-sys-color-primary); font-size: 0.875rem; font-weight: 600;">Read Story <i class="fas fa-arrow-right"></i></div>
+      <p class="md-card-desc">Built custom API service connecting Utopia Fiber webhook events directly to PowerCode management, eliminating 99% of manual customer provisioning work for 4,000+ subscribers.</p>
+      <div style="color: var(--md-sys-color-primary); font-size: 0.875rem; font-weight: 600;">Learn More <i class="fas fa-arrow-right"></i></div>
     </a>
   </div>
 </section>
