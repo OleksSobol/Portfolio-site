@@ -119,7 +119,7 @@ Full documentation: [`docs/`](docs/)
 
 ## Contact
 
-- **Email:** olekssobol@gmail.com
+- **Email:** oleks@osobol.com
 - **LinkedIn:** [linkedin.com/in/olekssobol](https://www.linkedin.com/in/olekssobol/)
 - **GitHub:** [github.com/OleksSobol](https://github.com/OleksSobol)
 - **YouTube:** [youtube.com/@Life2freedom](https://www.youtube.com/@Life2freedom)

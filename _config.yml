@@ -57,7 +57,7 @@ author:
   avatar: "/assets/images/avatar.png"
   bio: "Full Stack Developer at Abstract Software LLC • Ex-GlobalNet Backend & Network Engineer"
   location: "Yakima, WA"
-  email: "olekssobol@gmail.com"
+  email: "oleks@osobol.com"
   phone: "(406) 580-6183"
   links:
     - label: "GitHub"
@@ -68,4 +68,4 @@ author:
       url: "https://www.linkedin.com/in/olekssobol/"
     - label: "Email"
       icon: "fas fa-fw fa-envelope"
-      url: "mailto:olekssobol@gmail.com"
+      url: "mailto:oleks@osobol.com"

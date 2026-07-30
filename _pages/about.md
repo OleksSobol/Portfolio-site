@@ -11,7 +11,7 @@ permalink: /about/
   </div>
   <h1 class="md-hero-title">Oleksandr Sobol</h1>
   <p class="md-hero-sub" style="margin-bottom: 1rem;">
-    <i class="fas fa-envelope"></i> <a href="mailto:olekssobol@gmail.com" style="color: var(--md-sys-color-primary);">olekssobol@gmail.com</a> &nbsp;•&nbsp; 
+    <i class="fas fa-envelope"></i> <a href="mailto:oleks@osobol.com" style="color: var(--md-sys-color-primary);">oleks@osobol.com</a> &nbsp;•&nbsp; 
     <i class="fas fa-phone"></i> (406) 580-6183 &nbsp;•&nbsp; 
     <i class="fas fa-map-marker-alt"></i> Yakima, WA
   </p>

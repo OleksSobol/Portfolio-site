@@ -47,7 +47,7 @@ permalink: /contact/
     <div class="md-card">
       <h3 class="md-card-title"><i class="fas fa-envelope" style="color: var(--md-sys-color-secondary);"></i> Direct Email</h3>
       <p class="md-card-desc">For urgent requests or direct correspondence.</p>
-      <a href="mailto:olekssobol@gmail.com" class="md-btn md-btn-tonal" style="width: fit-content;"><i class="fas fa-at"></i> olekssobol@gmail.com</a>
+      <a href="mailto:oleks@osobol.com" class="md-btn md-btn-tonal" style="width: fit-content;"><i class="fas fa-at"></i> oleks@osobol.com</a>
     </div>
 
     <div class="md-card">
