@@ -1,14 +1,10 @@
 # Site Settings
-title: "Oleks Sobol"
-name: "Oleks Sobol"
-description: "Backend automation engineer. Production systems serving 4000+ clients with 99.9% uptime."
-url: "https://olekssobol.github.io"
+title: "Oleksandr Sobol"
+name: "Oleksandr Sobol"
+description: "Full Stack & Backend Developer | PHP, Python, Go, JS, MySQL, Docker, Networking"
+url: "https://osobol.com"
 baseurl: ""
 repository: "OleksSobol/olekssobol.github.io"
-
-# Theme Configuration
-remote_theme: "mmistakes/minimal-mistakes@4.26.0"
-minimal_mistakes_skin: "dark"
 
 # Reading Files
 include:
@@ -38,7 +34,6 @@ exclude:
   - Rakefile
   - README
   - tmp
-  - STRUCTURE.md
 
 # Plugins
 plugins:
@@ -47,30 +42,10 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
-  - jekyll-gist
 
 # Markdown Processing
 markdown: kramdown
 highlighter: rouge
-kramdown:
-  input: GFM
-  hard_wrap: false
-  auto_ids: true
-  footnote_nr: 1
-  entity_output: as_char
-  toc_levels: 1..6
-  smart_quotes: lsquo,rsquo,ldquo,rdquo
-  syntax_highlighter: rouge
-  syntax_highlighter_opts:
-    css_class: 'highlight'
-    span:
-      line_numbers: false
-    block:
-      line_numbers: true
-
-# Pagination
-paginate: 10
-paginate_path: /blog/page:num/
 
 # SEO and Analytics
 timezone: America/Los_Angeles
@@ -78,10 +53,12 @@ locale: "en-US"
 
 # Author Profile
 author:
-  name: "Oleks Sobol"
+  name: "Oleksandr Sobol"
   avatar: "/assets/images/avatar.png"
-  bio: "Automation engineer — I build systems that replace manual work"
-  location: "Washington, USA"
+  bio: "Full Stack Developer at Abstract Software LLC • Ex-GlobalNet Backend & Network Engineer"
+  location: "Yakima, WA"
+  email: "olekssobol@gmail.com"
+  phone: "(406) 580-6183"
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
@@ -92,77 +69,3 @@ author:
     - label: "Email"
       icon: "fas fa-fw fa-envelope"
       url: "mailto:olekssobol@gmail.com"
-
-# Site Footer
-footer:
-  links:
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/OleksSobol"
-    - label: "LinkedIn"
-      icon: "fab fa-fw fa-linkedin"
-      url: "https://www.linkedin.com/in/olekssobol/"
-
-# Reading time
-read_time: true
-words_per_minute: 200
-
-# Search
-search: true
-search_full_content: true
-search_provider: lunr
-
-# Collections
-collections:
-  case-studies:
-    output: true
-    permalink: /case-studies/:title/
-
-# Defaults
-defaults:
-  # _posts
-  - scope:
-      path: ""
-      type: posts
-    values:
-      layout: single
-      author_profile: true
-      read_time: true
-      comments: false
-      share: true
-      related: true
-      show_date: true
-      toc: true
-      toc_sticky: true
-  # _pages
-  - scope:
-      path: "_pages"
-      type: pages
-    values:
-      layout: single
-      author_profile: true
-  # _case-studies
-  - scope:
-      path: ""
-      type: case-studies
-    values:
-      layout: single
-      author_profile: false
-      share: true
-      read_time: true
-      toc: true
-      toc_sticky: true
-
-# Category & Tag Archives
-category_archive:
-  type: liquid
-  path: /categories/
-tag_archive:
-  type: liquid
-  path: /tags/
-
-# Compress HTML
-compress_html:
-  clippings: all
-  ignore:
-    envs: development

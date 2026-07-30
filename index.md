@@ -1,134 +1,122 @@
 ---
 layout: default
 permalink: /
-title: "Oleksandr Sobol — Backend Automation & Software Engineer"
+title: "Oleksandr Sobol — Full Stack & Backend Developer"
 ---
 
 <div class="md-hero">
   <div class="md-hero-badge">
     <span class="md-hero-badge-pulse"></span>
-    Backend Systems & Automation Specialist
+    Full Stack Developer @ Abstract Software LLC
   </div>
 
-  <h1 class="md-hero-title">I build high-scale backend systems that eliminate manual work.</h1>
+  <h1 class="md-hero-title">Oleksandr Sobol</h1>
   
   <p class="md-hero-sub">
-    Production automation serving 4,000+ clients with 99.9% uptime. Transforming complex manual workflows into fast, resilient API services.
+    Full Stack & Backend Developer based in Yakima, WA. Specializing in PHP, Python, JavaScript, Go, MySQL, Docker, and resilient network/backend automation.
   </p>
 
   <div class="md-chip-group">
+    <span class="md-chip">PHP</span>
     <span class="md-chip">Python</span>
+    <span class="md-chip">JavaScript / AJAX</span>
+    <span class="md-chip">MySQL</span>
     <span class="md-chip">Go</span>
-    <span class="md-chip">FastAPI</span>
-    <span class="md-chip">Flask</span>
     <span class="md-chip">Docker</span>
     <span class="md-chip">REST APIs</span>
-    <span class="md-chip">MySQL</span>
     <span class="md-chip">Linux</span>
   </div>
 
   <div class="md-hero-actions">
-    <a href="{{ '/projects/' | relative_url }}" class="md-btn md-btn-filled"><i class="fas fa-rocket"></i> Explore Work</a>
-    <a href="{{ '/playground/' | relative_url }}" class="md-btn md-btn-tonal"><i class="fas fa-terminal"></i> Interactive Tools</a>
-    <a href="{{ '/assets/resume.pdf' | relative_url }}" class="md-btn md-btn-tonal" target="_blank"><i class="fas fa-file-pdf"></i> Resume</a>
+    <a href="{{ '/about/' | relative_url }}" class="md-btn md-btn-filled"><i class="fas fa-file-alt"></i> View Full Resume</a>
+    <a href="{{ '/projects/' | relative_url }}" class="md-btn md-btn-tonal"><i class="fas fa-code-branch"></i> Projects & Work</a>
+    <a href="https://github.com/OleksSobol" target="_blank" rel="noopener" class="md-btn md-btn-tonal"><i class="fab fa-github"></i> GitHub Profile</a>
   </div>
 </div>
 
-<div class="md-stats-grid">
-  <div class="md-stat-card">
-    <div class="md-stat-num">4,000+</div>
-    <div class="md-stat-label">Clients Served</div>
-  </div>
-  <div class="md-stat-card">
-    <div class="md-stat-num">95%</div>
-    <div class="md-stat-label">Faster Onboarding</div>
-  </div>
-  <div class="md-stat-card">
-    <div class="md-stat-num">15+ hrs</div>
-    <div class="md-stat-label">Saved Weekly / Tech</div>
-  </div>
-  <div class="md-stat-card">
-    <div class="md-stat-num">99.9%</div>
-    <div class="md-stat-label">System Uptime</div>
-  </div>
-</div>
+<!-- Experience Highlights Grid -->
+<section style="margin: 3rem 0;">
+  <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem;"><i class="fas fa-briefcase" style="color: var(--md-sys-color-primary);"></i> Professional Experience</h2>
 
-<section style="margin: 4rem 0;">
-  <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 1.5rem;">
-    <div>
-      <h2 style="font-size: 1.8rem;">Featured Projects</h2>
-      <p style="margin: 0; color: var(--md-sys-color-on-surface-variant);">Production automation & engineering systems</p>
+  <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+    <!-- Abstract Software LLC -->
+    <div class="md-card">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem;">
+        <div>
+          <h3 class="md-card-title" style="color: var(--md-sys-color-primary);">Full Stack Developer</h3>
+          <p style="margin: 0; font-weight: 600; color: var(--md-sys-color-on-surface);">Abstract Software LLC — Yakima, WA</p>
+        </div>
+        <span class="md-chip" style="background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container);">Dec 2025 – Present</span>
+      </div>
+      <ul style="margin-top: 1rem; margin-left: 1.25rem; color: var(--md-sys-color-on-surface-variant); line-height: 1.7;">
+        <li>Develop end-to-end features using <strong>PHP, JavaScript, AJAX, and MySQL</strong> to streamline agricultural logistics and international supply chain management.</li>
+        <li>Engineer server-side validation and security-filtered database queries to ensure accuracy and compliance in multi-tenant environments.</li>
+      </ul>
+      <div class="md-chip-group" style="margin-top: 0.75rem;">
+        <span class="md-chip">PHP</span>
+        <span class="md-chip">JavaScript</span>
+        <span class="md-chip">AJAX</span>
+        <span class="md-chip">MySQL</span>
+        <span class="md-chip">Multi-tenant</span>
+      </div>
     </div>
-    <a href="{{ '/projects/' | relative_url }}" class="md-btn md-btn-tonal" style="padding: 0.4rem 1rem; font-size: 0.85rem;">View All <i class="fas fa-arrow-right"></i></a>
-  </div>
 
-  <div class="md-grid">
-    <a href="{{ '/projects/' | relative_url }}" class="md-card">
-      <div class="md-chip-group">
+    <!-- GlobalNet Inc -->
+    <div class="md-card">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem;">
+        <div>
+          <h3 class="md-card-title" style="color: var(--md-sys-color-secondary);">Backend Developer & Network Engineer (Various Roles)</h3>
+          <p style="margin: 0; font-weight: 600; color: var(--md-sys-color-on-surface);">GlobalNet Inc. — Belgrade, MT</p>
+        </div>
+        <span class="md-chip">Nov 2019 – Dec 2025</span>
+      </div>
+      <ul style="margin-top: 1rem; margin-left: 1.25rem; color: var(--md-sys-color-on-surface-variant); line-height: 1.7;">
+        <li><strong>Backend Developer (June 2025 – Dec 2025):</strong> Built the Utopia API Handler integrating Utopia webhook events with PowerCode, reducing manual workload by 99% for 4,000+ clients. Developed equipment automation tools with Mikrotik & PowerCode APIs.</li>
+        <li><strong>Tower Lead / Network Engineer (Jan 2022 – May 2025):</strong> Managed backhaul capacity planning and enterprise wireless infrastructure supporting 4,000+ customers. Designed automated firmware deployment pipelines.</li>
+        <li><strong>Network Operations Tech (Nov 2019 – Jan 2022):</strong> Led network performance analysis, capacity planning, and troubleshooting.</li>
+      </ul>
+      <div class="md-chip-group" style="margin-top: 0.75rem;">
         <span class="md-chip">Python</span>
-        <span class="md-chip">Flask</span>
-        <span class="md-chip">ISP API</span>
+        <span class="md-chip">PowerCode API</span>
+        <span class="md-chip">Mikrotik API</span>
+        <span class="md-chip">Wireless Backhaul</span>
+        <span class="md-chip">Automation</span>
       </div>
-      <h3 class="md-card-title">Utopia Account Creation (UAC)</h3>
-      <p class="md-card-desc">Production ISP onboarding automation serving 4000+ active subscribers. Reduced provisioning time from 20 minutes to under 1 minute with 90% error reduction.</p>
-      <div style="color: var(--md-sys-color-primary); font-size: 0.875rem; font-weight: 600; display: flex; align-items: center; gap: 0.4rem;">
-        Explore Case Study <i class="fas fa-arrow-right"></i>
-      </div>
-    </a>
-
-    <a href="{{ '/projects/' | relative_url }}" class="md-card">
-      <div class="md-chip-group">
-        <span class="md-chip">Python</span>
-        <span class="md-chip">Multi-threading</span>
-        <span class="md-chip">Network</span>
-      </div>
-      <h3 class="md-card-title">DHCP Lease Runner (DLR)</h3>
-      <p class="md-card-desc">ISP field equipment management tool. Automated IP & lease resolution across multi-vendor devices, saving 15+ hours per technician each week.</p>
-      <div style="color: var(--md-sys-color-primary); font-size: 0.875rem; font-weight: 600; display: flex; align-items: center; gap: 0.4rem;">
-        Explore Case Study <i class="fas fa-arrow-right"></i>
-      </div>
-    </a>
-
-    <a href="{{ '/projects/' | relative_url }}" class="md-card">
-      <div class="md-chip-group">
-        <span class="md-chip">Flutter</span>
-        <span class="md-chip">Dart</span>
-        <span class="md-chip">AES-256</span>
-      </div>
-      <h3 class="md-card-title">CodeLedger</h3>
-      <p class="md-card-desc">Offline-first mobile application for freelance developer billing. Automated timer logging, customizable PDF invoicing, and encrypted cloud backups.</p>
-      <div style="color: var(--md-sys-color-primary); font-size: 0.875rem; font-weight: 600; display: flex; align-items: center; gap: 0.4rem;">
-        Explore Case Study <i class="fas fa-arrow-right"></i>
-      </div>
-    </a>
+    </div>
   </div>
 </section>
 
+<!-- Featured Projects -->
 <section style="margin: 4rem 0;">
   <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 1.5rem;">
     <div>
-      <h2 style="font-size: 1.8rem;">Latest Posts</h2>
-      <p style="margin: 0; color: var(--md-sys-color-on-surface-variant);">Engineering notes, technical deep dives & updates</p>
+      <h2 style="font-size: 1.8rem;">Projects & Engineering Work</h2>
+      <p style="margin: 0; color: var(--md-sys-color-on-surface-variant);">Key software & automation systems</p>
     </div>
-    <a href="{{ '/blog/' | relative_url }}" class="md-btn md-btn-tonal" style="padding: 0.4rem 1rem; font-size: 0.85rem;">All Posts <i class="fas fa-arrow-right"></i></a>
+    <a href="https://github.com/OleksSobol?tab=repositories" target="_blank" rel="noopener" class="md-btn md-btn-tonal" style="padding: 0.4rem 1rem; font-size: 0.85rem;">GitHub Repos <i class="fas fa-external-link-alt"></i></a>
   </div>
 
   <div class="md-grid">
-    {% for post in site.posts limit:3 %}
-      <a href="{{ post.url | relative_url }}" class="md-card">
-        <div style="font-size: 0.8rem; color: var(--md-sys-color-secondary); font-family: var(--md-font-mono);">
-          <i class="far fa-calendar-alt"></i> {{ post.date | date: "%B %d, %Y" }}
-        </div>
-        <h3 class="md-card-title" style="font-size: 1.2rem;">{{ post.title }}</h3>
-        <p class="md-card-desc" style="font-size: 0.9rem;">{{ post.excerpt | strip_html | truncate: 140 }}</p>
-        <div style="color: var(--md-sys-color-primary); font-size: 0.85rem; font-weight: 600;">
-          Read Article <i class="fas fa-arrow-right"></i>
-        </div>
-      </a>
-    {% else %}
-      <div class="md-card" style="grid-column: 1 / -1;">
-        <p style="margin: 0; color: var(--md-sys-color-on-surface-variant);">No blog posts published yet. Stay tuned for upcoming articles on backend architecture, Python automation, and system design!</p>
+    <div class="md-card">
+      <div class="md-chip-group">
+        <span class="md-chip">Python</span>
+        <span class="md-chip">Flask</span>
+        <span class="md-chip">Webhooks</span>
+        <span class="md-chip">PowerCode</span>
       </div>
-    {% endfor %}
+      <h3 class="md-card-title">Utopia Account Creation (UAC)</h3>
+      <p class="md-card-desc">Production API integration handler connecting Utopia Fiber webhook events directly into PowerCode ISP management, reducing manual provisioning workload by 99% for 4,000+ subscribers.</p>
+    </div>
+
+    <div class="md-card">
+      <div class="md-chip-group">
+        <span class="md-chip">Python</span>
+        <span class="md-chip">DHCP</span>
+        <span class="md-chip">Mikrotik API</span>
+        <span class="md-chip">Multi-threading</span>
+      </div>
+      <h3 class="md-card-title">DHCP Lease Runner (DLR)</h3>
+      <p class="md-card-desc">Equipment management and lease automation runner interfacing with Mikrotik router hardware and PowerCode APIs to automate IP resolution and device discovery across field operations.</p>
+    </div>
   </div>
 </section>
