@@ -46,9 +46,6 @@ permalink: /projects/
       Impact: Full UI/CSS theme transformation & multi-tenant payroll engine
     </div>
   </div>
-      Impact: Multi-tenant agricultural payroll calculation & compliance reporting
-    </div>
-  </div>
 
   <!-- Utopia Account Creation -->
   <div class="md-card">
