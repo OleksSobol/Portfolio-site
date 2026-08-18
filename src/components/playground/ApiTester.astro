@@ -92,7 +92,7 @@
           <a class="tab" data-target="res-headers">Headers</a>
         </div>
 
-        <div class="flex-1 overflow-y-auto relative bg-[#1e1e1e]">
+        <div class="flex-1 overflow-y-auto relative bg-neutral text-neutral-content">
           <!-- Loading Overlay -->
           <div id="resLoading" class="absolute inset-0 bg-base-100/50 backdrop-blur-sm flex items-center justify-center z-10 hidden">
             <span class="loading loading-spinner loading-lg text-primary"></span>
@@ -100,12 +100,12 @@
 
           <!-- Preview Tab -->
           <div id="res-preview" class="res-tab-content block h-full">
-            <pre id="resBody" class="p-4 m-0 font-mono text-sm text-gray-300 whitespace-pre-wrap break-all h-full" style="tab-size: 2;">Hit Send to get a response...</pre>
+            <pre id="resBody" class="p-4 m-0 font-mono text-sm whitespace-pre-wrap break-all h-full" style="tab-size: 2;">Hit Send to get a response...</pre>
           </div>
 
           <!-- Headers Tab -->
           <div id="res-headers" class="res-tab-content hidden h-full p-4">
-            <div id="resHeadersList" class="flex flex-col gap-1 text-sm font-mono break-all text-gray-300">
+            <div id="resHeadersList" class="flex flex-col gap-1 text-sm font-mono break-all">
               No headers to display.
             </div>
           </div>
@@ -347,7 +347,7 @@
         // Response Headers
         let resHeadersHtml = '';
         response.headers.forEach((val, key) => {
-          resHeadersHtml += `<div class="grid grid-cols-3 gap-2 border-b border-gray-800 py-1"><span class="font-bold text-gray-400">${key}</span><span class="col-span-2">${val}</span></div>`;
+          resHeadersHtml += `<div class="grid grid-cols-3 gap-2 border-b border-base-content/20 py-1"><span class="font-bold text-neutral-content/70">${key}</span><span class="col-span-2">${val}</span></div>`;
         });
         elements.resHeadersList.innerHTML = resHeadersHtml || 'No headers returned.';
 

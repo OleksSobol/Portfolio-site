@@ -12,6 +12,11 @@ module.exports = {
 					...require("daisyui/src/theming/themes")["dark"],
 					primary: "#3b82f6", // Blue
 					secondary: "#eab308", // Yellow
+				},
+				light: {
+					...require("daisyui/src/theming/themes")["light"],
+					primary: "#3b82f6", // Blue
+					secondary: "#eab308", // Yellow
 				}
 			}
 		],
