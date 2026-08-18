@@ -1,0 +1,111 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TimeLineElement from "../components/cv/TimeLine.astro";
+---
+
+<BaseLayout title="Resume" sideBarActiveItemID="cv">
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Profile</div>
+  </div>
+
+  <div class="mb-10 text-justify">
+    I am a Full Stack Developer with a strong background in Network Engineering. I specialize in building robust backend architectures, API development, and responsive web applications. Over the years, I've transitioned from managing enterprise wireless infrastructure supporting thousands of customers to creating modern, full-stack software solutions.
+  </div>
+
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Experience</div>
+  </div>
+
+  <div class="time-line-container mb-10">
+    <TimeLineElement
+      title="Full Stack Developer"
+      subtitle="From Dec 2025 to Present at Abstract Software LLC, Yakima, WA"
+    >
+      <ul class="list-disc ml-5">
+        <li>Develop full-stack web features using <strong>PHP, JavaScript, AJAX, and MySQL</strong> for ProVar Management and NRS Accounting Systems.</li>
+        <li>Architected and implemented a complete CSS theme overhaul & modern UI design system across both platforms.</li>
+        <li>Engineer server-side validation, multi-tenant database queries, and custom reporting engines to ensure financial accuracy.</li>
+      </ul>
+    </TimeLineElement>
+    <TimeLineElement
+      title="Backend Developer (Remote, Part-Time)"
+      subtitle="From June 2025 to Dec 2025 at GlobalNet Inc., Belgrade, MT"
+    >
+      <ul class="list-disc ml-5">
+        <li>Built the Utopia API Handler integrating Utopia webhook events with PowerCode, reducing manual workload by 99% for 4,000+ clients.</li>
+        <li>Developed automation tools for equipment management with Mikrotik and PowerCode APIs.</li>
+      </ul>
+    </TimeLineElement>
+    <TimeLineElement
+      title="Tower Lead / Network Engineer"
+      subtitle="From Jan 2022 to May 2025 at GlobalNet Inc., Belgrade, MT"
+    >
+      <ul class="list-disc ml-5">
+        <li>Managed backhaul capacity planning and enterprise wireless infrastructure supporting 4,000+ customers.</li>
+        <li>Designed and implemented automated firmware deployment pipelines.</li>
+      </ul>
+    </TimeLineElement>
+    <TimeLineElement
+      title="Network Operations Technician"
+      subtitle="From Nov 2019 to Jan 2022 at GlobalNet Inc., Belgrade, MT"
+    >
+      <ul class="list-disc ml-5">
+        <li>Led network performance analysis and capacity planning initiatives.</li>
+        <li>Served as the primary technical lead for troubleshooting complex system integration issues.</li>
+      </ul>
+    </TimeLineElement>
+    <TimeLineElement
+      title="System Administrator Intern"
+      subtitle="From June 2012 to May 2015 at Vinnytsia Road Management, Vinnytsia, Ukraine"
+    >
+      <ul class="list-disc ml-5">
+        <li>Administered local network infrastructure, implemented security protocols, and resolved system-level reliability issues.</li>
+      </ul>
+    </TimeLineElement>
+  </div>
+
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Education</div>
+  </div>
+
+  <div class="time-line-container grid gap-4 mb-10">
+    <TimeLineElement
+      title="B.S. Cybersecurity"
+      subtitle="2012 to 2016 at Vinnytsia National Technical University, Vinnytsia, Ukraine"
+    />
+  </div>
+
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Certifications</div>
+  </div>
+
+  <ul class="list-disc mx-6 mb-10 grid gap-2">
+    <li>
+      <strong>MTCNA (#2403NA2018)</strong> — Mikrotik Certified Network Associate
+    </li>
+    <li>
+      <strong>MTCRE (#2403RE2623)</strong> — Mikrotik Certified Routing Engineer
+    </li>
+  </ul>
+
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Skills</div>
+  </div>
+
+  <ul class="list-disc md:columns-5 columns-2 mx-6">
+    <li>Python (Flask, FastAPI)</li>
+    <li>PHP</li>
+    <li>JavaScript & AJAX</li>
+    <li>Go</li>
+    <li>C/C++</li>
+    <li>Dart (Flutter)</li>
+    <li>REST / JSON</li>
+    <li>OAuth2 / JWT</li>
+    <li>Mikrotik API</li>
+    <li>MySQL & SQLite</li>
+    <li>Docker & Docker Compose</li>
+    <li>Nginx</li>
+    <li>CI/CD (GitHub Actions)</li>
+    <li>AWS (EC2, S3)</li>
+  </ul>
+</BaseLayout>

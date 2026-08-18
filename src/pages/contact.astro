@@ -1,0 +1,76 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Contact" sideBarActiveItemID="contact">
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Let's Work Together</div>
+    <p class="py-2">Have a manual workflow that needs automation, an open engineering role, or a project in mind? Drop me a line below.</p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="card bg-base-200 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title">Send a Message</h2>
+        <form action="https://formspree.io/f/mlgwqlel" method="POST" class="flex flex-col gap-4 mt-4">
+          <div class="form-control w-full">
+            <label class="label"><span class="label-text">Name</span></label>
+            <input type="text" name="name" placeholder="Your name" class="input input-bordered w-full" required />
+          </div>
+          
+          <div class="form-control w-full">
+            <label class="label"><span class="label-text">Email Address</span></label>
+            <input type="email" name="email" placeholder="you@company.com" class="input input-bordered w-full" required />
+          </div>
+          
+          <div class="form-control w-full">
+            <label class="label"><span class="label-text">Topic</span></label>
+            <select name="type" class="select select-bordered">
+              <option value="automation">Backend Automation & System Design</option>
+              <option value="employment">Full-time / Contracting Role</option>
+              <option value="aerial">Drone Cinematography Services</option>
+              <option value="other">Other Inquiry</option>
+            </select>
+          </div>
+          
+          <div class="form-control w-full">
+            <label class="label"><span class="label-text">Message</span></label>
+            <textarea name="message" class="textarea textarea-bordered h-24" placeholder="Describe your project, timeline, or workflow goals..." required></textarea>
+          </div>
+          
+          <button type="submit" class="btn btn-primary mt-4">Send Message</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-6">
+      <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">Direct Email</h2>
+          <p>For urgent requests or direct correspondence.</p>
+          <div class="card-actions justify-start mt-2">
+            <a href="mailto:oleks@osobol.com" class="btn btn-outline">oleks@osobol.com</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">Professional Profiles</h2>
+          <div class="flex flex-col gap-2 mt-2">
+            <a href="https://github.com/OleksSobol" target="_blank" class="btn btn-outline justify-start">GitHub (@OleksSobol)</a>
+            <a href="https://www.linkedin.com/in/olekssobol/" target="_blank" class="btn btn-outline justify-start">LinkedIn (/in/olekssobol)</a>
+            <a href="https://www.youtube.com/@Life2freedom" target="_blank" class="btn btn-outline justify-start">YouTube (@Life2freedom)</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card bg-base-300 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">Location</h2>
+          <p>Washington, USA • Available for remote worldwide</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,38 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HorizontalCard from "../components/HorizontalCard.astro";
+---
+
+<BaseLayout title = "Projects" sideBarActiveItemID="projects">
+  <div>
+    <div class="text-3xl w-full font-bold mb-5">Projects & Case Studies</div>
+  </div>
+
+  <HorizontalCard
+    title="CodeLedger: An Offline-First Time Tracking & Invoicing App for Freelance Developers"
+    desc="Built a Flutter mobile app from scratch to solve my own freelance billing problem — offline-first, encrypted backups, GitHub-integrated time tracking."
+    url="https://codeledger.osobol.com"
+    badge="FLUTTER"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="Automating ISP Equipment Management: 15+ Hours Saved Per Week"
+    desc="Multi-threaded DHCP lease processing for ISP operations."
+    url="https://github.com/OleksSobol/DHCP-LEASE-RUNNER---DLR"
+    badge="PYTHON"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="Expenses Tracker: A Privacy-First Personal Finance App"
+    desc="Built an offline-first Flutter app to track personal income, expenses, and recurring bills — no accounts, no cloud, no subscriptions."
+    url="https://expenses-tracker.osobol.com/"
+    badge="FLUTTER"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="How I Reduced ISP Customer Onboarding from 20 Minutes to Under 60 Seconds"
+    desc="Production automation serving 4000+ clients with 99.9% uptime."
+    url="https://github.com/OleksSobol/Utopia-Account-Creation---UAC"
+    badge="AUTOMATION"
+  />
+</BaseLayout>

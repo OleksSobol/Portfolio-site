@@ -1,0 +1,445 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Developer Tools Playground" sideBarActiveItemID="playground">
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Developer Tools Playground</div>
+  </div>
+
+  <div class="mb-10">
+    <p class="mb-6 text-lg">
+      Client-side interactive tools for API testing, Base64 encoding/decoding, JSON formatting, subnet calculations, and UUID generation.
+    </p>
+
+    <!-- Loaded Share Banner (hidden by default) -->
+    <div id="sharedNoticeBanner" class="alert alert-success shadow-lg mb-6" style="display: none;">
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+        <span>Loaded shared message link!</span>
+      </div>
+      <div class="flex-none">
+        <button class="btn btn-sm btn-ghost" onclick="document.getElementById('sharedNoticeBanner').style.display='none'">Close</button>
+      </div>
+    </div>
+
+    <style>
+      .pg-output {
+        margin-top: 1.25rem;
+        padding: 1.25rem;
+        border-radius: 12px;
+        font-family: monospace;
+        font-size: 0.875rem;
+        white-space: pre-wrap;
+        word-break: break-word;
+        background: oklch(var(--b3));
+        border: 1px solid oklch(var(--b1));
+      }
+      .pg-output.success {
+        border-color: oklch(var(--su));
+        color: oklch(var(--su));
+      }
+      .pg-output.error {
+        border-color: oklch(var(--er));
+        color: oklch(var(--er));
+      }
+    </style>
+
+    <!-- Tabs -->
+    <div class="tabs tabs-boxed mb-6 overflow-x-auto whitespace-nowrap flex-nowrap block" id="pgTabsContainer">
+      <a class="tab tab-active" onclick="switchPgTab('api-tester', this)">API Tester</a>
+      <a class="tab" id="tab-base64" onclick="switchPgTab('base64', this)">Base64 Tool</a>
+      <a class="tab" onclick="switchPgTab('json-formatter', this)">JSON Formatter</a>
+      <a class="tab" onclick="switchPgTab('subnet-calc', this)">Subnet Calc</a>
+      <a class="tab" onclick="switchPgTab('uuid-gen', this)">UUID Gen</a>
+    </div>
+
+    <!-- API Tester -->
+    <div id="api-tester" class="pg-tab-content block">
+      <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title text-primary">REST API Tester</h2>
+          <p class="text-sm mb-4">Test HTTP endpoints with custom headers & payload right from your browser.</p>
+
+          <div class="flex gap-2 flex-wrap mb-4">
+            <select id="apiMethod" class="select select-bordered w-full max-w-[120px]">
+              <option value="GET">GET</option>
+              <option value="POST">POST</option>
+              <option value="PUT">PUT</option>
+              <option value="DELETE">DELETE</option>
+            </select>
+            <input type="text" id="apiUrl" class="input input-bordered flex-1 min-w-[200px]" placeholder="https://jsonplaceholder.typicode.com/todos/1" value="https://jsonplaceholder.typicode.com/todos/1">
+          </div>
+
+          <div class="mb-4">
+            <label class="label"><span class="label-text">Headers (JSON format)</span></label>
+            <textarea id="apiHeaders" class="textarea textarea-bordered w-full" rows="2" placeholder='{"Content-Type": "application/json"}'></textarea>
+          </div>
+
+          <div id="apiBodyGroup" class="mb-4" style="display: none;">
+            <label class="label"><span class="label-text">Request Body (JSON)</span></label>
+            <textarea id="apiBody" class="textarea textarea-bordered w-full" rows="3" placeholder='{"title": "Test", "completed": false}'></textarea>
+          </div>
+
+          <div class="card-actions justify-start">
+            <button class="btn btn-primary" onclick="testAPI()">Send Request</button>
+            <button class="btn btn-outline" onclick="clearAPITester()">Clear</button>
+          </div>
+
+          <div id="apiOutput" class="pg-output" style="display: none;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Base64 Tool -->
+    <div id="base64" class="pg-tab-content hidden">
+      <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title text-secondary">Base64 Encoder / Decoder</h2>
+          <p class="text-sm mb-4">Encode plain text to Base64 or decode Base64 strings — with direct link sharing.</p>
+
+          <textarea id="base64Input" class="textarea textarea-bordered w-full mb-4" rows="4" placeholder="Enter text to encode or Base64 string to decode..."></textarea>
+
+          <div class="card-actions justify-start">
+            <button class="btn btn-primary" onclick="encodeBase64()">Encode</button>
+            <button class="btn btn-secondary" onclick="decodeBase64()">Decode</button>
+            <button class="btn btn-outline" onclick="clearBase64()">Clear</button>
+          </div>
+
+          <div id="base64OutputGroup" style="display: none; margin-top: 1.25rem;">
+            <div id="base64Output" class="pg-output mb-4"></div>
+            <div class="flex gap-2 flex-wrap">
+              <button id="btnShareB64Link" class="btn btn-sm btn-outline" onclick="copyBase64ShareLink()">Share Link</button>
+              <button id="btnCopyB64Output" class="btn btn-sm btn-outline" onclick="copyBase64Result()">Copy Result</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JSON Formatter -->
+    <div id="json-formatter" class="pg-tab-content hidden">
+      <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title text-accent">JSON Formatter & Minifier</h2>
+          <p class="text-sm mb-4">Validate, beautify, and minify JSON data.</p>
+
+          <textarea id="jsonInput" class="textarea textarea-bordered w-full mb-4" rows="6" placeholder='{"name":"Oleks","role":"Developer","skills":["Python","Go"]}'></textarea>
+
+          <div class="card-actions justify-start">
+            <button class="btn btn-primary" onclick="formatJSON()">Format</button>
+            <button class="btn btn-secondary" onclick="minifyJSON()">Minify</button>
+            <button class="btn btn-outline" onclick="clearJSON()">Clear</button>
+          </div>
+
+          <div id="jsonOutput" class="pg-output" style="display: none;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Subnet Calculator -->
+    <div id="subnet-calc" class="pg-tab-content hidden">
+      <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title text-info">IPv4 Subnet Calculator</h2>
+          <p class="text-sm mb-4">Calculate network address, broadcast address, and host range for any CIDR subnet.</p>
+
+          <div class="flex gap-2 flex-wrap mb-4">
+            <input type="text" id="subnetIP" class="input input-bordered flex-2 min-w-[160px]" placeholder="192.168.1.0" value="192.168.1.0">
+            <input type="number" id="subnetMask" class="input input-bordered flex-1 min-w-[90px]" placeholder="24" value="24" min="1" max="32">
+          </div>
+
+          <div class="card-actions justify-start">
+            <button class="btn btn-primary" onclick="calculateSubnet()">Calculate</button>
+            <button class="btn btn-outline" onclick="clearSubnet()">Clear</button>
+          </div>
+
+          <div id="subnetOutput" class="pg-output" style="display: none;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- UUID Generator -->
+    <div id="uuid-gen" class="pg-tab-content hidden">
+      <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title text-success">UUID v4 Generator</h2>
+          <p class="text-sm mb-4">Generate unique UUID v4 strings for database keys or API tokens.</p>
+
+          <div class="flex gap-4 items-center mb-4">
+            <label class="label-text">Count:</label>
+            <input type="number" id="uuidCount" class="input input-bordered w-[90px]" value="1" min="1" max="50">
+          </div>
+
+          <div class="card-actions justify-start">
+            <button class="btn btn-primary" onclick="generateUUIDs()">Generate</button>
+            <button class="btn btn-outline" onclick="clearUUID()">Clear</button>
+          </div>
+
+          <div id="uuidOutput" class="pg-output" style="display: none;"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</BaseLayout>
+
+<script is:inline>
+  let currentB64Data = "";
+
+  function switchPgTab(tabId, el) {
+    document.querySelectorAll('.pg-tab-content').forEach(t => {
+      t.classList.remove('block');
+      t.classList.add('hidden');
+    });
+    document.querySelectorAll('.tab').forEach(b => b.classList.remove('tab-active'));
+    
+    const content = document.getElementById(tabId);
+    if (content) {
+      content.classList.remove('hidden');
+      content.classList.add('block');
+    }
+    
+    if (el) el.classList.add('tab-active');
+  }
+
+  document.getElementById('apiMethod')?.addEventListener('change', function() {
+    const bodyGroup = document.getElementById('apiBodyGroup');
+    if (bodyGroup) {
+      bodyGroup.style.display = (this.value === 'POST' || this.value === 'PUT') ? 'block' : 'none';
+    }
+  });
+
+  async function testAPI() {
+    const method = document.getElementById('apiMethod').value;
+    const url = document.getElementById('apiUrl').value;
+    const headersText = document.getElementById('apiHeaders').value;
+    const body = document.getElementById('apiBody').value;
+    const output = document.getElementById('apiOutput');
+
+    if (!url) {
+      output.style.display = 'block';
+      output.className = 'pg-output error';
+      output.textContent = 'Error: Please enter a URL';
+      return;
+    }
+
+    output.style.display = 'block';
+    output.className = 'pg-output';
+    output.textContent = 'Sending request...';
+
+    try {
+      const options = { method };
+      if (headersText) options.headers = JSON.parse(headersText);
+      if ((method === 'POST' || method === 'PUT') && body) options.body = body;
+
+      const response = await fetch(url, options);
+      const data = await response.text();
+      let formatted;
+      try { formatted = JSON.stringify(JSON.parse(data), null, 2); } catch { formatted = data; }
+
+      output.className = response.ok ? 'pg-output success' : 'pg-output error';
+      output.textContent = `Status: ${response.status} ${response.statusText}\n\nResponse:\n${formatted}`;
+    } catch (err) {
+      output.className = 'pg-output error';
+      output.textContent = `Error: ${err.message}`;
+    }
+  }
+
+  function clearAPITester() {
+    document.getElementById('apiUrl').value = '';
+    document.getElementById('apiHeaders').value = '';
+    document.getElementById('apiBody').value = '';
+    document.getElementById('apiOutput').style.display = 'none';
+  }
+
+  function formatJSON() {
+    const input = document.getElementById('jsonInput').value;
+    const output = document.getElementById('jsonOutput');
+    output.style.display = 'block';
+    try {
+      output.className = 'pg-output success';
+      output.textContent = JSON.stringify(JSON.parse(input), null, 2);
+    } catch (err) {
+      output.className = 'pg-output error';
+      output.textContent = `Invalid JSON: ${err.message}`;
+    }
+  }
+
+  function minifyJSON() {
+    const input = document.getElementById('jsonInput').value;
+    const output = document.getElementById('jsonOutput');
+    output.style.display = 'block';
+    try {
+      output.className = 'pg-output success';
+      output.textContent = JSON.stringify(JSON.parse(input));
+    } catch (err) {
+      output.className = 'pg-output error';
+      output.textContent = `Invalid JSON: ${err.message}`;
+    }
+  }
+
+  function clearJSON() {
+    document.getElementById('jsonInput').value = '';
+    document.getElementById('jsonOutput').style.display = 'none';
+  }
+
+  /* Base64 Tool & Share Feature */
+  function encodeBase64() {
+    const input = document.getElementById('base64Input').value;
+    const outputGroup = document.getElementById('base64OutputGroup');
+    const output = document.getElementById('base64Output');
+    outputGroup.style.display = 'block';
+    if (!input) {
+      output.className = 'pg-output error';
+      output.textContent = 'Please enter text to encode';
+      currentB64Data = "";
+      return;
+    }
+    try {
+      const encoded = btoa(unescape(encodeURIComponent(input)));
+      output.className = 'pg-output success';
+      output.textContent = encoded;
+      currentB64Data = encoded;
+    } catch (e) {
+      output.className = 'pg-output error';
+      output.textContent = 'Encoding error: ' + e.message;
+      currentB64Data = "";
+    }
+  }
+
+  function decodeBase64() {
+    const input = document.getElementById('base64Input').value.trim();
+    const outputGroup = document.getElementById('base64OutputGroup');
+    const output = document.getElementById('base64Output');
+    outputGroup.style.display = 'block';
+    if (!input) {
+      output.className = 'pg-output error';
+      output.textContent = 'Please enter Base64 string to decode';
+      currentB64Data = "";
+      return;
+    }
+    try {
+      const decoded = decodeURIComponent(escape(atob(input)));
+      output.className = 'pg-output success';
+      output.textContent = decoded;
+      currentB64Data = input;
+    } catch (e) {
+      output.className = 'pg-output error';
+      output.textContent = 'Invalid Base64 string';
+      currentB64Data = "";
+    }
+  }
+
+  function copyBase64ShareLink() {
+    const b64Val = currentB64Data || document.getElementById('base64Input').value.trim();
+    if (!b64Val) return;
+
+    const shareUrl = `${window.location.origin}${window.location.pathname}?b64=${encodeURIComponent(b64Val)}`;
+    const btn = document.getElementById('btnShareB64Link');
+
+    if (navigator.share) {
+      navigator.share({
+        title: 'Base64 Message',
+        text: 'Decoded Base64 message on Oleks Sobol\'s Playground',
+        url: shareUrl
+      }).catch(() => {
+        copyUrlToClipboard(shareUrl, btn);
+      });
+    } else {
+      copyUrlToClipboard(shareUrl, btn);
+    }
+  }
+
+  function copyUrlToClipboard(url, btn) {
+    navigator.clipboard.writeText(url).then(() => {
+      btn.innerHTML = 'Link Copied!';
+      setTimeout(() => {
+        btn.innerHTML = 'Share Link';
+      }, 2500);
+    });
+  }
+
+  function copyBase64Result() {
+    const output = document.getElementById('base64Output');
+    const btn = document.getElementById('btnCopyB64Output');
+    if (output && output.textContent) {
+      navigator.clipboard.writeText(output.textContent);
+      btn.innerHTML = 'Copied!';
+      setTimeout(() => {
+        btn.innerHTML = 'Copy Result';
+      }, 2000);
+    }
+  }
+
+  function clearBase64() {
+    document.getElementById('base64Input').value = '';
+    document.getElementById('base64OutputGroup').style.display = 'none';
+    currentB64Data = "";
+  }
+
+  function calculateSubnet() {
+    const ip = document.getElementById('subnetIP').value;
+    const cidr = parseInt(document.getElementById('subnetMask').value);
+    const output = document.getElementById('subnetOutput');
+    output.style.display = 'block';
+
+    try {
+      const parts = ip.split('.').map(Number);
+      if (parts.length !== 4 || parts.some(p => p < 0 || p > 255)) throw new Error('Invalid IP');
+      const mask = -1 << (32 - cidr);
+      const maskParts = [(mask >>> 24) & 255, (mask >>> 16) & 255, (mask >>> 8) & 255, mask & 255];
+      const netParts = parts.map((p, i) => p & maskParts[i]);
+      const broadParts = netParts.map((p, i) => p | (~maskParts[i] & 255));
+      const hosts = Math.pow(2, 32 - cidr);
+
+      output.className = 'pg-output success';
+      output.textContent = `Network Address: ${netParts.join('.')}\nSubnet Mask: ${maskParts.join('.')}\nCIDR: /${cidr}\nBroadcast: ${broadParts.join('.')}\nUsable Hosts: ${hosts - 2}`;
+    } catch (err) {
+      output.className = 'pg-output error';
+      output.textContent = `Error: ${err.message}`;
+    }
+  }
+
+  function clearSubnet() {
+    document.getElementById('subnetIP').value = '';
+    document.getElementById('subnetOutput').style.display = 'none';
+  }
+
+  function generateUUIDs() {
+    const count = parseInt(document.getElementById('uuidCount').value) || 1;
+    const output = document.getElementById('uuidOutput');
+    output.style.display = 'block';
+    const list = [];
+    for (let i = 0; i < count; i++) {
+      list.push('xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+        const r = Math.random() * 16 | 0;
+        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+      }));
+    }
+    output.className = 'pg-output success';
+    output.textContent = list.join('\n');
+  }
+
+  function clearUUID() {
+    document.getElementById('uuidCount').value = '1';
+    document.getElementById('uuidOutput').style.display = 'none';
+  }
+
+  /* Auto-Load Shared Links on Page Load */
+  document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const b64Data = urlParams.get('b64') || urlParams.get('data');
+    const tool = urlParams.get('tool');
+
+    if (b64Data || tool === 'base64') {
+      const tabBtn = document.getElementById('tab-base64');
+      switchPgTab('base64', tabBtn);
+      if (b64Data) {
+        document.getElementById('base64Input').value = b64Data;
+        decodeBase64();
+        document.getElementById('sharedNoticeBanner').style.display = 'flex';
+      }
+    }
+  });
+</script>
