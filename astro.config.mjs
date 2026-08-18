@@ -6,5 +6,5 @@ import tailwind from "@astrojs/tailwind";
 // https://astro.build/config
 export default defineConfig({
   site: 'https://osobol.com',
-  integrations: [mdx(), tailwind(), sitemap()]
+  integrations: [mdx(), tailwind()]
 });
