@@ -1,0 +1,64 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Services" sideBarActiveItemID="services">
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Services</div>
+  </div>
+
+  <div class="mb-10 text-left">
+    <h2 class="text-2xl font-bold mb-4">What I Build</h2>
+    <p class="mb-6 text-lg">
+      I help teams escape "copy-paste" hell. If you're spending hours each week on manual data entry or fighting systems that won't talk to each other, I can build a custom solution to do the work for you—in seconds.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+      <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+          <h3 class="card-title text-xl text-primary">⚡ Automations</h3>
+          <p class="mt-2 text-sm">Turn multi-step manual tasks into one-click operations, saving you hours every week.</p>
+        </div>
+      </div>
+
+      <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+          <h3 class="card-title text-xl text-secondary">🔗 Integrations</h3>
+          <p class="mt-2 text-sm">Connect your tools. I build API layers that make your different software platforms finally talk to each other.</p>
+        </div>
+      </div>
+
+      <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+          <h3 class="card-title text-xl text-accent">💻 Internal Tools</h3>
+          <p class="mt-2 text-sm">Custom admin panels and dashboards built specifically for how <i>your</i> business actually works.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-10">
+    <h2 class="text-2xl font-bold mb-4">How I Work</h2>
+    <ul class="steps steps-vertical lg:steps-horizontal w-full">
+      <li class="step step-primary">Discovery (Free)</li>
+      <li class="step step-primary">Assessment</li>
+      <li class="step step-primary">Build</li>
+      <li class="step step-primary">Deploy & Support</li>
+    </ul>
+  </div>
+
+  <div class="mb-10">
+    <h2 class="text-2xl font-bold mb-4">Who This Is For</h2>
+    <ul class="list-disc mx-6 grid gap-2">
+      <li><strong>ISPs and telecoms</strong> with manual provisioning workflows</li>
+      <li><strong>Operations teams</strong> spending 10+ hours/week on repetitive tasks</li>
+      <li><strong>Small companies</strong> that need internal tools but not a full dev team</li>
+      <li><strong>Agencies</strong> that need backend automation for client projects</li>
+    </ul>
+  </div>
+
+  <div class="flex justify-center gap-4 mt-8">
+    <a href="/contact" class="btn btn-primary">Let's Discuss Your Workflow</a>
+    <a href="/projects" class="btn btn-outline">See Past Work</a>
+  </div>
+</BaseLayout>

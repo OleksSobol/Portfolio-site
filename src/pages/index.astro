@@ -1,0 +1,73 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HorizontalCard from "../components/HorizontalCard.astro";
+import { getCollection } from "astro:content";
+import createSlug from "../lib/createSlug"
+
+const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const last_posts = posts.slice(0, 3);
+---
+
+<BaseLayout sideBarActiveItemID="home">
+  <div class="pb-12 mt-5">
+    <div class="text-xl py-1">Hey there 👋</div>
+    <div class="text-5xl font-bold">I'm Oleksandr Sobol</div>
+    <div class="text-3xl py-3 font-bold">Full-Stack Developer</div>
+    <div class="py-2">
+      <text class="text-lg">
+        I specialize in building practical, reliable software that solves actual business problems. Coming from a background in network engineering and physical infrastructure, I know what happens when systems fail—so I write code that doesn't. From server-side automation to full-stack web platforms, I build fast, resilient solutions that users can depend on.
+      </text>
+    </div>
+    <div class="mt-8">
+      <a class="btn btn-primary" href="/contact"> Let's Talk</a>
+      <a href="/cv" class="btn btn-outline ml-5">
+        My Story & Resume
+      </a>
+    </div>
+  </div>
+
+  <div>
+    <div class="text-3xl w-full font-bold mb-2">Projects I'm Proud Of {"</>"}</div>
+  </div>
+
+  <HorizontalCard
+    title="ProVar Agricultural Variety Management"
+    desc="Architected a complete CSS theme redesign and modern UI overhaul for ProVar Management, streamlining fruit variety licensing, agricultural logistics, and grower reporting."
+    url="https://provarmanagement.com/pvm/about-pvm/"
+    badge="PHP & JS"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="NRS Accounting & Payroll Platform"
+    desc="Executed a full CSS theme redesign alongside custom server-side validation and payroll processing engines for NRS Accounting Systems serving agricultural operations."
+    url="https://www.nrsaccounting.com/"
+    badge="PHP & AJAX"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="Utopia API Handler"
+    desc="Built custom API service connecting Utopia Fiber webhook events directly to PowerCode management, eliminating 99% of manual customer provisioning work for 4,000+ subscribers."
+    url="https://github.com/OleksSobol/Utopia-Account-Creation---UAC"
+    badge="PYTHON"
+  />
+
+  <div>
+    <div class="text-3xl w-full font-bold mb-5 mt-10">Latest from blog</div>
+  </div>
+
+  {
+    last_posts.map((post) => (
+      <>
+        <HorizontalCard
+          title={post.data.title}
+          desc={post.data.description}
+          url={"/blog/" + createSlug(post.data.title, post.slug)}
+          target="_self"
+          badge={post.data.badge}
+        />
+        <div class="divider my-0" />
+      </>
+    ))
+  }
+</BaseLayout>
