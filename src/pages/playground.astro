@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ApiTester from "../components/playground/ApiTester.astro";
 ---
 
 <BaseLayout title="Developer Tools Playground" sideBarActiveItemID="playground">
@@ -56,39 +57,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
     <!-- API Tester -->
     <div id="api-tester" class="pg-tab-content block">
-      <div class="card bg-base-200 shadow-xl">
-        <div class="card-body">
-          <h2 class="card-title text-primary">REST API Tester</h2>
-          <p class="text-sm mb-4">Test HTTP endpoints with custom headers & payload right from your browser.</p>
-
-          <div class="flex gap-2 flex-wrap mb-4">
-            <select id="apiMethod" class="select select-bordered w-full max-w-[120px]">
-              <option value="GET">GET</option>
-              <option value="POST">POST</option>
-              <option value="PUT">PUT</option>
-              <option value="DELETE">DELETE</option>
-            </select>
-            <input type="text" id="apiUrl" class="input input-bordered flex-1 min-w-[200px]" placeholder="https://jsonplaceholder.typicode.com/todos/1" value="https://jsonplaceholder.typicode.com/todos/1">
-          </div>
-
-          <div class="mb-4">
-            <label class="label"><span class="label-text">Headers (JSON format)</span></label>
-            <textarea id="apiHeaders" class="textarea textarea-bordered w-full" rows="2" placeholder='{"Content-Type": "application/json"}'></textarea>
-          </div>
-
-          <div id="apiBodyGroup" class="mb-4" style="display: none;">
-            <label class="label"><span class="label-text">Request Body (JSON)</span></label>
-            <textarea id="apiBody" class="textarea textarea-bordered w-full" rows="3" placeholder='{"title": "Test", "completed": false}'></textarea>
-          </div>
-
-          <div class="card-actions justify-start">
-            <button class="btn btn-primary" onclick="testAPI()">Send Request</button>
-            <button class="btn btn-outline" onclick="clearAPITester()">Clear</button>
-          </div>
-
-          <div id="apiOutput" class="pg-output" style="display: none;"></div>
-        </div>
-      </div>
+      <ApiTester />
     </div>
 
     <!-- Base64 Tool -->

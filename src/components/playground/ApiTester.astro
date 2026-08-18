@@ -1,0 +1,434 @@
+---
+---
+
+<div class="card bg-base-200 shadow-xl overflow-visible">
+  <div class="card-body p-4 md:p-6">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="card-title text-primary">Insomnia-like API Tester</h2>
+      <button class="btn btn-sm btn-ghost" id="apiClearHistoryBtn">Clear History</button>
+    </div>
+
+    <!-- URL and Method Row -->
+    <div class="flex gap-2 w-full mb-4">
+      <select id="apiMethod" class="select select-bordered w-full max-w-[120px] bg-base-100">
+        <option value="GET">GET</option>
+        <option value="POST">POST</option>
+        <option value="PUT">PUT</option>
+        <option value="PATCH">PATCH</option>
+        <option value="DELETE">DELETE</option>
+      </select>
+      <input type="text" id="apiUrl" class="input input-bordered flex-1 bg-base-100 font-mono text-sm" placeholder="https://api.example.com/v1/users">
+      <button class="btn btn-primary px-6" id="apiSendBtn">Send</button>
+    </div>
+
+    <!-- Split Pane Layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      
+      <!-- LEFT PANE: Request -->
+      <div class="flex flex-col border border-base-300 rounded-box bg-base-100 overflow-hidden h-[500px]">
+        <!-- Request Tabs -->
+        <div class="tabs tabs-boxed bg-base-200 rounded-none rounded-t-box p-1" id="reqTabs">
+          <a class="tab tab-active" data-target="req-params">Params</a>
+          <a class="tab" data-target="req-headers">Headers</a>
+          <a class="tab" data-target="req-auth">Auth</a>
+          <a class="tab" data-target="req-body">Body</a>
+        </div>
+        
+        <div class="flex-1 overflow-y-auto p-4">
+          <!-- Params Tab -->
+          <div id="req-params" class="req-tab-content block">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-xs font-semibold uppercase text-base-content/70">Query Parameters</span>
+              <button class="btn btn-xs btn-outline" id="addParamBtn">+ Add</button>
+            </div>
+            <div id="paramsList" class="flex flex-col gap-2"></div>
+          </div>
+
+          <!-- Headers Tab -->
+          <div id="req-headers" class="req-tab-content hidden">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-xs font-semibold uppercase text-base-content/70">Headers</span>
+              <button class="btn btn-xs btn-outline" id="addHeaderBtn">+ Add</button>
+            </div>
+            <div id="headersList" class="flex flex-col gap-2"></div>
+          </div>
+
+          <!-- Auth Tab -->
+          <div id="req-auth" class="req-tab-content hidden">
+            <label class="label"><span class="label-text font-semibold text-base-content/70">Bearer Token</span></label>
+            <input type="text" id="apiAuthToken" class="input input-bordered w-full font-mono text-sm" placeholder="eyJhY2Nlc3NfdG9rZW4..."/>
+          </div>
+
+          <!-- Body Tab -->
+          <div id="req-body" class="req-tab-content hidden h-full flex-col">
+            <label class="label"><span class="label-text font-semibold text-base-content/70">JSON Body</span></label>
+            <textarea id="apiBody" class="textarea textarea-bordered w-full flex-1 font-mono text-sm resize-none" placeholder='{\n  "key": "value"\n}'></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT PANE: Response -->
+      <div class="flex flex-col border border-base-300 rounded-box bg-base-100 overflow-hidden h-[500px]">
+        
+        <!-- Response Meta Bar -->
+        <div class="flex items-center gap-4 bg-base-200 p-2 border-b border-base-300 text-sm overflow-x-auto whitespace-nowrap">
+          <div class="flex flex-col">
+            <span class="text-[10px] uppercase text-base-content/50 font-bold tracking-wider leading-none mb-1">Status</span>
+            <div id="resStatus" class="badge badge-ghost badge-sm font-mono">-</div>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-[10px] uppercase text-base-content/50 font-bold tracking-wider leading-none mb-1">Time</span>
+            <div id="resTime" class="text-base-content font-mono">-</div>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-[10px] uppercase text-base-content/50 font-bold tracking-wider leading-none mb-1">Size</span>
+            <div id="resSize" class="text-base-content font-mono">-</div>
+          </div>
+        </div>
+
+        <!-- Response Tabs -->
+        <div class="tabs tabs-boxed bg-base-200 rounded-none p-1 border-b border-base-300" id="resTabs">
+          <a class="tab tab-active" data-target="res-preview">Preview</a>
+          <a class="tab" data-target="res-headers">Headers</a>
+        </div>
+
+        <div class="flex-1 overflow-y-auto relative bg-[#1e1e1e]">
+          <!-- Loading Overlay -->
+          <div id="resLoading" class="absolute inset-0 bg-base-100/50 backdrop-blur-sm flex items-center justify-center z-10 hidden">
+            <span class="loading loading-spinner loading-lg text-primary"></span>
+          </div>
+
+          <!-- Preview Tab -->
+          <div id="res-preview" class="res-tab-content block h-full">
+            <pre id="resBody" class="p-4 m-0 font-mono text-sm text-gray-300 whitespace-pre-wrap break-all h-full" style="tab-size: 2;">Hit Send to get a response...</pre>
+          </div>
+
+          <!-- Headers Tab -->
+          <div id="res-headers" class="res-tab-content hidden h-full p-4">
+            <div id="resHeadersList" class="flex flex-col gap-1 text-sm font-mono break-all text-gray-300">
+              No headers to display.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Syntax Highlighting Classes */
+  .sh-string { color: #ce9178; }
+  .sh-number { color: #b5cea8; }
+  .sh-boolean { color: #569cd6; }
+  .sh-null { color: #569cd6; }
+  .sh-key { color: #9cdcfe; }
+</style>
+
+<script is:inline>
+  (function() {
+    // --- State & DOM Elements ---
+    const STORAGE_KEY = 'insomnia_tester_history';
+    
+    const elements = {
+      method: document.getElementById('apiMethod'),
+      url: document.getElementById('apiUrl'),
+      sendBtn: document.getElementById('apiSendBtn'),
+      paramsList: document.getElementById('paramsList'),
+      headersList: document.getElementById('headersList'),
+      addParamBtn: document.getElementById('addParamBtn'),
+      addHeaderBtn: document.getElementById('addHeaderBtn'),
+      authToken: document.getElementById('apiAuthToken'),
+      body: document.getElementById('apiBody'),
+      
+      resStatus: document.getElementById('resStatus'),
+      resTime: document.getElementById('resTime'),
+      resSize: document.getElementById('resSize'),
+      resBody: document.getElementById('resBody'),
+      resHeadersList: document.getElementById('resHeadersList'),
+      resLoading: document.getElementById('resLoading'),
+      clearHistoryBtn: document.getElementById('apiClearHistoryBtn')
+    };
+
+    // --- Tab Switching Logic ---
+    function setupTabs(containerId, contentClass) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      const tabs = container.querySelectorAll('.tab');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          // Deactivate all
+          tabs.forEach(t => t.classList.remove('tab-active'));
+          document.querySelectorAll(`.${contentClass}`).forEach(c => {
+            c.classList.remove('block', 'flex');
+            c.classList.add('hidden');
+          });
+          
+          // Activate clicked
+          tab.classList.add('tab-active');
+          const targetId = tab.getAttribute('data-target');
+          const target = document.getElementById(targetId);
+          if (target) {
+            target.classList.remove('hidden');
+            target.classList.add(targetId === 'req-body' ? 'flex' : 'block');
+          }
+        });
+      });
+    }
+
+    setupTabs('reqTabs', 'req-tab-content');
+    setupTabs('resTabs', 'res-tab-content');
+
+    // --- Dynamic Rows (Params & Headers) ---
+    function createRow(key = '', value = '', isParam = false) {
+      const div = document.createElement('div');
+      div.className = 'flex gap-2 items-center';
+      
+      const keyInput = document.createElement('input');
+      keyInput.type = 'text';
+      keyInput.className = 'input input-bordered input-sm flex-1 font-mono text-xs';
+      keyInput.placeholder = 'Key';
+      keyInput.value = key;
+      
+      const valInput = document.createElement('input');
+      valInput.type = 'text';
+      valInput.className = 'input input-bordered input-sm flex-1 font-mono text-xs';
+      valInput.placeholder = 'Value';
+      valInput.value = value;
+      
+      const delBtn = document.createElement('button');
+      delBtn.className = 'btn btn-square btn-sm btn-ghost text-error';
+      delBtn.innerHTML = '×';
+      delBtn.onclick = () => {
+        div.remove();
+        if (isParam) syncUrlFromParams();
+      };
+      
+      if (isParam) {
+        keyInput.oninput = syncUrlFromParams;
+        valInput.oninput = syncUrlFromParams;
+      }
+      
+      div.appendChild(keyInput);
+      div.appendChild(valInput);
+      div.appendChild(delBtn);
+      return div;
+    }
+
+    elements.addParamBtn.addEventListener('click', () => {
+      elements.paramsList.appendChild(createRow('', '', true));
+    });
+
+    elements.addHeaderBtn.addEventListener('click', () => {
+      elements.headersList.appendChild(createRow());
+    });
+
+    // --- URL / Params Syncing ---
+    function syncParamsFromUrl() {
+      try {
+        const urlStr = elements.url.value;
+        if (!urlStr.startsWith('http')) return;
+        const urlObj = new URL(urlStr);
+        elements.paramsList.innerHTML = '';
+        urlObj.searchParams.forEach((val, key) => {
+          elements.paramsList.appendChild(createRow(key, val, true));
+        });
+      } catch (e) {
+        // invalid URL, ignore
+      }
+    }
+
+    function syncUrlFromParams() {
+      try {
+        const urlStr = elements.url.value;
+        if (!urlStr.startsWith('http')) return;
+        const urlObj = new URL(urlStr);
+        
+        // Clear existing params
+        urlObj.searchParams.forEach((val, key) => urlObj.searchParams.delete(key));
+        
+        // Add current params
+        Array.from(elements.paramsList.children).forEach(row => {
+          const key = row.children[0].value.trim();
+          const val = row.children[1].value;
+          if (key) urlObj.searchParams.append(key, val);
+        });
+        
+        elements.url.value = urlObj.toString();
+      } catch (e) {}
+    }
+
+    elements.url.addEventListener('input', syncParamsFromUrl);
+
+    // --- Formatting & Highlighting ---
+    function syntaxHighlightJSON(json) {
+      if (typeof json != 'string') {
+        json = JSON.stringify(json, undefined, 2);
+      }
+      json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+        let cls = 'sh-number';
+        if (/^"/.test(match)) {
+          if (/:$/.test(match)) {
+            cls = 'sh-key';
+          } else {
+            cls = 'sh-string';
+          }
+        } else if (/true|false/.test(match)) {
+          cls = 'sh-boolean';
+        } else if (/null/.test(match)) {
+          cls = 'sh-null';
+        }
+        return '<span class="' + cls + '">' + match + '</span>';
+      });
+    }
+
+    function formatBytes(bytes) {
+      if (bytes === 0) return '0 B';
+      const k = 1024;
+      const sizes = ['B', 'KB', 'MB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    function updateStatusBadge(code, text) {
+      elements.resStatus.textContent = `${code} ${text}`;
+      elements.resStatus.className = 'badge badge-sm font-mono text-white';
+      if (code >= 200 && code < 300) elements.resStatus.classList.add('badge-success');
+      else if (code >= 300 && code < 400) elements.resStatus.classList.add('badge-info');
+      else if (code >= 400 && code < 500) elements.resStatus.classList.add('badge-warning');
+      else if (code >= 500) elements.resStatus.classList.add('badge-error');
+      else elements.resStatus.classList.add('badge-ghost');
+    }
+
+    // --- Execution ---
+    async function executeRequest() {
+      const url = elements.url.value.trim();
+      if (!url) return;
+
+      elements.resLoading.classList.remove('hidden');
+      elements.resBody.innerHTML = '';
+      elements.resHeadersList.innerHTML = '';
+      
+      const method = elements.method.value;
+      const headers = {};
+      
+      // Collect headers
+      Array.from(elements.headersList.children).forEach(row => {
+        const key = row.children[0].value.trim();
+        const val = row.children[1].value.trim();
+        if (key) headers[key] = val;
+      });
+
+      // Collect Auth
+      const token = elements.authToken.value.trim();
+      if (token) headers['Authorization'] = `Bearer ${token}`;
+
+      const options = { method, headers };
+      
+      // Body
+      if (['POST', 'PUT', 'PATCH'].includes(method)) {
+        const bodyStr = elements.body.value.trim();
+        if (bodyStr) {
+          options.body = bodyStr;
+          if (!headers['Content-Type']) headers['Content-Type'] = 'application/json';
+        }
+      }
+
+      saveState();
+
+      const startTime = performance.now();
+      try {
+        const response = await fetch(url, options);
+        const endTime = performance.now();
+        
+        elements.resTime.textContent = `${Math.round(endTime - startTime)} ms`;
+        updateStatusBadge(response.status, response.statusText);
+
+        // Response Headers
+        let resHeadersHtml = '';
+        response.headers.forEach((val, key) => {
+          resHeadersHtml += `<div class="grid grid-cols-3 gap-2 border-b border-gray-800 py-1"><span class="font-bold text-gray-400">${key}</span><span class="col-span-2">${val}</span></div>`;
+        });
+        elements.resHeadersList.innerHTML = resHeadersHtml || 'No headers returned.';
+
+        // Try to parse body
+        const text = await response.text();
+        const size = new Blob([text]).size;
+        elements.resSize.textContent = formatBytes(size);
+
+        try {
+          const json = JSON.parse(text);
+          elements.resBody.innerHTML = syntaxHighlightJSON(json);
+        } catch {
+          elements.resBody.textContent = text || 'No response body.';
+        }
+
+      } catch (err) {
+        const endTime = performance.now();
+        elements.resTime.textContent = `${Math.round(endTime - startTime)} ms`;
+        updateStatusBadge(0, 'Error');
+        elements.resSize.textContent = '0 B';
+        elements.resBody.innerHTML = `<span class="text-error">Network Error: ${err.message}</span>\nCheck CORS policies or network connectivity.`;
+      } finally {
+        elements.resLoading.classList.add('hidden');
+      }
+    }
+
+    elements.sendBtn.addEventListener('click', executeRequest);
+    elements.url.addEventListener('keydown', e => { if (e.key === 'Enter') executeRequest(); });
+
+    // --- State Management ---
+    function saveState() {
+      const state = {
+        method: elements.method.value,
+        url: elements.url.value,
+        token: elements.authToken.value,
+        body: elements.body.value,
+        headers: Array.from(elements.headersList.children).map(row => ({
+          key: row.children[0].value,
+          val: row.children[1].value
+        }))
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function loadState() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (!saved) return;
+      try {
+        const state = JSON.parse(saved);
+        if (state.method) elements.method.value = state.method;
+        if (state.url) elements.url.value = state.url;
+        if (state.token) elements.authToken.value = state.token;
+        if (state.body) elements.body.value = state.body;
+        
+        elements.headersList.innerHTML = '';
+        if (state.headers) {
+          state.headers.forEach(h => {
+            if (h.key || h.val) elements.headersList.appendChild(createRow(h.key, h.val, false));
+          });
+        }
+        syncParamsFromUrl();
+      } catch (e) {}
+    }
+
+    elements.clearHistoryBtn.addEventListener('click', () => {
+      localStorage.removeItem(STORAGE_KEY);
+      elements.url.value = '';
+      elements.method.value = 'GET';
+      elements.authToken.value = '';
+      elements.body.value = '';
+      elements.headersList.innerHTML = '';
+      elements.paramsList.innerHTML = '';
+      elements.resStatus.textContent = '-';
+      elements.resStatus.className = 'badge badge-ghost badge-sm font-mono';
+      elements.resTime.textContent = '-';
+      elements.resSize.textContent = '-';
+      elements.resBody.textContent = 'Hit Send to get a response...';
+      elements.resHeadersList.innerHTML = 'No headers to display.';
+    });
+
+    // Init
+    loadState();
+  })();
+</script>
