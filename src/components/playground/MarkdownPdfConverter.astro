@@ -1,0 +1,1720 @@
+---
+// Markdown to PDF Converter and Document Viewer Component
+---
+
+<div class="card bg-base-200 shadow-xl overflow-visible" id="mdPdfConverterApp">
+  <div class="card-body p-4 md:p-6">
+    <!-- Header Row -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4 pb-3 border-b border-base-300">
+      <div>
+        <div class="flex items-center gap-2">
+          <h2 class="card-title text-primary text-xl md:text-2xl font-bold flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            Markdown to PDF Converter
+          </h2>
+          <span class="badge badge-sm badge-outline text-xs">Mermaid & Alerts Ready</span>
+        </div>
+        <p class="text-xs md:text-sm text-base-content/70 mt-1">
+          Paste Markdown with Mermaid diagrams, GitHub callouts, code blocks & tables. Preview live and print or export to clean PDF.
+        </p>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-wrap items-center gap-2 w-full md:w-auto justify-end">
+        <button id="btnPrintPdf" class="btn btn-sm btn-primary gap-1 shadow-md hover:shadow-lg transition-all" title="Open native browser print dialog to print or save as vector PDF">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+          </svg>
+          Print / Save PDF
+        </button>
+
+        <button id="btnDownloadPdf" class="btn btn-sm btn-secondary gap-1 shadow-sm" title="Directly generate and download .pdf file">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
+          <span id="downloadPdfLabel">Download PDF</span>
+        </button>
+
+        <div class="dropdown dropdown-end">
+          <label tabindex="0" class="btn btn-sm btn-outline gap-1">
+            More
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+          </label>
+          <ul tabindex="0" class="dropdown-content z-20 menu p-2 shadow-xl bg-base-100 rounded-box w-52 text-sm border border-base-300">
+            <li><a id="btnCopyHtml">📋 Copy HTML</a></li>
+            <li><a id="btnExportMd">💾 Download .md File</a></li>
+            <li><a id="btnToggleWide">⛶ Toggle Wide Screen</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Fill & Toolbar Row -->
+    <div class="flex flex-wrap items-center justify-between gap-3 mb-4 bg-base-100 p-3 rounded-lg border border-base-300">
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="text-xs font-bold uppercase text-base-content/60">Quick Tools:</span>
+        <button id="btnLoadSample" class="btn btn-xs btn-outline btn-accent rounded-full font-medium" title="Load the Accounting MVC & ECharts Architecture Plan">
+          ⚡ Load Implementation Plan Sample
+        </button>
+        <button id="btnPasteClipboard" class="btn btn-xs btn-outline rounded-full">
+          📋 Paste Clipboard
+        </button>
+        <label class="btn btn-xs btn-outline rounded-full cursor-pointer">
+          📂 Open .md
+          <input type="file" id="fileMdInput" accept=".md,.markdown,.txt" class="hidden" />
+        </label>
+        <button id="btnClearEditor" class="btn btn-xs btn-ghost text-error rounded-full">
+          🗑️ Clear
+        </button>
+      </div>
+
+      <!-- View & Format Controls -->
+      <div class="flex items-center gap-3 flex-wrap">
+        <!-- View Mode Toggle -->
+        <div class="join">
+          <button id="btnViewSplit" class="btn btn-xs join-item btn-active" title="Side-by-side Editor & Preview">Split</button>
+          <button id="btnViewPreview" class="btn btn-xs join-item" title="Fullscreen Document Preview">Preview Only</button>
+          <button id="btnViewEditor" class="btn btn-xs join-item" title="Editor Only">Editor Only</button>
+        </div>
+
+        <!-- Preview Theme -->
+        <div class="flex items-center gap-1 text-xs">
+          <span class="text-base-content/60">Preview:</span>
+          <select id="selectDocTheme" class="select select-bordered select-xs bg-base-100">
+            <option value="paper">📄 Paper (Print-White)</option>
+            <option value="modern">🌙 Dark / Theme</option>
+          </select>
+        </div>
+
+        <!-- Paper Size -->
+        <div class="flex items-center gap-1 text-xs">
+          <span class="text-base-content/60">Paper:</span>
+          <select id="selectPaperSize" class="select select-bordered select-xs bg-base-100">
+            <option value="a4">A4 (210×297mm)</option>
+            <option value="letter">Letter (8.5×11")</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Workspace Container -->
+    <div id="workspaceGrid" class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
+      
+      <!-- LEFT: Editor Pane -->
+      <div id="editorPane" class="flex flex-col border border-base-300 rounded-box bg-base-100 overflow-hidden shadow-sm">
+        <div class="flex justify-between items-center bg-base-200 px-3 py-2 border-b border-base-300 text-xs">
+          <span class="font-semibold text-base-content/70 flex items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+            </svg>
+            Markdown Input
+          </span>
+          <div class="flex items-center gap-3 text-base-content/60">
+            <span id="charWordCount">0 words | 0 chars</span>
+            <span class="badge badge-xs badge-success gap-1" id="saveIndicator">Auto-saved</span>
+          </div>
+        </div>
+
+        <div class="relative flex-1">
+          <textarea
+            id="markdownTextarea"
+            class="textarea w-full h-[650px] font-mono text-sm leading-relaxed p-4 bg-base-100 border-none focus:outline-none resize-y"
+            placeholder="Write or paste your markdown here... (Supports # headings, ```mermaid diagrams, > [!NOTE] GitHub alerts, tables, code blocks)"
+            spellcheck="false"
+          ></textarea>
+        </div>
+      </div>
+
+      <!-- RIGHT: Document Preview Pane -->
+      <div id="previewPane" class="flex flex-col border border-base-300 rounded-box bg-base-100 overflow-hidden shadow-sm">
+        <div class="flex justify-between items-center bg-base-200 px-3 py-2 border-b border-base-300 text-xs">
+          <div class="flex items-center gap-2">
+            <span class="font-semibold text-base-content/70 flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+              Live Rendered Document
+            </span>
+            <span id="renderStatusBadge" class="badge badge-xs badge-ghost">Ready</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button id="btnZoomOut" class="btn btn-ghost btn-xs px-1" title="Zoom out preview">-</button>
+            <span id="zoomLabel" class="text-xs font-mono">100%</span>
+            <button id="btnZoomIn" class="btn btn-ghost btn-xs px-1" title="Zoom in preview">+</button>
+            <button id="btnResetZoom" class="btn btn-ghost btn-xs px-1 text-[10px]" title="Reset zoom">1:1</button>
+          </div>
+        </div>
+
+        <!-- Scrollable Document Viewport -->
+        <div id="previewViewport" class="flex-1 h-[650px] overflow-y-auto overflow-x-auto p-4 md:p-6 bg-base-300/40">
+          <!-- The printable sheet container -->
+          <div
+            id="printableMarkdownDoc"
+            class="doc-sheet doc-theme-paper mx-auto p-6 md:p-10 shadow-lg rounded-sm transition-all"
+            style="min-height: 100%;"
+          >
+            <!-- Content will be rendered here -->
+            <div id="markdownOutput" class="markdown-body">
+              <div class="text-center py-20 text-base-content/50">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto mb-3 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <p class="text-base font-semibold">Your formatted document will appear here</p>
+                <p class="text-xs mt-1">Click "⚡ Load Implementation Plan Sample" above or start typing</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Toast Notification -->
+<div id="toastNotification" class="toast toast-end toast-bottom z-50 hidden">
+  <div class="alert alert-info py-2 px-4 shadow-lg text-sm">
+    <span id="toastMessage">Notification</span>
+  </div>
+</div>
+
+<!-- Required CDN Libraries -->
+<script is:inline src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script is:inline src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<!-- Highlight.js Themes (Screen & Print) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" />
+
+<style is:global>
+  /* ========================================================
+     DOCUMENT & TYPOGRAPHY STYLES (SCREEN & PAPER)
+     ======================================================== */
+  #mdPdfConverterApp .doc-sheet {
+    max-width: 850px;
+    width: 100%;
+    transform-origin: top center;
+    transition: transform 0.15s ease, background-color 0.2s ease, color 0.2s ease;
+  }
+
+  /* Paper Light Theme (Crisp Document Look) */
+  #mdPdfConverterApp .doc-sheet.doc-theme-paper {
+    background-color: #ffffff;
+    color: #1e293b; /* Slate 800 */
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Modern Theme (Follows App Theme) */
+  #mdPdfConverterApp .doc-sheet.doc-theme-modern {
+    background-color: oklch(var(--b1));
+    color: oklch(var(--bc));
+    border: 1px solid oklch(var(--b3));
+  }
+
+  /* Markdown Typography */
+  #mdPdfConverterApp .markdown-body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    word-wrap: break-word;
+  }
+
+  #mdPdfConverterApp .markdown-body h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.25;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e2e8f0;
+    letter-spacing: -0.025em;
+    color: #0f172a;
+  }
+
+  #mdPdfConverterApp .markdown-body h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-top: 1.75rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid #e2e8f0;
+    letter-spacing: -0.02em;
+    color: #1e293b;
+  }
+
+  #mdPdfConverterApp .markdown-body h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.35;
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: #1e293b;
+  }
+
+  #mdPdfConverterApp .markdown-body h4 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-top: 1rem;
+    margin-bottom: 0.4rem;
+    color: #334155;
+  }
+
+  #mdPdfConverterApp .markdown-body p {
+    margin-top: 0.5rem;
+    margin-bottom: 0.85rem;
+    line-height: 1.65;
+    color: #334155;
+  }
+
+  #mdPdfConverterApp .markdown-body ul,
+  #mdPdfConverterApp .markdown-body ol {
+    margin-top: 0.4rem;
+    margin-bottom: 0.85rem;
+    padding-left: 1.75rem;
+  }
+
+  #mdPdfConverterApp .markdown-body ul {
+    list-style-type: disc;
+  }
+
+  #mdPdfConverterApp .markdown-body ol {
+    list-style-type: decimal;
+  }
+
+  #mdPdfConverterApp .markdown-body li {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+    color: #334155;
+  }
+
+  #mdPdfConverterApp .markdown-body strong {
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  #mdPdfConverterApp .markdown-body hr {
+    height: 2px;
+    padding: 0;
+    margin: 1.75rem 0;
+    background-color: rgba(148, 163, 184, 0.25);
+    border: 0;
+  }
+
+  /* Inline Code */
+  #mdPdfConverterApp .markdown-body :not(pre) > code {
+    padding: 0.2em 0.4em;
+    margin: 0 0.15em;
+    font-size: 85%;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    background-color: rgba(148, 163, 184, 0.15);
+    border-radius: 6px;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+  }
+
+  /* Code Block Wrappers */
+  #mdPdfConverterApp .code-block-wrapper {
+    position: relative;
+    margin: 1.2rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    background-color: #1e293b;
+  }
+
+  #mdPdfConverterApp .code-block-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0f172a;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-family: monospace;
+    color: #94a3b8;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+  }
+
+  #mdPdfConverterApp .code-copy-btn {
+    background: transparent;
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    color: #cbd5e1;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  #mdPdfConverterApp .code-copy-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+  }
+
+  #mdPdfConverterApp .markdown-body pre {
+    margin: 0;
+    padding: 12px 16px;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.5;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    background-color: #1e293b;
+    color: #f8fafc;
+  }
+
+  /* Tables */
+  #mdPdfConverterApp .table-wrapper {
+    overflow-x: auto;
+    margin: 1.25rem 0;
+    border-radius: 8px;
+    border: 1px solid rgba(148, 163, 184, 0.25);
+  }
+
+  #mdPdfConverterApp .markdown-body table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    text-align: left;
+  }
+
+  #mdPdfConverterApp .markdown-body th {
+    background-color: rgba(148, 163, 184, 0.1);
+    font-weight: 600;
+    padding: 8px 14px;
+    border-bottom: 2px solid rgba(148, 163, 184, 0.3);
+  }
+
+  #mdPdfConverterApp .markdown-body td {
+    padding: 8px 14px;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+  }
+
+  #mdPdfConverterApp .markdown-body tr:last-child td {
+    border-bottom: none;
+  }
+
+  #mdPdfConverterApp .markdown-body tr:nth-child(even) {
+    background-color: rgba(148, 163, 184, 0.04);
+  }
+
+  /* GitHub Alerts / Callouts */
+  #mdPdfConverterApp .markdown-alert {
+    margin: 1.25rem 0;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border-left: 4px solid #64748b;
+    background-color: rgba(100, 116, 139, 0.08);
+  }
+
+  #mdPdfConverterApp .markdown-alert-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 13.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 6px;
+  }
+
+  #mdPdfConverterApp .markdown-alert-icon {
+    display: inline-flex;
+    width: 18px;
+    height: 18px;
+  }
+
+  #mdPdfConverterApp .markdown-alert-content {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  #mdPdfConverterApp .markdown-alert-content > p:first-child {
+    margin-top: 0;
+  }
+
+  #mdPdfConverterApp .markdown-alert-content > p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Alert Types */
+  #mdPdfConverterApp .markdown-alert-note {
+    border-left-color: #2563eb;
+    background-color: #eff6ff;
+    color: #1e3a8a;
+  }
+  #mdPdfConverterApp .markdown-alert-note .markdown-alert-header { color: #1d4ed8; }
+
+  #mdPdfConverterApp .markdown-alert-tip {
+    border-left-color: #16a34a;
+    background-color: #f0fdf4;
+    color: #14532d;
+  }
+  #mdPdfConverterApp .markdown-alert-tip .markdown-alert-header { color: #15803d; }
+
+  #mdPdfConverterApp .markdown-alert-important {
+    border-left-color: #7c3aed;
+    background-color: #f5f3ff;
+    color: #4c1d95;
+  }
+  #mdPdfConverterApp .markdown-alert-important .markdown-alert-header { color: #6d28d9; }
+
+  #mdPdfConverterApp .markdown-alert-warning {
+    border-left-color: #d97706;
+    background-color: #fffbeb;
+    color: #78350f;
+  }
+  #mdPdfConverterApp .markdown-alert-warning .markdown-alert-header { color: #b45309; }
+
+  #mdPdfConverterApp .markdown-alert-caution {
+    border-left-color: #dc2626;
+    background-color: #fef2f2;
+    color: #7f1d1d;
+  }
+  #mdPdfConverterApp .markdown-alert-caution .markdown-alert-header { color: #b91c1c; }
+
+  /* Standard Blockquotes */
+  #mdPdfConverterApp .markdown-body blockquote:not(.markdown-alert) {
+    margin: 1rem 0;
+    padding: 6px 16px;
+    border-left: 4px solid rgba(148, 163, 184, 0.4);
+    background-color: rgba(148, 163, 184, 0.06);
+    border-radius: 4px;
+    color: inherit;
+    opacity: 0.9;
+  }
+
+  /* Mermaid Diagram Wrappers */
+  #mdPdfConverterApp .mermaid-diagram-wrap {
+    margin: 1.5rem 0;
+    padding: 16px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: auto;
+  }
+
+  #mdPdfConverterApp .mermaid-diagram-wrap svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  #mdPdfConverterApp .mermaid-error {
+    color: #dc2626;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-family: monospace;
+    width: 100%;
+  }
+
+  /* Task Lists */
+  #mdPdfConverterApp .markdown-body input[type="checkbox"] {
+    margin-right: 6px;
+    accent-color: #2563eb;
+    vertical-align: middle;
+  }
+
+  /* ========================================================
+     PRINT & PDF STYLES (PURE WHITE PAPER, ZERO DARK THEME LEAK)
+     ======================================================== */
+  @media print {
+    html, body {
+      background: #ffffff;
+      background-color: #ffffff;
+      color: #0f172a;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: auto;
+      overflow: visible;
+    }
+
+    /* Hide entire website chrome, headers, sidebars, tabs, toolbars */
+    header, footer, aside, .drawer-side, .drawer-toggle,
+    #pgTabsContainer, #editorPane, #sharedNoticeBanner, .tabs,
+    .navbar, .alert, button, input, select, textarea,
+    #mdPdfConverterApp > .card-body > div:first-child,
+    #mdPdfConverterApp > .card-body > div:nth-child(2),
+    #toastNotification {
+      display: none;
+    }
+
+    /* Force all parent wrappers to be unconstrained, white, and full width */
+    .drawer, .drawer-content, main, #mdPdfConverterApp, .card, .card-body,
+    #workspaceGrid, #previewPane, #previewViewport {
+      display: block;
+      position: static;
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+      border: none;
+      box-shadow: none;
+      background: #ffffff;
+      background-color: #ffffff;
+      overflow: visible;
+      height: auto;
+    }
+
+    #mdPdfConverterApp #printableMarkdownDoc {
+      display: block;
+      position: static;
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+      box-shadow: none;
+      border: none;
+      background: #ffffff;
+      background-color: #ffffff;
+      color: #0f172a;
+      transform: none;
+    }
+
+    @page {
+      size: A4 portrait;
+      margin: 15mm 15mm 15mm 15mm;
+    }
+
+    /* Exact print colors */
+    * {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* Page break optimization */
+    h1, h2, h3, h4, h5, h6 {
+      page-break-after: avoid;
+      break-after: avoid;
+      color: #0f172a;
+    }
+
+    pre, .code-block-wrapper, table, .table-wrapper, .markdown-alert, .mermaid-diagram-wrap, blockquote {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    tr {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    /* Hide copy button in print */
+    .code-copy-btn, .code-block-header {
+      background-color: #f1f5f9;
+      color: #475569;
+      border-color: #cbd5e1;
+    }
+    .code-copy-btn {
+      display: none;
+    }
+
+    /* Code blocks in print: clear background, crisp text */
+    .code-block-wrapper {
+      border: 1px solid #cbd5e1;
+      background-color: #f8fafc;
+    }
+
+    #mdPdfConverterApp .markdown-body pre {
+      background-color: #f8fafc;
+      color: #0f172a;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    #mdPdfConverterApp .markdown-body pre code {
+      color: #0f172a;
+    }
+
+    /* Tables in print */
+    #mdPdfConverterApp .markdown-body table {
+      border: 1px solid #94a3b8;
+    }
+    #mdPdfConverterApp .markdown-body th, #mdPdfConverterApp .markdown-body td {
+      border: 1px solid #cbd5e1;
+      color: #0f172a;
+    }
+    #mdPdfConverterApp .markdown-body th {
+      background-color: #f1f5f9;
+    }
+
+    /* Mermaid diagrams in print */
+    #mdPdfConverterApp .mermaid-diagram-wrap {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+    }
+  }
+</style>
+
+<script is:inline>
+(function() {
+  // Elements
+  const textarea = document.getElementById('markdownTextarea');
+  const output = document.getElementById('markdownOutput');
+  const printableDoc = document.getElementById('printableMarkdownDoc');
+  const countEl = document.getElementById('charWordCount');
+  const saveIndicator = document.getElementById('saveIndicator');
+  const statusBadge = document.getElementById('renderStatusBadge');
+  const themeSelect = document.getElementById('selectDocTheme');
+  const paperSelect = document.getElementById('selectPaperSize');
+  const zoomLabel = document.getElementById('zoomLabel');
+  const toastNotification = document.getElementById('toastNotification');
+  const toastMessage = document.getElementById('toastMessage');
+
+  let currentZoom = 1;
+  let renderDebounceTimer = null;
+  let mermaidCounter = 0;
+
+  // Simple clean starter
+  const SIMPLE_DEFAULT_MARKDOWN = `# Document Title
+
+Start typing your markdown here...
+
+### Quick Guide:
+- Write standard Markdown with headings, lists, tables, and code snippets.
+- Add diagrams with \`\`\`mermaid code fences.
+- Add callout alerts using \`> [!NOTE]\` or \`> [!IMPORTANT]\`.
+- Click **Print / Save PDF** to print or export a clean vector PDF.
+`;
+
+  // Sample Architecture Plan (Loadable via Button)
+  const USER_SAMPLE_MARKDOWN = `# Implementation Plan: Port PVM Fluent MVC Framework & ECharts to Accounting
+
+## Goal Description
+Port the modern Fluent MVC UI Framework and ECharts charting engine developed in PVM (Issue-4075) to Accounting (\`NRSSoftware/accounting\`). This provides Accounting with a unified, object-oriented UI builder architecture (\`View\`, \`ViewSection\`, \`ViewForm\`, \`ViewTable\`, and \`Column\` classes) and interactive charting, eliminating monolithic procedural HTML generation and laying the groundwork for modernized reports and dashboards.
+
+\`\`\`mermaid
+flowchart TD
+    subgraph Controller
+        C[Controller Page e.g. arCashRegCharts.php]
+    end
+
+    subgraph "MVC Builders (libraries/System/View/)"
+        VF[ViewForm Builder]
+        VS[ViewSection Container]
+        VT[ViewTable Builder]
+        EC[Echarts Builder]
+    end
+
+    subgraph "OOP Columns (libraries/System/View/Columns/)"
+        COL[Column Base]
+        TC[TextColumn]
+        NC[NumberColumn]
+        MC[MoneyColumn]
+        DC[DateColumn]
+        SUM[Summarizers Sum/Avg/Count]
+    end
+
+    subgraph "View Templates (views/components/)"
+        VFS["_view_form.php"]
+        VSS["_view_section.php"]
+        VTS["_shared_table.php"]
+    end
+
+    subgraph "Browser Assets (resources/javascript/)"
+        JS_SORT["viewTable.sort.js"]
+        JS_ECH["echarts.min.js"]
+        JS_ENG["echartsChartEngine.js"]
+    end
+
+    C --> VF & VS & VT & EC
+    VT --> COL
+    COL --> TC & NC & MC & DC & SUM
+    VS --> VSS
+    VF --> VFS
+    VT --> VTS
+    VTS --> JS_SORT
+    EC --> JS_ECH & JS_ENG
+\`\`\`
+
+---
+
+## User Review Required
+
+> [!IMPORTANT]
+> **Autoloader Additions**: Requires adding class-resolution rules to \`libraries/Autoloader.php\` so that \`View*\`, \`*Column\`, and \`*Trait\` resolve automatically without manual \`require\` calls.
+> 
+> **Zero Inline Styles**: All component templates adhere strictly to the Accounting rule requiring utility classes from \`base.css\` and \`utilities.css\`.
+
+---
+
+## Open Questions
+
+> [!NOTE]
+> 1. **Testing Harness**: PVM uses PHPUnit in \`tests/system/View/\`. Accounting currently does not have a configured PHPUnit suite. We propose creating a CLI test runner script \`tests/verify_mvc_framework.php\` to smoke test and validate all components in Accounting.
+> 2. **Domain Columns**: Should we introduce an \`Ar\` or \`Acc\` column namespace now (e.g. \`libraries/AR/Columns/\`), or wait until specific AR pages need custom formatting? (Recommendation: Start with core \`System/View/Columns/\` and add domain columns when migrating specific pages).
+
+---
+
+## Proposed Changes
+
+### 1. Autoloader Configuration
+#### [MODIFY] \`libraries/Autoloader.php\`
+Register patterns for View builders, OOP Columns, and System Traits:
+\`\`\`php
+array('/^View/',        'System/View'),
+array('/Column$/',      'System/View/Columns'),
+array('/Trait$/',       'System/Traits'),
+\`\`\`
+
+---
+
+### 2. System Traits
+#### [NEW] \`libraries/System/Traits/HasScriptsTrait.php\`
+- Trait providing script buffer management (\`addScript()\`, \`startScript()\`, \`endScript()\`) across \`ViewSection\`, \`ViewForm\`, and \`ViewTable\`.
+
+---
+
+### 3. Core MVC View Builders (\`libraries/System/View/\`)
+#### [NEW] \`libraries/System/View/View.php\`
+- \`View::render(string $path, array $data = []): string\`: isolated-scope view renderer using output buffering.
+
+#### [NEW] \`libraries/System/View/ViewSection.php\`
+- Fluent container supporting titles, collapsible state, action links, alerts, embedded tables, forms, and inline charts.
+
+#### [NEW] \`libraries/System/View/ViewForm.php\`
+- Fluent builder for forms, text inputs, dropdowns, checkboxes, radio groups, date pickers, hidden fields, and action buttons.
+
+#### [NEW] \`libraries/System/View/ViewTable.php\`
+- Fluent table builder with OOP columns, sorting triggers, total rows, super-headers, and row charts.
+
+---
+
+### 4. OOP Table Columns & Summarizers (\`libraries/System/View/Columns/\`)
+#### [NEW] \`libraries/System/View/Columns/Column.php\`
+- Base abstract column with fluent methods: \`label()\`, \`cellClass()\`, \`headerClass()\`, \`alignRight()\`, \`colspan()\`, \`helper()\`, \`visible()\`, \`url()\`, and \`summarize()\`.
+
+#### [NEW] Column Type Implementations:
+- \`TextColumn.php\`: safe HTML-escaped text display.
+- \`NumberColumn.php\`: formatted numeric output with decimal precision.
+- \`MoneyColumn.php\`: currency formatted values with currency symbols.
+- \`DateColumn.php\`: date formatting and alignment.
+- \`CheckboxColumn.php\`: row selection / bulk checkboxes.
+- \`ActionColumn.php\`: row action buttons and icons.
+- \`CustomColumn.php\`: raw output and closure-based rendering.
+- \`GroupColumn.php\`: row grouping with duplicate value suppression.
+
+#### [NEW] Summarizers (\`libraries/System/View/Columns/Summarizers/Summarizer.php\`):
+- \`Sum\`, \`Average\`, and \`Count\` classes to automatically calculate table totals.
+
+---
+
+### 5. Reusable Component Views (\`views/components/\`)
+#### [NEW] \`views/components/_view_section.php\`
+- Presentation template for \`ViewSection\` containers.
+
+#### [NEW] \`views/components/_view_form.php\`
+- Presentation template for \`ViewForm\` inputs and layout.
+
+#### [NEW] \`views/components/_shared_table.php\`
+- Presentation template for \`ViewTable\` data grid and total rows.
+
+---
+
+### 6. Interactive Charting Engine (\`Echarts\`)
+#### [NEW] \`libraries/System/Echarts.php\`
+- Fluent builder for ECharts datasets, supporting Bar, Stacked Bar, Line, Area, and Pie charts, with drilldowns and responsive options.
+
+#### [NEW] Client-side JavaScript Assets:
+- \`resources/javascript/echarts.min.js\`: Apache ECharts vendor library.
+- \`resources/javascript/echartsChartEngine.js\`: Chart initialization, theme application, and dynamic resizing engine.
+- \`resources/javascript/viewTable.sort.js\`: Table column sorting interactions.
+
+---
+
+### 7. Verification & Test Suite
+#### [NEW] \`tests/verify_mvc_framework.php\`
+- CLI test harness to verify:
+  1. Autoloader class resolution without warnings or fatals.
+  2. Fluent API chaining for all builders.
+  3. Template rendering output verification.
+  4. Summarizer calculation accuracy.
+  5. ECharts dataset JSON serialization.
+
+---
+
+## Verification Plan
+
+### Automated Verification
+Run the verification script from CLI:
+\`\`\`bash
+php /var/www/oleks/accounting/tests/verify_mvc_framework.php
+\`\`\`
+Run syntax checks across all newly ported files:
+\`\`\`bash
+find libraries/System/View libraries/System/Traits views/components resources/javascript -name "*.php" -exec php -l {} +
+\`\`\`
+
+### Manual Verification
+1. Open a test page implementing \`ViewSection\`, \`ViewForm\`, \`ViewTable\`, and \`Echarts\`.
+2. Verify table sorting clicks toggle ascending/descending order via \`viewTable.sort.js\`.
+3. Verify ECharts render correctly and adapt on window resize.
+`;
+
+  // SVG Icons for GitHub Alerts
+  const ALERT_ICONS = {
+    note: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>',
+    tip: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.21c-.04-.282-.18-.583-.41-.917a8.4 8.4 0 0 0-.64-.799l-.21-.25C3.06 7.643 2.5 6.74 2.5 5.25 2.5 2.41 4.795 0 8 0s5.5 2.41 5.5 5.25c0 1.49-.56 2.393-1.228 3.14l-.21.25a8.4 8.4 0 0 0-.64.8c-.23.333-.37.634-.41.916a.75.75 0 0 1-1.484-.21c.084-.594.337-1.079.62-1.49.204-.292.45-.584.674-.848l.214-.253c.56-.679.984-1.32.984-2.304 0-2.06-1.637-3.75-4-3.75ZM6 12a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-1Zm1.5 3.5a.75.75 0 0 0 0 1.5h1a.75.75 0 0 0 0-1.5h-1Z"/></svg>',
+    important: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H9.06l-2.573 2.573A1.458 1.458 0 0 1 4 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25v-9.5ZM8 3.5a.75.75 0 0 0-.75.75v3.5a.75.75 0 0 0 1.5 0v-3.5A.75.75 0 0 0 8 3.5ZM8 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"/></svg>',
+    warning: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg>',
+    caution: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4"><path d="M4.47.22A.75.75 0 0 1 5 0h6a.75.75 0 0 1 .53.22l4.25 4.25c.141.14.22.331.22.53v6a.75.75 0 0 1-.22.53l-4.25 4.25A.75.75 0 0 1 11 16H5a.75.75 0 0 1-.53-.22L.22 11.53A.75.75 0 0 1 0 11V5a.75.75 0 0 1 .22-.53Zm.84 1.28L1.5 5.31v5.38l3.81 3.81h5.38l3.81-3.81V5.31L10.69 1.5ZM8 4a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 8 4Zm0 8a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>'
+  };
+
+  // Toast Helper
+  function showToast(msg) {
+    if (!toastNotification || !toastMessage) return;
+    toastMessage.textContent = msg;
+    toastNotification.classList.remove('hidden');
+    setTimeout(() => {
+      toastNotification.classList.add('hidden');
+    }, 2800);
+  }
+
+  let markedConfigured = false;
+  let mermaidInitialized = false;
+
+  // Initialize Mermaid
+  function initMermaid() {
+    if (window.mermaid && !mermaidInitialized) {
+      try {
+        window.mermaid.initialize({
+          startOnLoad: false,
+          theme: 'default',
+          securityLevel: 'loose',
+          fontFamily: 'inherit',
+          flowchart: {
+            useMaxWidth: true,
+            htmlLabels: true,
+            curve: 'basis'
+          }
+        });
+        mermaidInitialized = true;
+      } catch (e) {
+        console.warn('Mermaid initialization warning:', e);
+      }
+    }
+  }
+
+  // Custom Marked Renderer
+  function setupMarked() {
+    if (!window.marked || markedConfigured) return;
+
+    const customRenderer = {
+      // Blockquote Renderer: handles GitHub-style Alerts ([!NOTE], [!TIP], [!IMPORTANT], etc.)
+      blockquote(tokenOrQuote) {
+        const quote = (typeof tokenOrQuote === 'object' && tokenOrQuote !== null)
+          ? (tokenOrQuote.text || tokenOrQuote.raw || '')
+          : (tokenOrQuote || '');
+
+        const alertMatch = quote.match(/^\s*(?:<p>)?\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\](?:\s*<br\s*\/?>)?\s*([\s\S]*?)(?:<\/p>)?([\s\S]*)/i);
+
+        if (alertMatch) {
+          const type = alertMatch[1].toLowerCase();
+          const firstLineRest = alertMatch[2].trim();
+          const restOfBody = alertMatch[3] || '';
+          const icon = ALERT_ICONS[type] || ALERT_ICONS.note;
+          const title = type.charAt(0).toUpperCase() + type.slice(1);
+
+          let body = '';
+          if (firstLineRest) {
+            body += `<p>${firstLineRest}</p>`;
+          }
+          if (restOfBody) {
+            body += restOfBody;
+          }
+
+          return `<div class="markdown-alert markdown-alert-${type}">
+            <div class="markdown-alert-header">
+              <span class="markdown-alert-icon">${icon}</span>
+              <span class="markdown-alert-title">${title}</span>
+            </div>
+            <div class="markdown-alert-content">${body}</div>
+          </div>`;
+        }
+
+        return `<blockquote>${quote}</blockquote>`;
+      },
+
+      // Code Block Renderer
+      code(tokenOrCode, language) {
+        let codeStr = '';
+        let lang = '';
+        if (typeof tokenOrCode === 'object' && tokenOrCode !== null) {
+          codeStr = tokenOrCode.text || tokenOrCode.raw || '';
+          lang = (tokenOrCode.lang || '').trim().toLowerCase();
+        } else {
+          codeStr = tokenOrCode || '';
+          lang = (language || '').trim().toLowerCase();
+        }
+
+        const cleanLang = (lang.split(/\s+/)[0] || '').toLowerCase();
+
+        if (cleanLang === 'mermaid') {
+          const diagramId = 'mermaid-block-' + (++mermaidCounter);
+          const safeCode = (codeStr || '').replace(/"/g, '&quot;');
+          return `<div class="mermaid-diagram-wrap" id="${diagramId}" data-mermaid="${safeCode}">
+            <div class="flex items-center gap-2 text-xs text-base-content/50 py-4">
+              <span class="loading loading-spinner loading-sm text-primary"></span>
+              Rendering Mermaid diagram...
+            </div>
+          </div>`;
+        }
+
+        // Syntax highlighting via highlight.js
+        let highlighted = '';
+        if (window.hljs && cleanLang && hljs.getLanguage(cleanLang)) {
+          try {
+            highlighted = hljs.highlight(codeStr, { language: cleanLang, ignoreIllegals: true }).value;
+          } catch (e) {
+            highlighted = escapeHtml(codeStr);
+          }
+        } else if (window.hljs) {
+          try {
+            highlighted = hljs.highlightAuto(codeStr).value;
+          } catch (e) {
+            highlighted = escapeHtml(codeStr);
+          }
+        } else {
+          highlighted = escapeHtml(codeStr);
+        }
+
+        const displayLang = cleanLang || 'code';
+        const encodedCode = encodeURIComponent(codeStr);
+
+        return `<div class="code-block-wrapper">
+          <div class="code-block-header">
+            <span>${displayLang}</span>
+            <button class="code-copy-btn" onclick="copySnippet('${encodedCode}', this)">Copy</button>
+          </div>
+          <pre><code class="hljs ${cleanLang}">${highlighted}</code></pre>
+        </div>`;
+      }
+    };
+
+    try {
+      if (typeof marked.use === 'function') {
+        marked.use({ renderer: customRenderer });
+      }
+      if (typeof marked.setOptions === 'function') {
+        const legacyRenderer = new marked.Renderer();
+        legacyRenderer.code = customRenderer.code;
+        legacyRenderer.blockquote = customRenderer.blockquote;
+        marked.setOptions({
+          renderer: legacyRenderer,
+          gfm: true,
+          breaks: false
+        });
+      }
+      markedConfigured = true;
+    } catch (err) {
+      console.warn('Error setting up marked:', err);
+    }
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  // Copy code helper attached to window
+  window.copySnippet = function(encoded, btn) {
+    try {
+      const code = decodeURIComponent(encoded);
+      navigator.clipboard.writeText(code).then(() => {
+        const oldText = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = oldText; }, 1800);
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  // Main Render Function
+  async function renderMarkdown() {
+    if (!textarea || !output) return;
+
+    if (!markedConfigured && window.marked) {
+      setupMarked();
+    }
+    if (window.mermaid) {
+      initMermaid();
+    }
+
+    if (statusBadge) {
+      statusBadge.textContent = 'Rendering...';
+      statusBadge.className = 'badge badge-xs badge-warning';
+    }
+
+    const rawMd = textarea.value;
+    updateStats(rawMd);
+
+    // Save to LocalStorage
+    try {
+      localStorage.setItem('md_pdf_converter_draft', rawMd);
+      if (saveIndicator) {
+        saveIndicator.textContent = 'Saved';
+        saveIndicator.className = 'badge badge-xs badge-success gap-1';
+      }
+    } catch (e) {}
+
+    if (!rawMd.trim()) {
+      output.innerHTML = `
+        <div class="text-center py-20 text-base-content/50">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto mb-3 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          <p class="text-base font-semibold">Your formatted document will appear here</p>
+          <p class="text-xs mt-1">Click "⚡ Load Implementation Plan Sample" above or start typing</p>
+        </div>`;
+      if (statusBadge) {
+        statusBadge.textContent = 'Ready';
+        statusBadge.className = 'badge badge-xs badge-ghost';
+      }
+      return;
+    }
+
+    // Step 1: Parse Markdown to HTML via Marked
+    let html = '';
+    if (window.marked) {
+      html = marked.parse(rawMd);
+    } else {
+      html = `<pre>${escapeHtml(rawMd)}</pre>`;
+    }
+
+    // Step 2: Inject HTML into preview
+    output.innerHTML = html;
+
+    // Step 3: Render Mermaid SVGs Asynchronously
+    await renderMermaidDiagrams();
+
+    if (statusBadge) {
+      statusBadge.textContent = 'Rendered';
+      statusBadge.className = 'badge badge-xs badge-success';
+    }
+  }
+
+  // Asynchronously render all Mermaid blocks
+  async function renderMermaidDiagrams() {
+    // 1. Await mermaid if CDN is still loading
+    if (!window.mermaid) {
+      let attempts = 0;
+      while (!window.mermaid && attempts < 25) {
+        await new Promise(r => setTimeout(r, 100));
+        attempts++;
+      }
+      if (!window.mermaid) return;
+    }
+
+    initMermaid();
+
+    // 2. Fallback scanner: convert any <code class="language-mermaid"> that bypassed Marked custom renderer
+    const fallbackCodes = output.querySelectorAll('pre > code.language-mermaid, pre > code.lang-mermaid, pre > code[class*="mermaid"]');
+    fallbackCodes.forEach((codeEl) => {
+      const rawDiagram = codeEl.textContent || '';
+      const preEl = codeEl.closest('.code-block-wrapper') || codeEl.closest('pre');
+      const wrapEl = document.createElement('div');
+      wrapEl.className = 'mermaid-diagram-wrap';
+      wrapEl.id = 'mermaid-block-' + (++mermaidCounter);
+      wrapEl.setAttribute('data-mermaid', rawDiagram);
+      wrapEl.innerHTML = `<div class="flex items-center gap-2 text-xs text-base-content/50 py-4">
+        <span class="loading loading-spinner loading-sm text-primary"></span>
+        Rendering Mermaid diagram...
+      </div>`;
+      if (preEl && preEl.parentNode) {
+        preEl.parentNode.replaceChild(wrapEl, preEl);
+      }
+    });
+
+    // 3. Render all .mermaid-diagram-wrap containers
+    const containers = output.querySelectorAll('.mermaid-diagram-wrap');
+    if (containers.length === 0) return;
+
+    for (let i = 0; i < containers.length; i++) {
+      const container = containers[i];
+      if (container.querySelector('svg')) continue; // Already rendered
+
+      let code = container.getAttribute('data-mermaid');
+      if (!code) {
+        code = container.textContent || '';
+      }
+      code = code
+        .replace(/&quot;/g, '"')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&amp;/g, '&')
+        .trim();
+
+      if (!code) continue;
+
+      const uniqueId = 'mermaid-svg-' + Date.now() + '-' + i + '-' + Math.floor(Math.random() * 1000);
+
+      try {
+        const { svg } = await window.mermaid.render(uniqueId, code);
+        container.innerHTML = svg;
+      } catch (err) {
+        console.warn('Mermaid render error:', err);
+        container.innerHTML = `
+          <div class="mermaid-error">
+            <strong>Mermaid Syntax Error:</strong> ${escapeHtml(err.message || 'Invalid syntax')}
+          </div>`;
+      }
+    }
+  }
+
+  // Update Character and Word Count
+  function updateStats(text) {
+    if (!countEl) return;
+    const chars = text.length;
+    const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+    countEl.textContent = `${words.toLocaleString()} words | ${chars.toLocaleString()} chars`;
+  }
+
+  // Debounced input listener
+  function queueRender() {
+    if (statusBadge) {
+      statusBadge.textContent = 'Typing...';
+      statusBadge.className = 'badge badge-xs badge-info';
+    }
+    if (saveIndicator) {
+      saveIndicator.textContent = 'Unsaved...';
+      saveIndicator.className = 'badge badge-xs badge-ghost';
+    }
+    clearTimeout(renderDebounceTimer);
+    renderDebounceTimer = setTimeout(renderMarkdown, 250);
+  }
+
+  // Native Print / Save to PDF (Uses an isolated iframe for pure white paper output)
+  function printDocument() {
+    let printFrame = document.getElementById('md-print-iframe');
+    if (!printFrame) {
+      printFrame = document.createElement('iframe');
+      printFrame.id = 'md-print-iframe';
+      printFrame.style.position = 'fixed';
+      printFrame.style.right = '0';
+      printFrame.style.bottom = '0';
+      printFrame.style.width = '0';
+      printFrame.style.height = '0';
+      printFrame.style.border = '0';
+      printFrame.style.visibility = 'hidden';
+      document.body.appendChild(printFrame);
+    }
+
+    const docContent = document.getElementById('markdownOutput').innerHTML;
+    const firstH1 = document.querySelector('#markdownOutput h1');
+    const docTitle = firstH1 ? firstH1.innerText.trim() : 'Document';
+    const paperSize = paperSelect ? paperSelect.value : 'a4';
+
+    const frameDoc = printFrame.contentWindow.document;
+    frameDoc.open();
+    frameDoc.write(`<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>${escapeHtml(docTitle)}</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" />
+  <style>
+    @page {
+      size: ${paperSize === 'letter' ? 'letter' : 'A4'} portrait;
+      margin: 15mm 15mm 15mm 15mm;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    html, body {
+      background-color: #ffffff;
+      color: #0f172a;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 11pt;
+      line-height: 1.6;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      page-break-after: avoid;
+      break-after: avoid;
+      color: #0f172a;
+    }
+    h1 {
+      font-size: 22pt;
+      font-weight: 800;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 6px;
+      margin-top: 0;
+      margin-bottom: 12pt;
+      letter-spacing: -0.02em;
+    }
+    h2 {
+      font-size: 16pt;
+      font-weight: 700;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 4px;
+      margin-top: 18pt;
+      margin-bottom: 8pt;
+      letter-spacing: -0.015em;
+    }
+    h3 {
+      font-size: 13pt;
+      font-weight: 600;
+      margin-top: 14pt;
+      margin-bottom: 6pt;
+    }
+    h4 {
+      font-size: 11pt;
+      font-weight: 600;
+      margin-top: 10pt;
+      margin-bottom: 4pt;
+    }
+    p {
+      margin-top: 0;
+      margin-bottom: 9pt;
+      color: #334155;
+    }
+    ul, ol {
+      margin-top: 0;
+      margin-bottom: 9pt;
+      padding-left: 20pt;
+    }
+    li {
+      margin-bottom: 3pt;
+      color: #334155;
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid #cbd5e1;
+      margin: 16pt 0;
+    }
+    strong {
+      font-weight: 700;
+      color: #0f172a;
+    }
+    pre, .code-block-wrapper, table, .table-wrapper, .markdown-alert, .mermaid-diagram-wrap, blockquote {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    tr {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    :not(pre) > code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 9.5pt;
+      background-color: #f1f5f9;
+      padding: 2px 5px;
+      border-radius: 4px;
+      border: 1px solid #e2e8f0;
+      color: #0f172a;
+    }
+    .code-block-wrapper {
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      background: #f8fafc;
+      margin: 12pt 0;
+      overflow: hidden;
+    }
+    .code-block-header {
+      background: #f1f5f9;
+      padding: 4px 10px;
+      font-size: 9pt;
+      font-family: monospace;
+      color: #475569;
+      border-bottom: 1px solid #cbd5e1;
+    }
+    .code-copy-btn {
+      display: none;
+    }
+    pre {
+      margin: 0;
+      padding: 10px 14px;
+      font-size: 9pt;
+      line-height: 1.45;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      background: #f8fafc;
+      color: #0f172a;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    pre code {
+      color: #0f172a;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12pt 0;
+      font-size: 10pt;
+    }
+    th, td {
+      border: 1px solid #cbd5e1;
+      padding: 6pt 10pt;
+      text-align: left;
+    }
+    th {
+      background-color: #f1f5f9;
+      font-weight: 600;
+    }
+    tr:nth-child(even) td {
+      background-color: #f8fafc;
+    }
+    .markdown-alert {
+      margin: 12pt 0;
+      padding: 10pt 14pt;
+      border-radius: 6px;
+      border-left: 4px solid #64748b;
+      background-color: #f8fafc;
+    }
+    .markdown-alert-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 700;
+      font-size: 9.5pt;
+      text-transform: uppercase;
+      margin-bottom: 4pt;
+    }
+    .markdown-alert-icon {
+      display: inline-flex;
+      width: 14px;
+      height: 14px;
+    }
+    .markdown-alert-note {
+      border-left-color: #2563eb;
+      background-color: #eff6ff;
+      color: #1e3a8a;
+    }
+    .markdown-alert-note .markdown-alert-header { color: #1d4ed8; }
+    .markdown-alert-tip {
+      border-left-color: #16a34a;
+      background-color: #f0fdf4;
+      color: #14532d;
+    }
+    .markdown-alert-tip .markdown-alert-header { color: #15803d; }
+    .markdown-alert-important {
+      border-left-color: #7c3aed;
+      background-color: #f5f3ff;
+      color: #4c1d95;
+    }
+    .markdown-alert-important .markdown-alert-header { color: #6d28d9; }
+    .markdown-alert-warning {
+      border-left-color: #d97706;
+      background-color: #fffbeb;
+      color: #78350f;
+    }
+    .markdown-alert-warning .markdown-alert-header { color: #b45309; }
+    .markdown-alert-caution {
+      border-left-color: #dc2626;
+      background-color: #fef2f2;
+      color: #7f1d1d;
+    }
+    .markdown-alert-caution .markdown-alert-header { color: #b91c1c; }
+    .mermaid-diagram-wrap {
+      margin: 14pt 0;
+      padding: 10pt;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      display: flex;
+      justify-content: center;
+    }
+    .mermaid-diagram-wrap svg {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  ${docContent}
+</body>
+</html>`);
+    frameDoc.close();
+
+    setTimeout(() => {
+      printFrame.contentWindow.focus();
+      printFrame.contentWindow.print();
+    }, 250);
+  }
+
+  // Direct PDF Download via html2pdf.js
+  function downloadDirectPdf() {
+    if (!window.html2pdf || !printableDoc) {
+      printDocument();
+      return;
+    }
+
+    const btnLabel = document.getElementById('downloadPdfLabel');
+    if (btnLabel) btnLabel.textContent = 'Generating...';
+
+    // Get document title from first H1 or default
+    const firstH1 = printableDoc.querySelector('h1');
+    const baseName = firstH1 ? firstH1.innerText.trim().replace(/[^a-zA-Z0-9_-]/g, '_').substring(0, 45) : 'Document';
+    const filename = `${baseName}.pdf`;
+
+    const paperFormat = (paperSelect ? paperSelect.value : 'a4') === 'letter' ? 'letter' : 'a4';
+
+    const opt = {
+      margin: [12, 12, 12, 12],
+      filename: filename,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true, logging: false },
+      jsPDF: { unit: 'mm', format: paperFormat, orientation: 'portrait' },
+      pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+    };
+
+    // Temporarily ensure paper theme
+    const previousTheme = themeSelect ? themeSelect.value : 'paper';
+    applyTheme('paper');
+
+    html2pdf()
+      .set(opt)
+      .from(printableDoc)
+      .save()
+      .then(() => {
+        showToast('PDF downloaded successfully!');
+      })
+      .catch((err) => {
+        console.error('html2pdf error:', err);
+        showToast('Direct download failed, opening browser print...');
+        window.print();
+      })
+      .finally(() => {
+        if (btnLabel) btnLabel.textContent = 'Download PDF';
+        if (previousTheme !== 'paper') applyTheme(previousTheme);
+      });
+  }
+
+  // Copy Rendered HTML
+  function copyRenderedHtml() {
+    if (!output) return;
+    navigator.clipboard.writeText(output.innerHTML).then(() => {
+      showToast('Rendered HTML copied to clipboard!');
+    });
+  }
+
+  // Export .md file
+  function exportMarkdownFile() {
+    const text = textarea ? textarea.value : '';
+    if (!text.trim()) {
+      showToast('No markdown to export!');
+      return;
+    }
+    const blob = new Blob([text], { type: 'text/markdown;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'document.md';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Markdown file downloaded!');
+  }
+
+  // Theme application
+  function applyTheme(theme) {
+    if (!printableDoc) return;
+    if (theme === 'modern') {
+      printableDoc.classList.remove('doc-theme-paper');
+      printableDoc.classList.add('doc-theme-modern');
+    } else {
+      printableDoc.classList.remove('doc-theme-modern');
+      printableDoc.classList.add('doc-theme-paper');
+    }
+  }
+
+  // Paper Size styling
+  function applyPaperSize(size) {
+    if (!printableDoc) return;
+    if (size === 'letter') {
+      printableDoc.style.maxWidth = '816px'; // 8.5in at 96dpi
+    } else {
+      printableDoc.style.maxWidth = '794px'; // 210mm at 96dpi (~8.27in)
+    }
+  }
+
+  // Zoom control
+  function setZoom(val) {
+    currentZoom = Math.min(Math.max(val, 0.6), 1.6);
+    if (printableDoc) {
+      printableDoc.style.transform = `scale(${currentZoom})`;
+    }
+    if (zoomLabel) {
+      zoomLabel.textContent = `${Math.round(currentZoom * 100)}%`;
+    }
+  }
+
+  // Tab key indent handling for textarea
+  function handleTextareaKeyDown(e) {
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      const start = this.selectionStart;
+      const end = this.selectionEnd;
+      this.value = this.value.substring(0, start) + '  ' + this.value.substring(end);
+      this.selectionStart = this.selectionEnd = start + 2;
+      queueRender();
+    } else if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+      e.preventDefault();
+      printDocument();
+    }
+  }
+
+  // Toggle View Modes (Split, Preview Only, Editor Only)
+  function setViewMode(mode) {
+    const editor = document.getElementById('editorPane');
+    const preview = document.getElementById('previewPane');
+    const grid = document.getElementById('workspaceGrid');
+
+    const btnSplit = document.getElementById('btnViewSplit');
+    const btnPrev = document.getElementById('btnViewPreview');
+    const btnEdit = document.getElementById('btnViewEditor');
+
+    [btnSplit, btnPrev, btnEdit].forEach(b => b?.classList.remove('btn-active'));
+
+    if (mode === 'preview') {
+      editor.classList.add('hidden');
+      preview.classList.remove('hidden');
+      grid.classList.remove('lg:grid-cols-2');
+      grid.classList.add('grid-cols-1');
+      btnPrev?.classList.add('btn-active');
+    } else if (mode === 'editor') {
+      editor.classList.remove('hidden');
+      preview.classList.add('hidden');
+      grid.classList.remove('lg:grid-cols-2');
+      grid.classList.add('grid-cols-1');
+      btnEdit?.classList.add('btn-active');
+    } else {
+      // Split
+      editor.classList.remove('hidden');
+      preview.classList.remove('hidden');
+      grid.classList.remove('grid-cols-1');
+      grid.classList.add('lg:grid-cols-2');
+      btnSplit?.classList.add('btn-active');
+    }
+  }
+
+  // Wide screen toggle
+  let isWide = false;
+  function toggleWideScreen() {
+    isWide = !isWide;
+    const mainEl = document.querySelector('main');
+    if (mainEl) {
+      if (isWide) {
+        mainEl.classList.remove('lg:max-w-[900px]');
+        mainEl.classList.add('max-w-[95vw]', 'w-full');
+      } else {
+        mainEl.classList.remove('max-w-[95vw]', 'w-full');
+        mainEl.classList.add('lg:max-w-[900px]');
+      }
+    }
+    showToast(isWide ? 'Wide screen layout enabled' : 'Standard width restored');
+  }
+
+  // Setup Event Listeners
+  function initEvents() {
+    textarea?.addEventListener('input', queueRender);
+    textarea?.addEventListener('keydown', handleTextareaKeyDown);
+
+    document.getElementById('btnPrintPdf')?.addEventListener('click', printDocument);
+    document.getElementById('btnDownloadPdf')?.addEventListener('click', downloadDirectPdf);
+    document.getElementById('btnCopyHtml')?.addEventListener('click', copyRenderedHtml);
+    document.getElementById('btnExportMd')?.addEventListener('click', exportMarkdownFile);
+    document.getElementById('btnToggleWide')?.addEventListener('click', toggleWideScreen);
+
+    document.getElementById('btnViewSplit')?.addEventListener('click', () => setViewMode('split'));
+    document.getElementById('btnViewPreview')?.addEventListener('click', () => setViewMode('preview'));
+    document.getElementById('btnViewEditor')?.addEventListener('click', () => setViewMode('editor'));
+
+    themeSelect?.addEventListener('change', (e) => applyTheme(e.target.value));
+    paperSelect?.addEventListener('change', (e) => applyPaperSize(e.target.value));
+
+    document.getElementById('btnZoomIn')?.addEventListener('click', () => setZoom(currentZoom + 0.1));
+    document.getElementById('btnZoomOut')?.addEventListener('click', () => setZoom(currentZoom - 0.1));
+    document.getElementById('btnResetZoom')?.addEventListener('click', () => setZoom(1.0));
+
+    // Load Sample Button
+    document.getElementById('btnLoadSample')?.addEventListener('click', () => {
+      if (textarea) {
+        textarea.value = USER_SAMPLE_MARKDOWN;
+        renderMarkdown();
+        showToast('Sample Implementation Plan loaded!');
+      }
+    });
+
+    // Paste from Clipboard
+    document.getElementById('btnPasteClipboard')?.addEventListener('click', async () => {
+      try {
+        const text = await navigator.clipboard.readText();
+        if (text && textarea) {
+          textarea.value = text;
+          renderMarkdown();
+          showToast('Pasted from clipboard!');
+        }
+      } catch (err) {
+        showToast('Clipboard access denied. Please paste directly using Ctrl+V');
+      }
+    });
+
+    // Open .md File
+    document.getElementById('fileMdInput')?.addEventListener('change', (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+          if (textarea && evt.target && evt.target.result) {
+            textarea.value = evt.target.result;
+            renderMarkdown();
+            showToast(`Loaded "${file.name}"`);
+          }
+        };
+        reader.readAsText(file);
+      }
+    });
+
+    // Clear
+    document.getElementById('btnClearEditor')?.addEventListener('click', () => {
+      if (confirm('Clear editor content?')) {
+        if (textarea) textarea.value = '';
+        renderMarkdown();
+        showToast('Editor cleared');
+      }
+    });
+  }
+
+  // Initialize Component on DOM ready
+  function init() {
+    initMermaid();
+    setupMarked();
+    initEvents();
+
+    // Check for saved draft or load simple default
+    const savedDraft = localStorage.getItem('md_pdf_converter_draft');
+    if (savedDraft && savedDraft.trim() && savedDraft !== USER_SAMPLE_MARKDOWN) {
+      textarea.value = savedDraft;
+    } else if (textarea) {
+      textarea.value = SIMPLE_DEFAULT_MARKDOWN;
+    }
+
+    applyPaperSize(paperSelect ? paperSelect.value : 'a4');
+    applyTheme(themeSelect ? themeSelect.value : 'paper');
+    renderMarkdown();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>

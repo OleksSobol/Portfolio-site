@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ApiTester from "../components/playground/ApiTester.astro";
+import MarkdownPdfConverter from "../components/playground/MarkdownPdfConverter.astro";
 ---
 
 <BaseLayout title="Developer Tools Playground" sideBarActiveItemID="playground">
@@ -10,7 +11,7 @@ import ApiTester from "../components/playground/ApiTester.astro";
 
   <div class="mb-10">
     <p class="mb-6 text-lg">
-      Client-side interactive tools for API testing, Base64 encoding/decoding, JSON formatting, subnet calculations, and UUID generation.
+      Client-side interactive tools for Markdown to PDF conversion, API testing, Base64 encoding/decoding, JSON formatting, subnet calculations, and UUID generation.
     </p>
 
     <!-- Loaded Share Banner (hidden by default) -->
@@ -24,7 +25,13 @@ import ApiTester from "../components/playground/ApiTester.astro";
       </div>
     </div>
 
-    <style>
+    <style is:global>
+      /* Allow Playground layout to expand up to 1400px for comfortable side-by-side editing */
+      div.drawer-content main.max-w-\[100vw\] {
+        max-width: 1400px;
+        width: 100%;
+      }
+
       .pg-output {
         margin-top: 1.25rem;
         padding: 1.25rem;
@@ -48,15 +55,21 @@ import ApiTester from "../components/playground/ApiTester.astro";
 
     <!-- Tabs -->
     <div class="tabs tabs-boxed mb-6 overflow-x-auto whitespace-nowrap flex-nowrap block" id="pgTabsContainer">
-      <a class="tab tab-active" onclick="switchPgTab('api-tester', this)">API Tester</a>
+      <a class="tab tab-active" id="tab-md-pdf" onclick="switchPgTab('md-pdf-converter', this)">Markdown to PDF</a>
+      <a class="tab" id="tab-api-tester" onclick="switchPgTab('api-tester', this)">API Tester</a>
       <a class="tab" id="tab-base64" onclick="switchPgTab('base64', this)">Base64 Tool</a>
       <a class="tab" onclick="switchPgTab('json-formatter', this)">JSON Formatter</a>
       <a class="tab" onclick="switchPgTab('subnet-calc', this)">Subnet Calc</a>
       <a class="tab" onclick="switchPgTab('uuid-gen', this)">UUID Gen</a>
     </div>
 
+    <!-- Markdown to PDF Converter -->
+    <div id="md-pdf-converter" class="pg-tab-content block">
+      <MarkdownPdfConverter />
+    </div>
+
     <!-- API Tester -->
-    <div id="api-tester" class="pg-tab-content block">
+    <div id="api-tester" class="pg-tab-content hidden">
       <ApiTester />
     </div>
 
@@ -409,6 +422,12 @@ import ApiTester from "../components/playground/ApiTester.astro";
         decodeBase64();
         document.getElementById('sharedNoticeBanner').style.display = 'flex';
       }
+    } else if (tool === 'api' || tool === 'api-tester') {
+      const tabBtn = document.getElementById('tab-api-tester');
+      switchPgTab('api-tester', tabBtn);
+    } else if (tool === 'markdown' || tool === 'pdf' || tool === 'md') {
+      const tabBtn = document.getElementById('tab-md-pdf');
+      switchPgTab('md-pdf-converter', tabBtn);
     }
   });
 </script>
