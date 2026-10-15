@@ -1,0 +1,1886 @@
+---
+// Generators Component: Sample Data (PHP Arrays, ECharts Tracer), PHPUnit Test Generator & UUID Generator
+---
+
+<div class="card bg-base-200 shadow-xl overflow-visible" id="generatorsApp">
+  <div class="card-body p-4 md:p-6">
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 mb-4 pb-3 border-b border-base-300">
+      <div>
+        <div class="flex items-center gap-2">
+          <h2 class="card-title text-success text-xl md:text-2xl font-bold flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+            </svg>
+            Generators
+          </h2>
+          <span class="badge badge-sm badge-success badge-outline font-mono text-xs">PHP Arrays &bull; PHPUnit &bull; ECharts &bull; UUID</span>
+        </div>
+        <p class="text-xs md:text-sm text-base-content/70 mt-1">
+          Fast generators for mock PHP arrays, PHPUnit test classes &amp; data providers, ECharts tracer bullet templates, and RFC-compliant UUIDs.
+        </p>
+      </div>
+
+      <!-- Sub-tabs navigation -->
+      <div class="tabs tabs-boxed bg-base-300 p-1 self-stretch md:self-auto flex overflow-x-auto whitespace-nowrap" id="genSubTabsNav">
+        <a class="tab tab-active font-medium text-xs md:text-sm flex-1 md:flex-none" id="gen-tab-btn-data" onclick="switchGenSubTab('data-gen', this)">
+          📊 Sample Data Generator
+        </a>
+        <a class="tab font-medium text-xs md:text-sm flex-1 md:flex-none" id="gen-tab-btn-phpunit" onclick="switchGenSubTab('phpunit-gen', this)">
+          🧪 PHPUnit Test Generator
+        </a>
+        <a class="tab font-medium text-xs md:text-sm flex-1 md:flex-none" id="gen-tab-btn-uuid" onclick="switchGenSubTab('uuid-gen-sub', this)">
+          🔑 UUID Generator
+        </a>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SUB-TAB 1: SAMPLE DATA GENERATOR          -->
+    <!-- ========================================== -->
+    <div id="gen-subtab-data" class="gen-subtab-panel block">
+      <!-- Quick Presets -->
+      <div class="mb-4 bg-base-100 p-3 rounded-lg border border-base-300">
+        <div class="flex items-center justify-between gap-2 flex-wrap mb-2">
+          <span class="text-xs font-bold uppercase tracking-wider text-base-content/60 flex items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+            Quick Presets:
+          </span>
+          <span class="text-xs text-base-content/50">One-click templates or customize fields below</span>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <button type="button" class="btn btn-xs btn-outline btn-success font-semibold" onclick="loadDataPreset('echarts-monthly')">
+            📈 Sales by Month (ECharts Tracer)
+          </button>
+          <button type="button" class="btn btn-xs btn-outline rounded-full font-medium" onclick="loadDataPreset('multi-metric')">
+            📊 Multi-Metric (Sales &amp; Cost)
+          </button>
+          <button type="button" class="btn btn-xs btn-outline rounded-full font-medium" onclick="loadDataPreset('invoices')">
+            🧾 Invoices &amp; Receipts
+          </button>
+          <button type="button" class="btn btn-xs btn-outline rounded-full font-medium" onclick="loadDataPreset('users')">
+            👥 Users &amp; Roles
+          </button>
+          <button type="button" class="btn btn-xs btn-outline rounded-full font-medium" onclick="loadDataPreset('dropdown-kv')">
+            🏷️ Key-Value Options Map
+          </button>
+          <button type="button" class="btn btn-xs btn-outline btn-accent rounded-full font-semibold" onclick="loadDataPreset('echarts-full-page')">
+            ⚡ Full ECharts Page Boilerplate
+          </button>
+          <button type="button" class="btn btn-xs btn-ghost text-xs text-base-content/70 rounded-full" onclick="toggleSchemaEditor()">
+            🛠️ Custom Schema Builder
+          </button>
+        </div>
+      </div>
+
+      <!-- Controls & Output Split View -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 mb-4">
+        <!-- Configuration Controls (Left side) -->
+        <div class="lg:col-span-5 flex flex-col gap-4">
+          <div class="bg-base-100 p-4 rounded-xl border border-base-300 shadow-sm flex flex-col gap-3">
+            <h3 class="font-bold text-sm text-base-content/80 flex items-center justify-between">
+              <span>Settings &amp; Output Format</span>
+              <span class="badge badge-sm badge-ghost" id="currentPresetNameBadge">Sales by Month</span>
+            </h3>
+
+            <!-- Output Format & Variable Name -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="label py-1"><span class="label-text text-xs font-semibold">Format</span></label>
+                <select id="genOutputFormat" class="select select-bordered select-sm w-full bg-base-200 text-xs" onchange="generateData()">
+                  <option value="php-array" selected>PHP Array [...] (Short)</option>
+                  <option value="php-echarts">Full PHP Page + ECharts</option>
+                  <option value="php-classic">PHP array(...) (Classic)</option>
+                  <option value="json">JSON Array</option>
+                  <option value="js">JavaScript / TS Array</option>
+                  <option value="csv">CSV Format</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="label py-1"><span class="label-text text-xs font-semibold">Variable Name</span></label>
+                <input type="text" id="genVarName" class="input input-bordered input-sm w-full font-mono text-xs bg-base-200" value="$mockData" oninput="generateData()" placeholder="$mockData" />
+              </div>
+            </div>
+
+            <!-- Row Count Controls -->
+            <div>
+              <div class="flex justify-between items-center mb-1">
+                <label class="label py-0"><span class="label-text text-xs font-semibold">Row Count:</span></label>
+                <div class="flex items-center gap-1">
+                  <button type="button" class="btn btn-xs btn-ghost px-1.5 font-mono" onclick="updateRowCount(3)">3</button>
+                  <button type="button" class="btn btn-xs btn-ghost px-1.5 font-mono" onclick="updateRowCount(6)">6</button>
+                  <button type="button" class="btn btn-xs btn-ghost px-1.5 font-mono" onclick="updateRowCount(12)">12</button>
+                  <button type="button" class="btn btn-xs btn-ghost px-1.5 font-mono" onclick="updateRowCount(24)">24</button>
+                  <span class="badge badge-sm badge-success font-mono ml-1 text-xs" id="genRowsBadge">3</span>
+                </div>
+              </div>
+              <input type="range" id="genRowsSlider" min="1" max="50" value="3" class="range range-xs range-success w-full" oninput="onRowsSliderChange(this.value)" />
+            </div>
+
+            <!-- Formatting Checkboxes -->
+            <div class="flex flex-wrap items-center gap-4 pt-1 text-xs border-t border-base-200">
+              <label class="cursor-pointer flex items-center gap-2 select-none">
+                <input type="checkbox" id="genAlignArrows" class="checkbox checkbox-xs checkbox-success" checked onchange="generateData()" />
+                <span class="label-text text-xs">Align <code class="font-bold text-success">=&gt;</code> arrows</span>
+              </label>
+
+              <label class="cursor-pointer flex items-center gap-2 select-none">
+                <input type="checkbox" id="genSingleLineRows" class="checkbox checkbox-xs checkbox-success" checked onchange="generateData()" />
+                <span class="label-text text-xs">One item per line</span>
+              </label>
+
+              <label class="cursor-pointer flex items-center gap-2 select-none">
+                <input type="checkbox" id="genRoundThousands" class="checkbox checkbox-xs checkbox-success" checked onchange="generateData()" />
+                <span class="label-text text-xs">Round totals (e.g. 12500)</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Dynamic Schema Columns Editor (Collapsible/Editable) -->
+          <div class="bg-base-100 p-4 rounded-xl border border-base-300 shadow-sm flex flex-col gap-2">
+            <div class="flex justify-between items-center pb-2 border-b border-base-200">
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-sm text-base-content/80">Fields Schema</span>
+                <span class="badge badge-xs badge-neutral" id="schemaCountBadge">2 fields</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <button type="button" class="btn btn-xs btn-outline btn-success gap-1" onclick="addColumnRow()">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+                  Add Field
+                </button>
+              </div>
+            </div>
+
+            <!-- Column Rows List -->
+            <div id="genColumnsList" class="flex flex-col gap-2 max-h-[220px] overflow-y-auto pr-1">
+              <!-- Dynamically populated via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Output Code Preview & Table View (Right side) -->
+        <div class="lg:col-span-7 flex flex-col">
+          <div class="bg-base-100 rounded-xl border border-base-300 shadow-sm flex flex-col h-full overflow-hidden min-h-[460px]">
+            <!-- Output Header Bar -->
+            <div class="flex flex-wrap justify-between items-center gap-2 bg-base-200/70 p-2.5 border-b border-base-300">
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-base-content/70 font-mono" id="outputPreviewTitle">PHP Output</span>
+                <span class="badge badge-sm badge-ghost font-mono text-[11px]" id="genDataStats">3 rows &bull; ~180 B</span>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="flex items-center gap-1.5">
+                <div class="btn-group btn-group-horizontal">
+                  <button type="button" id="btnViewCode" class="btn btn-xs btn-active" onclick="switchPreviewMode('code')">Code</button>
+                  <button type="button" id="btnViewTable" class="btn btn-xs" onclick="switchPreviewMode('table')">Table</button>
+                </div>
+                <button type="button" id="btnRerollData" class="btn btn-xs btn-ghost gap-1 tooltip tooltip-bottom" data-tip="Generate new randomized sample values" onclick="rerollDataValues()">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 transition-transform" id="rerollSpinIcon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                  Re-roll
+                </button>
+                <button type="button" class="btn btn-xs btn-outline gap-1" onclick="downloadDataFile()">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                  Download
+                </button>
+                <button type="button" id="btnCopyDataOutput" class="btn btn-xs btn-success gap-1 shadow-sm px-3 font-semibold" onclick="copyDataOutput()">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg>
+                  <span id="btnCopyDataText">Copy Code</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Code Output View -->
+            <div id="dataCodeContainer" class="flex-1 p-0 relative bg-neutral text-neutral-content font-mono text-xs md:text-sm overflow-auto">
+              <pre class="p-4 m-0 leading-relaxed font-mono whitespace-pre select-all min-h-[380px]" id="dataCodePre"><code>// Generating sample data...</code></pre>
+            </div>
+
+            <!-- Visual Table View -->
+            <div id="dataTableContainer" class="flex-1 p-3 hidden overflow-auto bg-base-100 max-h-[500px]">
+              <table class="table table-xs table-zebra w-full font-mono text-xs" id="genPreviewTable">
+                <thead id="genPreviewTableHead"></thead>
+                <tbody id="genPreviewTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SUB-TAB 2: PHPUNIT TEST GENERATOR         -->
+    <!-- ========================================== -->
+    <div id="gen-subtab-phpunit" class="gen-subtab-panel hidden">
+      <!-- Quick Presets -->
+      <div class="mb-4 bg-base-100 p-3 rounded-lg border border-base-300">
+        <div class="flex items-center justify-between gap-2 flex-wrap mb-2">
+          <span class="text-xs font-bold uppercase tracking-wider text-base-content/60 flex items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+            PHPUnit Test Presets:
+          </span>
+          <span class="text-xs text-base-content/50">One-click unit test scaffolds for services, controllers, charts &amp; data providers</span>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <button type="button" class="btn btn-xs btn-outline btn-success font-semibold" onclick="loadPhpUnitPreset('echarts-chart')">
+            📊 ECharts / Chart Config Test
+          </button>
+          <button type="button" class="btn btn-xs btn-outline rounded-full font-medium" onclick="loadPhpUnitPreset('service-mock')">
+            ⚙️ Service with Mocks
+          </button>
+          <button type="button" class="btn btn-xs btn-outline rounded-full font-medium" onclick="loadPhpUnitPreset('data-provider')">
+            📦 DataProvider Calculation Test
+          </button>
+          <button type="button" class="btn btn-xs btn-outline rounded-full font-medium" onclick="loadPhpUnitPreset('controller-callback')">
+            🌐 Controller &amp; AJAX Callback
+          </button>
+          <button type="button" class="btn btn-xs btn-outline rounded-full font-medium" onclick="loadPhpUnitPreset('repository-crud')">
+            💾 Repository / CRUD Test
+          </button>
+          <button type="button" class="btn btn-xs btn-outline btn-secondary rounded-full font-semibold" onclick="loadPhpUnitPreset('pest-php')">
+            ⚡ Pest PHP Syntax
+          </button>
+        </div>
+      </div>
+
+      <!-- Controls & Output Split View -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 mb-4">
+        <!-- Configuration Controls (Left side) -->
+        <div class="lg:col-span-5 flex flex-col gap-4">
+          <!-- Class & Framework Settings Card -->
+          <div class="bg-base-100 p-4 rounded-xl border border-base-300 shadow-sm flex flex-col gap-3">
+            <h3 class="font-bold text-sm text-base-content/80 flex items-center justify-between">
+              <span>Class &amp; Framework Setup</span>
+              <span class="badge badge-sm badge-ghost" id="phpunitPresetBadge">ECharts Test</span>
+            </h3>
+
+            <!-- Framework Syntax Style -->
+            <div>
+              <label class="label py-1"><span class="label-text text-xs font-semibold">Test Framework / Style</span></label>
+              <select id="phpunitFramework" class="select select-bordered select-sm w-full bg-base-200 text-xs" onchange="generatePhpUnitTest()">
+                <option value="phpunit-attributes" selected>PHPUnit 10+ (Attributes #[Test], #[DataProvider])</option>
+                <option value="phpunit-annotations">PHPUnit 9 (Annotations /** @test */)</option>
+                <option value="pest">Pest PHP (test() / it() / expect())</option>
+              </select>
+            </div>
+
+            <!-- Subject Under Test & Test Class -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="label py-1"><span class="label-text text-xs font-semibold">Class Under Test</span></label>
+                <input type="text" id="phpunitSubjectClass" class="input input-bordered input-sm w-full font-mono text-xs bg-base-200" value="SalesReceiptsAnalysis" oninput="onSubjectClassChange(this.value)" placeholder="e.g. SalesReceiptsService" />
+              </div>
+              <div>
+                <label class="label py-1"><span class="label-text text-xs font-semibold">Test Class Name</span></label>
+                <input type="text" id="phpunitTestClass" class="input input-bordered input-sm w-full font-mono text-xs bg-base-200" value="SalesReceiptsAnalysisTest" oninput="generatePhpUnitTest()" placeholder="e.g. SalesReceiptsTest" />
+              </div>
+            </div>
+
+            <!-- Namespace & Strict Types -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 items-end">
+              <div>
+                <label class="label py-1"><span class="label-text text-xs font-semibold">Namespace</span></label>
+                <input type="text" id="phpunitNamespace" class="input input-bordered input-sm w-full font-mono text-xs bg-base-200" value="Tests\Unit" oninput="generatePhpUnitTest()" />
+              </div>
+              <div class="pb-1.5">
+                <label class="cursor-pointer flex items-center gap-2 select-none">
+                  <input type="checkbox" id="phpunitStrictTypes" class="checkbox checkbox-xs checkbox-success" checked onchange="generatePhpUnitTest()" />
+                  <span class="label-text text-xs"><code>declare(strict_types=1);</code></span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Feature Checkboxes -->
+            <div class="flex flex-wrap items-center gap-3 pt-2 text-xs border-t border-base-200">
+              <label class="cursor-pointer flex items-center gap-1.5 select-none">
+                <input type="checkbox" id="phpunitIncludeSetup" class="checkbox checkbox-xs checkbox-success" checked onchange="generatePhpUnitTest()" />
+                <span class="label-text text-xs"><code>setUp()</code> method</span>
+              </label>
+
+              <label class="cursor-pointer flex items-center gap-1.5 select-none">
+                <input type="checkbox" id="phpunitIncludeDataProvider" class="checkbox checkbox-xs checkbox-success" checked onchange="generatePhpUnitTest()" />
+                <span class="label-text text-xs">DataProvider dataset</span>
+              </label>
+
+              <label class="cursor-pointer flex items-center gap-1.5 select-none">
+                <input type="checkbox" id="phpunitIncludeException" class="checkbox checkbox-xs checkbox-success" checked onchange="generatePhpUnitTest()" />
+                <span class="label-text text-xs">Exception test case</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Mock Dependencies Card -->
+          <div class="bg-base-100 p-4 rounded-xl border border-base-300 shadow-sm flex flex-col gap-2">
+            <div class="flex justify-between items-center pb-2 border-b border-base-200">
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-sm text-base-content/80">Mock Dependencies</span>
+                <span class="badge badge-xs badge-neutral" id="phpunitMockCountBadge">0 mocks</span>
+              </div>
+              <button type="button" class="btn btn-xs btn-outline btn-success gap-1" onclick="addMockDependency()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+                Add Mock
+              </button>
+            </div>
+            <div id="phpunitMocksList" class="flex flex-col gap-2 max-h-[140px] overflow-y-auto pr-1">
+              <!-- Dynamically populated via JS -->
+            </div>
+          </div>
+
+          <!-- Test Cases Methods Card -->
+          <div class="bg-base-100 p-4 rounded-xl border border-base-300 shadow-sm flex flex-col gap-2">
+            <div class="flex justify-between items-center pb-2 border-b border-base-200">
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-sm text-base-content/80">Test Methods</span>
+                <span class="badge badge-xs badge-neutral" id="phpunitMethodsCountBadge">3 tests</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <button type="button" class="btn btn-xs btn-ghost text-xs text-primary font-semibold" onclick="injectDataGeneratorDataIntoTest()" title="Insert current sample data into DataProvider">
+                  📥 Use Sample Data
+                </button>
+                <button type="button" class="btn btn-xs btn-outline btn-success gap-1" onclick="addTestMethod()">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+                  Add Test
+                </button>
+              </div>
+            </div>
+            <div id="phpunitMethodsList" class="flex flex-col gap-2 max-h-[180px] overflow-y-auto pr-1">
+              <!-- Dynamically populated via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Output Code Viewer (Right side) -->
+        <div class="lg:col-span-7 flex flex-col">
+          <div class="bg-base-100 rounded-xl border border-base-300 shadow-sm flex flex-col h-full overflow-hidden min-h-[500px]">
+            <!-- Output Header Bar -->
+            <div class="flex flex-wrap justify-between items-center gap-2 bg-base-200/70 p-2.5 border-b border-base-300">
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-base-content/70 font-mono" id="phpunitOutputTitle">PHPUnit Test Class</span>
+                <span class="badge badge-sm badge-ghost font-mono text-[11px]" id="phpunitStats">PSR-12 Ready</span>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="flex items-center gap-1.5">
+                <button type="button" class="btn btn-xs btn-ghost gap-1" onclick="generatePhpUnitTest()" title="Re-render test code">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                  Refresh
+                </button>
+                <button type="button" class="btn btn-xs btn-outline gap-1" onclick="downloadPhpUnitTestFile()">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                  Download .php
+                </button>
+                <button type="button" id="btnCopyPhpUnitOutput" class="btn btn-xs btn-success gap-1 shadow-sm px-3 font-semibold" onclick="copyPhpUnitTestOutput()">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg>
+                  <span id="btnCopyPhpUnitText">Copy Test</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Code Output View -->
+            <div class="flex-1 p-0 relative bg-neutral text-neutral-content font-mono text-xs md:text-sm overflow-auto">
+              <pre class="p-4 m-0 leading-relaxed font-mono whitespace-pre select-all min-h-[440px]" id="phpunitCodePre"><code>// Generating PHPUnit test class...</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SUB-TAB 3: UUID GENERATOR                  -->
+    <!-- ========================================== -->
+    <div id="gen-subtab-uuid" class="gen-subtab-panel hidden">
+      <div class="bg-base-100 p-4 md:p-6 rounded-xl border border-base-300 shadow-sm">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 pb-4 border-b border-base-200">
+          <div>
+            <h3 class="font-bold text-lg text-success flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" /></svg>
+              UUID v4 Generator
+            </h3>
+            <p class="text-xs text-base-content/70 mt-0.5">
+              Generate cryptographically strong RFC 4122 version 4 identifiers for database keys, tokens, and test records.
+            </p>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button type="button" class="btn btn-sm btn-success" onclick="generateUUIDs()">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+              Generate
+            </button>
+            <button type="button" class="btn btn-sm btn-outline" onclick="clearUUID()">Clear</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+          <div>
+            <label class="label py-1"><span class="label-text text-xs font-semibold">Count:</span></label>
+            <div class="flex items-center gap-2">
+              <input type="number" id="subUuidCount" class="input input-bordered input-sm w-24 font-mono text-xs" value="5" min="1" max="100" />
+              <div class="flex gap-1">
+                <button type="button" class="btn btn-xs btn-ghost" onclick="setUuidCount(1)">1</button>
+                <button type="button" class="btn btn-xs btn-ghost" onclick="setUuidCount(5)">5</button>
+                <button type="button" class="btn btn-xs btn-ghost" onclick="setUuidCount(10)">10</button>
+                <button type="button" class="btn btn-xs btn-ghost" onclick="setUuidCount(25)">25</button>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label class="label py-1"><span class="label-text text-xs font-semibold">Format Style:</span></label>
+            <select id="subUuidFormatStyle" class="select select-bordered select-sm w-full text-xs" onchange="generateUUIDs()">
+              <option value="standard" selected>Standard (lowercase with hyphens)</option>
+              <option value="uppercase">Uppercase (XXXX-XXXX-...)</option>
+              <option value="nohyphen">No Hyphens (32-char hex)</option>
+              <option value="braces">Braces (&#123;xxxxxxxx-...&#125;)</option>
+              <option value="urn">URN (urn:uuid:...)</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="label py-1"><span class="label-text text-xs font-semibold">Output Wrap:</span></label>
+            <select id="subUuidOutputWrap" class="select select-bordered select-sm w-full text-xs" onchange="generateUUIDs()">
+              <option value="lines" selected>Plain Text (1 per line)</option>
+              <option value="php">PHP Array ($uuids = [...])</option>
+              <option value="json">JSON Array (["..."])</option>
+              <option value="sql">SQL IN Clause ('...','...')</option>
+            </select>
+          </div>
+
+          <div class="flex flex-col justify-end">
+            <span class="text-xs text-base-content/60 mb-2">RFC 4122 Standard</span>
+            <span class="badge badge-sm badge-success font-mono">crypto.randomUUID()</span>
+          </div>
+        </div>
+
+        <!-- UUID Output Container -->
+        <div class="flex flex-col border border-base-300 rounded-xl overflow-hidden">
+          <div class="flex justify-between items-center bg-base-200/80 px-4 py-2 border-b border-base-300">
+            <span class="text-xs font-mono uppercase text-base-content/70" id="subUuidStatus">5 UUIDs</span>
+            <div class="flex items-center gap-2">
+              <button type="button" class="btn btn-xs btn-outline" id="btnCopyUuid" onclick="copyUUIDOutput()">
+                Copy Result
+              </button>
+              <button type="button" class="btn btn-xs btn-ghost" onclick="downloadUuidOutput()">
+                Download .txt
+              </button>
+            </div>
+          </div>
+          <div id="subUuidOutputPre" class="p-4 font-mono text-xs md:text-sm bg-neutral text-neutral-content whitespace-pre overflow-x-auto min-h-[160px] max-h-[380px] select-all"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  // ==========================================
+  // 1. DATA GENERATOR STATE & LOGIC
+  // ==========================================
+  let activeColumns = [
+    { name: 'month', type: 'month' },
+    { name: 'total', type: 'currency_rounded' }
+  ];
+
+  let currentPreset = 'echarts-monthly';
+  let seedSalt = 0;
+  let lastGeneratedRecords = [];
+
+  const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const FULL_MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const FIRST_NAMES = ['Alexander', 'Elena', 'Marcus', 'Sarah', 'Liam', 'Chloe', 'Noah', 'Aria', 'Julian', 'Maya'];
+  const LAST_NAMES = ['Vance', 'Rostova', 'Chen', 'Connor', 'Davies', 'Miller', 'Wilson', 'Patel', 'Hayes', 'Lin'];
+  const COMPANIES = ['Apex Solutions LLC', 'Horizon Retail Group', 'BlueStar Technologies', 'Vanguard Industrial', 'Omni Corp', 'Summit Capital', 'Pinnacle Distribution'];
+  const ROLES = ['Administrator', 'AR', 'Manager', 'Accountant', 'Viewer'];
+  const STATUSES = ['active', 'pending', 'settled', 'cleared', 'cancelled'];
+
+  // Switch Sub-tabs (Sample Data vs PHPUnit vs UUID)
+  function switchGenSubTab(targetTabId, el) {
+    document.querySelectorAll('.gen-subtab-panel').forEach(panel => {
+      panel.classList.remove('block');
+      panel.classList.add('hidden');
+    });
+
+    const dataBtn = document.getElementById('gen-tab-btn-data');
+    const phpunitBtn = document.getElementById('gen-tab-btn-phpunit');
+    const uuidBtn = document.getElementById('gen-tab-btn-uuid');
+
+    dataBtn?.classList.remove('tab-active');
+    phpunitBtn?.classList.remove('tab-active');
+    uuidBtn?.classList.remove('tab-active');
+
+    if (targetTabId === 'uuid-gen-sub' || targetTabId === 'uuid') {
+      const activePanel = document.getElementById('gen-subtab-uuid');
+      if (activePanel) {
+        activePanel.classList.remove('hidden');
+        activePanel.classList.add('block');
+      }
+      uuidBtn?.classList.add('tab-active');
+      if (!document.getElementById('subUuidOutputPre')?.textContent.trim()) {
+        generateUUIDs();
+      }
+    } else if (targetTabId === 'phpunit-gen' || targetTabId === 'phpunit' || targetTabId === 'test') {
+      const activePanel = document.getElementById('gen-subtab-phpunit');
+      if (activePanel) {
+        activePanel.classList.remove('hidden');
+        activePanel.classList.add('block');
+      }
+      phpunitBtn?.classList.add('tab-active');
+      generatePhpUnitTest();
+    } else {
+      const activePanel = document.getElementById('gen-subtab-data');
+      if (activePanel) {
+        activePanel.classList.remove('hidden');
+        activePanel.classList.add('block');
+      }
+      dataBtn?.classList.add('tab-active');
+      generateData();
+    }
+  }
+
+  // Load Presets
+  function loadDataPreset(presetKey) {
+    currentPreset = presetKey;
+    const badge = document.getElementById('currentPresetNameBadge');
+    const varNameEl = document.getElementById('genVarName');
+    const formatSelect = document.getElementById('genOutputFormat');
+
+    if (presetKey === 'echarts-monthly') {
+      if (badge) badge.textContent = 'Sales by Month (ECharts)';
+      if (varNameEl) varNameEl.value = '$mockData';
+      if (formatSelect) formatSelect.value = 'php-array';
+      updateRowCount(3);
+      activeColumns = [
+        { name: 'month', type: 'month' },
+        { name: 'total', type: 'currency_rounded' }
+      ];
+    } else if (presetKey === 'multi-metric') {
+      if (badge) badge.textContent = 'Multi-Metric (Sales & Cost)';
+      if (varNameEl) varNameEl.value = '$mockData';
+      if (formatSelect) formatSelect.value = 'php-array';
+      updateRowCount(6);
+      activeColumns = [
+        { name: 'month', type: 'month' },
+        { name: 'sales', type: 'currency_rounded' },
+        { name: 'expenses', type: 'currency_rounded_lower' },
+        { name: 'profit', type: 'computed_profit' }
+      ];
+    } else if (presetKey === 'invoices') {
+      if (badge) badge.textContent = 'Invoices & Receipts';
+      if (varNameEl) varNameEl.value = '$receipts';
+      if (formatSelect) formatSelect.value = 'php-array';
+      updateRowCount(4);
+      activeColumns = [
+        { name: 'receipt_no', type: 'receipt_id' },
+        { name: 'customer', type: 'company' },
+        { name: 'amount', type: 'amount_float' },
+        { name: 'payment_method', type: 'custom_enum', options: 'ACH, Check, Wire, Credit Card' },
+        { name: 'date', type: 'date' },
+        { name: 'status', type: 'custom_enum', options: 'Cleared, Pending, Settled' }
+      ];
+    } else if (presetKey === 'users') {
+      if (badge) badge.textContent = 'Users & Roles';
+      if (varNameEl) varNameEl.value = '$users';
+      if (formatSelect) formatSelect.value = 'php-array';
+      updateRowCount(4);
+      activeColumns = [
+        { name: 'id', type: 'autoincrement' },
+        { name: 'name', type: 'name' },
+        { name: 'email', type: 'email' },
+        { name: 'role', type: 'role' },
+        { name: 'status', type: 'status' }
+      ];
+    } else if (presetKey === 'dropdown-kv') {
+      if (badge) badge.textContent = 'Key-Value Options Map';
+      if (varNameEl) varNameEl.value = '$statusOptions';
+      if (formatSelect) formatSelect.value = 'php-array';
+      updateRowCount(5);
+      activeColumns = [
+        { name: '_kv_map', type: 'kv_options' }
+      ];
+    } else if (presetKey === 'echarts-full-page') {
+      if (badge) badge.textContent = 'Full ECharts Page Boilerplate';
+      if (varNameEl) varNameEl.value = '$mockData';
+      if (formatSelect) formatSelect.value = 'php-echarts';
+      updateRowCount(3);
+      activeColumns = [
+        { name: 'month', type: 'month' },
+        { name: 'total', type: 'currency_rounded' }
+      ];
+    }
+
+    renderColumnsListUI();
+    generateData();
+  }
+
+  function toggleSchemaEditor() {
+    const badge = document.getElementById('currentPresetNameBadge');
+    if (badge) badge.textContent = 'Custom Schema';
+    currentPreset = 'custom';
+    renderColumnsListUI();
+  }
+
+  function updateRowCount(val) {
+    const slider = document.getElementById('genRowsSlider');
+    const badge = document.getElementById('genRowsBadge');
+    if (slider) slider.value = val;
+    if (badge) badge.textContent = val;
+    generateData();
+  }
+
+  function onRowsSliderChange(val) {
+    const badge = document.getElementById('genRowsBadge');
+    if (badge) badge.textContent = val;
+    generateData();
+  }
+
+  function switchPreviewMode(mode) {
+    const codeContainer = document.getElementById('dataCodeContainer');
+    const tableContainer = document.getElementById('dataTableContainer');
+    const btnCode = document.getElementById('btnViewCode');
+    const btnTable = document.getElementById('btnViewTable');
+
+    if (mode === 'table') {
+      codeContainer?.classList.add('hidden');
+      tableContainer?.classList.remove('hidden');
+      btnCode?.classList.remove('btn-active');
+      btnTable?.classList.add('btn-active');
+    } else {
+      tableContainer?.classList.add('hidden');
+      codeContainer?.classList.remove('hidden');
+      btnTable?.classList.remove('btn-active');
+      btnCode?.classList.add('btn-active');
+    }
+  }
+
+  function rerollDataValues() {
+    seedSalt += 17;
+    const icon = document.getElementById('rerollSpinIcon');
+    if (icon) {
+      icon.style.transform = 'rotate(360deg)';
+      setTimeout(() => { icon.style.transform = 'none'; }, 400);
+    }
+    generateData();
+  }
+
+  // Schema Columns UI
+  function renderColumnsListUI() {
+    const list = document.getElementById('genColumnsList');
+    const countBadge = document.getElementById('schemaCountBadge');
+    if (!list) return;
+
+    if (countBadge) countBadge.textContent = `${activeColumns.length} field${activeColumns.length === 1 ? '' : 's'}`;
+
+    list.innerHTML = '';
+    activeColumns.forEach((col, idx) => {
+      const row = document.createElement('div');
+      row.className = 'flex items-center gap-2 bg-base-200/70 p-1.5 rounded-lg border border-base-300';
+      row.innerHTML = `
+        <input type="text" class="input input-bordered input-xs font-mono flex-1 min-w-[85px] text-xs font-semibold" value="${col.name}" placeholder="key" onchange="updateColName(${idx}, this.value)" />
+        <select class="select select-bordered select-xs flex-1 min-w-[120px] text-xs" onchange="updateColType(${idx}, this.value)">
+          <option value="month" ${col.type === 'month' ? 'selected' : ''}>Month (Jan, Feb...)</option>
+          <option value="full_month" ${col.type === 'full_month' ? 'selected' : ''}>Full Month (January...)</option>
+          <option value="currency_rounded" ${col.type === 'currency_rounded' ? 'selected' : ''}>Rounded Amount (12500)</option>
+          <option value="amount_float" ${col.type === 'amount_float' ? 'selected' : ''}>Decimal Currency (1250.50)</option>
+          <option value="name" ${col.type === 'name' ? 'selected' : ''}>Full Name</option>
+          <option value="company" ${col.type === 'company' ? 'selected' : ''}>Company Name</option>
+          <option value="email" ${col.type === 'email' ? 'selected' : ''}>Email</option>
+          <option value="role" ${col.type === 'role' ? 'selected' : ''}>Role (Administrator...)</option>
+          <option value="status" ${col.type === 'status' ? 'selected' : ''}>Status (active...)</option>
+          <option value="date" ${col.type === 'date' ? 'selected' : ''}>Date (YYYY-MM-DD)</option>
+          <option value="autoincrement" ${col.type === 'autoincrement' ? 'selected' : ''}>ID (Auto 1, 2...)</option>
+          <option value="uuid" ${col.type === 'uuid' ? 'selected' : ''}>UUID v4</option>
+          <option value="boolean" ${col.type === 'boolean' ? 'selected' : ''}>Boolean (true/false)</option>
+          <option value="custom_enum" ${col.type === 'custom_enum' ? 'selected' : ''}>Custom Options List</option>
+        </select>
+        <button type="button" class="btn btn-ghost btn-xs text-error p-1 hover:bg-error/20" title="Remove Field" onclick="removeColumn(${idx})">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+        </button>
+      `;
+
+      if (col.type === 'custom_enum') {
+        const sub = document.createElement('div');
+        sub.className = 'w-full pl-2 mt-1';
+        sub.innerHTML = `
+          <input type="text" class="input input-bordered input-xs w-full text-xs" placeholder="Comma separated: Value 1, Value 2, Value 3" value="${col.options || 'Active, Pending, Closed'}" onchange="updateColOptions(${idx}, this.value)" />
+        `;
+        row.appendChild(sub);
+      }
+
+      list.appendChild(row);
+    });
+  }
+
+  function addColumnRow() {
+    activeColumns.push({ name: 'field_' + (activeColumns.length + 1), type: 'currency_rounded' });
+    renderColumnsListUI();
+    generateData();
+  }
+
+  function removeColumn(idx) {
+    if (activeColumns.length <= 1) return;
+    activeColumns.splice(idx, 1);
+    renderColumnsListUI();
+    generateData();
+  }
+
+  function updateColName(idx, val) {
+    if (activeColumns[idx]) {
+      activeColumns[idx].name = val.trim() || 'col_' + idx;
+      generateData();
+    }
+  }
+
+  function updateColType(idx, val) {
+    if (activeColumns[idx]) {
+      activeColumns[idx].type = val;
+      if (val === 'custom_enum' && !activeColumns[idx].options) {
+        activeColumns[idx].options = 'Option 1, Option 2, Option 3';
+      }
+      renderColumnsListUI();
+      generateData();
+    }
+  }
+
+  function updateColOptions(idx, val) {
+    if (activeColumns[idx]) {
+      activeColumns[idx].options = val;
+      generateData();
+    }
+  }
+
+  function pseudoRand(seed) {
+    const x = Math.sin(seed) * 10000;
+    return x - Math.floor(x);
+  }
+
+  // Core Data Generation Engine
+  function generateData() {
+    const rows = parseInt(document.getElementById('genRowsSlider')?.value || '3');
+    let varName = (document.getElementById('genVarName')?.value || '$mockData').trim();
+    if (varName && !varName.startsWith('$') && !varName.includes('[')) varName = '$' + varName;
+
+    const format = document.getElementById('genOutputFormat')?.value || 'php-array';
+    const alignArrows = document.getElementById('genAlignArrows')?.checked ?? true;
+    const singleLineRows = document.getElementById('genSingleLineRows')?.checked ?? true;
+    const roundThousands = document.getElementById('genRoundThousands')?.checked ?? true;
+
+    // Special preset: Key-Value Options Map
+    if (currentPreset === 'dropdown-kv' || (activeColumns.length === 1 && activeColumns[0].type === 'kv_options')) {
+      generateKvMap(varName, format, alignArrows, rows);
+      return;
+    }
+
+    const records = [];
+    for (let r = 0; r < rows; r++) {
+      const rec = {};
+      activeColumns.forEach((col, cIdx) => {
+        const seed = (r + 1) * 9301 + (cIdx + 1) * 49297 + seedSalt;
+        const rand = pseudoRand(seed);
+
+        switch (col.type) {
+          case 'month':
+            rec[col.name] = MONTH_NAMES[r % 12];
+            break;
+          case 'full_month':
+            rec[col.name] = FULL_MONTH_NAMES[r % 12];
+            break;
+          case 'currency_rounded': {
+            let val = 10000 + Math.floor(rand * 15000);
+            if (roundThousands) val = Math.round(val / 500) * 500;
+            rec[col.name] = val;
+            break;
+          }
+          case 'currency_rounded_lower': {
+            let val = 5000 + Math.floor(rand * 8000);
+            if (roundThousands) val = Math.round(val / 200) * 200;
+            rec[col.name] = val;
+            break;
+          }
+          case 'computed_profit': {
+            const s = rec['sales'] || 18000;
+            const e = rec['expenses'] || 11000;
+            rec[col.name] = s - e;
+            break;
+          }
+          case 'amount_float': {
+            const val = 500 + rand * 8500;
+            rec[col.name] = parseFloat(val.toFixed(2));
+            break;
+          }
+          case 'receipt_id':
+            rec[col.name] = 'RCP-' + (10480 + r + 1);
+            break;
+          case 'name': {
+            const fn = FIRST_NAMES[(r + seedSalt) % FIRST_NAMES.length];
+            const ln = LAST_NAMES[(r + seedSalt) % LAST_NAMES.length];
+            rec[col.name] = `${fn} ${ln}`;
+            break;
+          }
+          case 'company':
+            rec[col.name] = COMPANIES[(r + seedSalt) % COMPANIES.length];
+            break;
+          case 'email': {
+            const nameStr = (rec['name'] || FIRST_NAMES[r % FIRST_NAMES.length]).toLowerCase().replace(/[^a-z]/g, '.');
+            rec[col.name] = `${nameStr}@example.com`;
+            break;
+          }
+          case 'role':
+            rec[col.name] = ROLES[r % ROLES.length];
+            break;
+          case 'status':
+            rec[col.name] = STATUSES[r % STATUSES.length];
+            break;
+          case 'date': {
+            const day = String((r * 4 + 1) % 28 + 1).padStart(2, '0');
+            rec[col.name] = `2026-03-${day}`;
+            break;
+          }
+          case 'autoincrement':
+            rec[col.name] = r + 1;
+            break;
+          case 'uuid':
+            rec[col.name] = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+              const rr = Math.random() * 16 | 0;
+              return (c === 'x' ? rr : (rr & 0x3 | 0x8)).toString(16);
+            });
+            break;
+          case 'boolean':
+            rec[col.name] = rand > 0.35;
+            break;
+          case 'custom_enum': {
+            const opts = (col.options || 'Active, Pending, Closed').split(',').map(s => s.trim()).filter(Boolean);
+            rec[col.name] = opts[Math.floor(rand * opts.length)] || 'N/A';
+            break;
+          }
+          default:
+            rec[col.name] = 'Item ' + (r + 1);
+        }
+      });
+      records.push(rec);
+    }
+
+    lastGeneratedRecords = records;
+
+    // Format output
+    let codeStr = '';
+    const titleEl = document.getElementById('outputPreviewTitle');
+
+    if (format === 'php-array' || format === 'php-classic') {
+      if (titleEl) titleEl.textContent = 'PHP Array Code';
+      codeStr = buildPhpArrayString(varName, records, format === 'php-array', alignArrows, singleLineRows);
+    } else if (format === 'php-echarts') {
+      if (titleEl) titleEl.textContent = 'Full PHP Controller & ECharts View';
+      codeStr = buildEchartsFullPageString(varName, records, alignArrows);
+    } else if (format === 'json') {
+      if (titleEl) titleEl.textContent = 'JSON Dataset';
+      codeStr = JSON.stringify(records, null, 2);
+    } else if (format === 'js') {
+      if (titleEl) titleEl.textContent = 'JavaScript / TypeScript Array';
+      codeStr = `const ${varName.replace('$', '')} = ` + JSON.stringify(records, null, 2) + ';';
+    } else if (format === 'csv') {
+      if (titleEl) titleEl.textContent = 'CSV Dataset';
+      codeStr = buildCsvString(records);
+    }
+
+    renderOutputCode(codeStr, records.length);
+    updatePreviewTable(records);
+  }
+
+  function buildPhpArrayString(varName, records, isShort, alignArrows, singleLineRows) {
+    const openOuter = isShort ? '[' : 'array(';
+    const closeOuter = isShort ? '];' : ');';
+    const openRow = isShort ? '[' : 'array(';
+    const closeRow = isShort ? ']' : ')';
+
+    let comment = '// Tracer bullet dummy data';
+    if (currentPreset === 'echarts-monthly') comment += ': Sales by Month';
+    else if (currentPreset === 'multi-metric') comment += ': Monthly Sales & Expenses';
+    else if (currentPreset === 'invoices') comment += ': Sales Receipts & AR';
+    else if (currentPreset === 'users') comment += ': User Accounts & Roles';
+
+    let maxKeyLen = 0;
+    records.forEach(r => {
+      Object.keys(r).forEach(k => {
+        if (k.length > maxKeyLen) maxKeyLen = k.length;
+      });
+    });
+
+    const lines = [];
+    lines.push(comment);
+    lines.push(`${varName} = ${openOuter}`);
+
+    records.forEach(row => {
+      const keys = Object.keys(row);
+      if (singleLineRows) {
+        const parts = keys.map(k => {
+          const val = row[k];
+          const valStr = formatPhpVal(val);
+          const arrowPad = alignArrows ? ' '.repeat(Math.max(0, maxKeyLen - k.length)) : '';
+          return `'${k}'${arrowPad} => ${valStr}`;
+        });
+        lines.push(`    ${openRow}${parts.join(', ')}${closeRow},`);
+      } else {
+        lines.push(`    ${openRow}`);
+        keys.forEach(k => {
+          const val = row[k];
+          const valStr = formatPhpVal(val);
+          const arrowPad = alignArrows ? ' '.repeat(Math.max(0, maxKeyLen - k.length)) : '';
+          lines.push(`        '${k}'${arrowPad} => ${valStr},`);
+        });
+        lines.push(`    ${closeRow},`);
+      }
+    });
+
+    lines.push(closeOuter);
+    return lines.join('\n');
+  }
+
+  function formatPhpVal(val) {
+    if (typeof val === 'number') return val;
+    if (typeof val === 'boolean') return val ? 'true' : 'false';
+    if (val === null) return 'null';
+    return `'${String(val).replace(/'/g, "\\'")}'`;
+  }
+
+  // Build Full ECharts Page Boilerplate (Safe string construction)
+  function buildEchartsFullPageString(varName, records, alignArrows) {
+    const phpDataArray = buildPhpArrayString(varName, records, true, alignArrows, true);
+
+    return '<?php\n\n' +
+      "$page['groups'] = ['Administrator', 'AR'];\n" +
+      "$page['title'] = 'Sales Receipts Analysis Charts';\n" +
+      "$page['roles'] = 'view';\n\n" +
+      "if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest')\n" +
+      "{\n" +
+      "    $page['isCallback'] = true; // is ajax\n" +
+      "}\n\n" +
+      "if ((array_key_exists('pdf', $_REQUEST) && $_REQUEST['pdf']) ||\n" +
+      "    (array_key_exists('exp', $_REQUEST) && $_REQUEST['exp'])) $page['isCallback'] = true;\n\n" +
+      "include_once('../application/initialize.php');\n\n" +
+      phpDataArray + "\n\n" +
+      "$chartConfig = Echarts::bar()\n" +
+      "    ->setData(" + varName + ")\n" +
+      "    ->setLabelKey('month')\n" +
+      "    ->setMetrics(['Total Sales' => 'total'])\n" +
+      "    ->render();\n\n" +
+      "$jsPath = $page['paths']['web']['javascript'];\n" +
+      "?>\n\n" +
+      '<script src="<?= $jsPath; ?>/echarts.min.js"><' + '/script>\n' +
+      '<script src="<?= $jsPath; ?>/echartsChartEngine.js"><' + '/script>\n\n' +
+      '<h2><?= t(\'Sales Receipts Analysis - Charts\'); ?></h2>\n\n' +
+      '<!-- The DOM element for ECharts -->\n' +
+      '<div id="cashReceiptsChart" style="width: 100%; height: 420px;"></div>\n\n' +
+      '<script>\n' +
+      '$(document).ready(function() {\n' +
+      '    let chartDom = document.getElementById(\'cashReceiptsChart\');\n' +
+      '    let myChart  = echarts.init(chartDom);\n\n' +
+      '    // Plug in the JSON datasets produced by your builder\n' +
+      '    let dimensions = <?= $chartConfig[\'chartDimensions\']; ?>;\n' +
+      '    let dataset    = <?= $chartConfig[\'chartDataset\']; ?>;\n\n' +
+      '    myChart.setOption({\n' +
+      '        tooltip: { trigger: \'axis\' },\n' +
+      '        legend: { top: 0 },\n' +
+      '        xAxis: { type: \'category\' },\n' +
+      '        yAxis: { type: \'value\' },\n' +
+      '        dataset: {\n' +
+      '            dimensions: dimensions,\n' +
+      '            source: dataset\n' +
+      '        },\n' +
+      '        series: [{ type: \'bar\' }]\n' +
+      '    });\n\n' +
+      '    // Keep it responsive on window resize\n' +
+      '    $(window).on(\'resize\', function() {\n' +
+      '        myChart.resize();\n' +
+      '    });\n' +
+      '});\n' +
+      '<' + '/script>\n\n' +
+      '<?php\n' +
+      'include_once(\'../application/finalize.php\');\n';
+  }
+
+  function generateKvMap(varName, format, alignArrows, count) {
+    const mapItems = [
+      { k: 'draft', v: 'Draft' },
+      { k: 'pending', v: 'Pending Review' },
+      { k: 'approved', v: 'Approved' },
+      { k: 'processed', v: 'Processed' },
+      { k: 'rejected', v: 'Rejected' },
+      { k: 'archived', v: 'Archived' },
+      { k: 'closed', v: 'Closed' }
+    ].slice(0, Math.min(count, 7));
+
+    let maxK = 0;
+    mapItems.forEach(item => { if (item.k.length > maxK) maxK = item.k.length; });
+
+    const isShort = format !== 'php-classic';
+    const lines = [];
+    lines.push('// Lookup / Dropdown Key-Value Options Map');
+    lines.push(`${varName} = ${isShort ? '[' : 'array('}`);
+    mapItems.forEach(item => {
+      const sp = alignArrows ? ' '.repeat(Math.max(0, maxK - item.k.length)) : '';
+      lines.push(`    '${item.k}'${sp} => '${item.v}',`);
+    });
+    lines.push(isShort ? '];' : ');');
+
+    const codeStr = lines.join('\n');
+    renderOutputCode(codeStr, mapItems.length);
+    updatePreviewTable(mapItems.map(i => ({ key: i.k, value: i.v })));
+  }
+
+  function buildCsvString(records) {
+    if (!records.length) return '';
+    const headers = Object.keys(records[0]);
+    const lines = [headers.join(',')];
+    records.forEach(r => {
+      const row = headers.map(h => {
+        const v = r[h];
+        if (typeof v === 'string' && (v.includes(',') || v.includes('"'))) {
+          return `"${v.replace(/"/g, '""')}"`;
+        }
+        return v;
+      });
+      lines.push(row.join(','));
+    });
+    return lines.join('\n');
+  }
+
+  function renderOutputCode(codeStr, rowsCount) {
+    const pre = document.getElementById('dataCodePre');
+    const statsEl = document.getElementById('genDataStats');
+    if (pre) pre.textContent = codeStr;
+    if (statsEl) {
+      const bytes = new Blob([codeStr]).size;
+      statsEl.textContent = `${rowsCount} rows \u2022 ${bytes} bytes`;
+    }
+  }
+
+  function updatePreviewTable(records) {
+    const head = document.getElementById('genPreviewTableHead');
+    const body = document.getElementById('genPreviewTableBody');
+    if (!head || !body) return;
+
+    if (!records.length) {
+      head.innerHTML = '';
+      body.innerHTML = '<tr><td class="text-center text-base-content/50">No data generated</td></tr>';
+      return;
+    }
+
+    const keys = Object.keys(records[0]);
+    head.innerHTML = `<tr><th class="w-8">#</th>${keys.map(k => `<th>${k}</th>`).join('')}</tr>`;
+
+    body.innerHTML = records.map((rec, i) => {
+      return `<tr>
+        <td class="font-mono text-base-content/50">${i + 1}</td>
+        ${keys.map(k => {
+          let val = rec[k];
+          if (typeof val === 'boolean') {
+            return `<td><span class="badge badge-xs ${val ? 'badge-success' : 'badge-ghost'}">${val}</span></td>`;
+          }
+          if (typeof val === 'number') {
+            return `<td class="font-mono text-right">${val.toLocaleString()}</td>`;
+          }
+          return `<td>${val}</td>`;
+        }).join('')}
+      </tr>`;
+    }).join('');
+  }
+
+  function copyDataOutput() {
+    const code = document.getElementById('dataCodePre')?.textContent || '';
+    if (!code) return;
+
+    navigator.clipboard.writeText(code).then(() => {
+      const btnText = document.getElementById('btnCopyDataText');
+      const btn = document.getElementById('btnCopyDataOutput');
+      if (btnText) btnText.textContent = 'Copied! ✓';
+      if (btn) btn.classList.add('btn-outline');
+
+      setTimeout(() => {
+        if (btnText) btnText.textContent = 'Copy Code';
+        if (btn) btn.classList.remove('btn-outline');
+      }, 2000);
+    });
+  }
+
+  function downloadDataFile() {
+    const code = document.getElementById('dataCodePre')?.textContent || '';
+    if (!code) return;
+
+    const format = document.getElementById('genOutputFormat')?.value || 'php-array';
+    let ext = 'php';
+    let mime = 'text/plain';
+
+    if (format === 'json') {
+      ext = 'json';
+      mime = 'application/json';
+    } else if (format === 'js') {
+      ext = 'js';
+    } else if (format === 'csv') {
+      ext = 'csv';
+      mime = 'text/csv';
+    }
+
+    const filename = `sample_data_${Date.now()}.${ext}`;
+    const blob = new Blob([code], { type: `${mime};charset=utf-8` });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
+    URL.revokeObjectURL(link.href);
+  }
+
+  // ==========================================
+  // 2. PHPUNIT TEST GENERATOR STATE & LOGIC
+  // ==========================================
+  let currentPhpUnitPreset = 'echarts-chart';
+  let phpunitMocks = [];
+  let phpunitMethods = [];
+  let customDataProviderRows = null;
+
+  function loadPhpUnitPreset(presetKey) {
+    currentPhpUnitPreset = presetKey;
+    const badge = document.getElementById('phpunitPresetBadge');
+    const frameworkSelect = document.getElementById('phpunitFramework');
+    const subjectInput = document.getElementById('phpunitSubjectClass');
+    const testClassInput = document.getElementById('phpunitTestClass');
+    const setupCb = document.getElementById('phpunitIncludeSetup');
+    const dpCb = document.getElementById('phpunitIncludeDataProvider');
+    const excCb = document.getElementById('phpunitIncludeException');
+
+    if (presetKey === 'echarts-chart') {
+      if (badge) badge.textContent = 'ECharts Test';
+      if (subjectInput) subjectInput.value = 'SalesReceiptsAnalysis';
+      if (testClassInput) testClassInput.value = 'SalesReceiptsAnalysisTest';
+      if (frameworkSelect) frameworkSelect.value = 'phpunit-attributes';
+      if (setupCb) setupCb.checked = true;
+      if (dpCb) dpCb.checked = true;
+      if (excCb) excCb.checked = false;
+
+      phpunitMocks = [];
+      phpunitMethods = [
+        { name: 'it_renders_chart_dimensions_and_dataset', type: 'chart_render' },
+        { name: 'it_calculates_monthly_sales_metrics', type: 'data_provider' },
+        { name: 'it_handles_ajax_callback_flag', type: 'ajax_callback' }
+      ];
+    } else if (presetKey === 'service-mock') {
+      if (badge) badge.textContent = 'Service with Mocks';
+      if (subjectInput) subjectInput.value = 'SalesReceiptsService';
+      if (testClassInput) testClassInput.value = 'SalesReceiptsServiceTest';
+      if (frameworkSelect) frameworkSelect.value = 'phpunit-attributes';
+      if (setupCb) setupCb.checked = true;
+      if (dpCb) dpCb.checked = false;
+      if (excCb) excCb.checked = true;
+
+      phpunitMocks = [
+        { name: 'receiptRepository', type: 'ReceiptRepositoryInterface' },
+        { name: 'logger', type: 'LoggerInterface' }
+      ];
+      phpunitMethods = [
+        { name: 'it_fetches_and_aggregates_monthly_sales_successfully', type: 'mock_service' },
+        { name: 'it_throws_exception_when_period_is_invalid', type: 'exception' }
+      ];
+    } else if (presetKey === 'data-provider') {
+      if (badge) badge.textContent = 'DataProvider Test';
+      if (subjectInput) subjectInput.value = 'CashReceiptsCalculator';
+      if (testClassInput) testClassInput.value = 'CashReceiptsCalculatorTest';
+      if (frameworkSelect) frameworkSelect.value = 'phpunit-attributes';
+      if (setupCb) setupCb.checked = true;
+      if (dpCb) dpCb.checked = true;
+      if (excCb) excCb.checked = false;
+
+      phpunitMocks = [];
+      phpunitMethods = [
+        { name: 'it_calculates_total_sales_per_month', type: 'data_provider' },
+        { name: 'it_validates_amounts_are_positive', type: 'generic' }
+      ];
+    } else if (presetKey === 'controller-callback') {
+      if (badge) badge.textContent = 'Controller & AJAX';
+      if (subjectInput) subjectInput.value = 'SalesReceiptsController';
+      if (testClassInput) testClassInput.value = 'SalesReceiptsControllerTest';
+      if (frameworkSelect) frameworkSelect.value = 'phpunit-attributes';
+      if (setupCb) setupCb.checked = true;
+      if (dpCb) dpCb.checked = false;
+      if (excCb) excCb.checked = false;
+
+      phpunitMocks = [];
+      phpunitMethods = [
+        { name: 'it_configures_page_metadata_and_permissions', type: 'page_config' },
+        { name: 'it_detects_ajax_callback_requests', type: 'ajax_callback' },
+        { name: 'it_handles_pdf_and_export_flags', type: 'export_flags' }
+      ];
+    } else if (presetKey === 'repository-crud') {
+      if (badge) badge.textContent = 'Repository CRUD';
+      if (subjectInput) subjectInput.value = 'ReceiptRepository';
+      if (testClassInput) testClassInput.value = 'ReceiptRepositoryTest';
+      if (frameworkSelect) frameworkSelect.value = 'phpunit-attributes';
+      if (setupCb) setupCb.checked = true;
+      if (dpCb) dpCb.checked = false;
+      if (excCb) excCb.checked = false;
+
+      phpunitMocks = [
+        { name: 'dbConnection', type: 'DatabaseConnectionInterface' }
+      ];
+      phpunitMethods = [
+        { name: 'it_finds_receipt_by_id', type: 'generic' },
+        { name: 'it_saves_new_receipt_record', type: 'generic' },
+        { name: 'it_returns_empty_array_when_no_records_found', type: 'generic' }
+      ];
+    } else if (presetKey === 'pest-php') {
+      if (badge) badge.textContent = 'Pest PHP';
+      if (subjectInput) subjectInput.value = 'SalesReceiptsAnalysis';
+      if (testClassInput) testClassInput.value = 'SalesReceiptsAnalysisTest';
+      if (frameworkSelect) frameworkSelect.value = 'pest';
+      if (setupCb) setupCb.checked = true;
+      if (dpCb) dpCb.checked = true;
+      if (excCb) excCb.checked = false;
+
+      phpunitMocks = [];
+      phpunitMethods = [
+        { name: 'it renders chart dimensions and dataset correctly', type: 'chart_render' },
+        { name: 'it calculates monthly sales totals', type: 'data_provider' },
+        { name: 'it verifies page permissions are configured', type: 'page_config' }
+      ];
+    }
+
+    renderPhpUnitMocksList();
+    renderPhpUnitMethodsList();
+    generatePhpUnitTest();
+  }
+
+  function onSubjectClassChange(val) {
+    const trimmed = val.trim();
+    const testClassInput = document.getElementById('phpunitTestClass');
+    if (testClassInput && trimmed) {
+      testClassInput.value = trimmed.endsWith('Test') ? trimmed : trimmed + 'Test';
+    }
+    generatePhpUnitTest();
+  }
+
+  // Mocks UI
+  function renderPhpUnitMocksList() {
+    const list = document.getElementById('phpunitMocksList');
+    const badge = document.getElementById('phpunitMockCountBadge');
+    if (!list) return;
+
+    if (badge) badge.textContent = `${phpunitMocks.length} mock${phpunitMocks.length === 1 ? '' : 's'}`;
+
+    if (phpunitMocks.length === 0) {
+      list.innerHTML = '<span class="text-xs text-base-content/40 italic p-1">No mocked dependencies. Click "Add Mock" to add one.</span>';
+      return;
+    }
+
+    list.innerHTML = '';
+    phpunitMocks.forEach((mock, idx) => {
+      const row = document.createElement('div');
+      row.className = 'flex items-center gap-2 bg-base-200/70 p-1.5 rounded-lg border border-base-300';
+      row.innerHTML = `
+        <span class="text-[11px] font-mono text-base-content/50">$</span>
+        <input type="text" class="input input-bordered input-xs font-mono flex-1 min-w-[85px] text-xs font-semibold" value="${mock.name}" placeholder="propName" onchange="updateMockName(${idx}, this.value)" />
+        <span class="text-[11px] text-base-content/50">:</span>
+        <input type="text" class="input input-bordered input-xs font-mono flex-1 min-w-[120px] text-xs" value="${mock.type}" placeholder="InterfaceOrClass" onchange="updateMockType(${idx}, this.value)" />
+        <button type="button" class="btn btn-ghost btn-xs text-error p-1 hover:bg-error/20" title="Remove Mock" onclick="removeMockDependency(${idx})">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+        </button>
+      `;
+      list.appendChild(row);
+    });
+  }
+
+  function addMockDependency() {
+    phpunitMocks.push({
+      name: 'dependency' + (phpunitMocks.length + 1),
+      type: 'DependencyInterface'
+    });
+    renderPhpUnitMocksList();
+    generatePhpUnitTest();
+  }
+
+  function removeMockDependency(idx) {
+    phpunitMocks.splice(idx, 1);
+    renderPhpUnitMocksList();
+    generatePhpUnitTest();
+  }
+
+  function updateMockName(idx, val) {
+    if (phpunitMocks[idx]) {
+      phpunitMocks[idx].name = val.trim().replace(/^\$/, '') || 'mock' + idx;
+      generatePhpUnitTest();
+    }
+  }
+
+  function updateMockType(idx, val) {
+    if (phpunitMocks[idx]) {
+      phpunitMocks[idx].type = val.trim() || 'MockInterface';
+      generatePhpUnitTest();
+    }
+  }
+
+  // Methods UI
+  function renderPhpUnitMethodsList() {
+    const list = document.getElementById('phpunitMethodsList');
+    const badge = document.getElementById('phpunitMethodsCountBadge');
+    if (!list) return;
+
+    if (badge) badge.textContent = `${phpunitMethods.length} test${phpunitMethods.length === 1 ? '' : 's'}`;
+
+    if (phpunitMethods.length === 0) {
+      list.innerHTML = '<span class="text-xs text-base-content/40 italic p-1">No test methods. Click "Add Test" to create one.</span>';
+      return;
+    }
+
+    list.innerHTML = '';
+    phpunitMethods.forEach((m, idx) => {
+      const row = document.createElement('div');
+      row.className = 'flex items-center gap-2 bg-base-200/70 p-1.5 rounded-lg border border-base-300';
+      row.innerHTML = `
+        <input type="text" class="input input-bordered input-xs font-mono flex-1 min-w-[120px] text-xs font-semibold" value="${m.name}" placeholder="test_method_name" onchange="updateTestMethodName(${idx}, this.value)" />
+        <select class="select select-bordered select-xs text-xs min-w-[110px]" onchange="updateTestMethodType(${idx}, this.value)">
+          <option value="chart_render" ${m.type === 'chart_render' ? 'selected' : ''}>Chart Render</option>
+          <option value="data_provider" ${m.type === 'data_provider' ? 'selected' : ''}>DataProvider</option>
+          <option value="ajax_callback" ${m.type === 'ajax_callback' ? 'selected' : ''}>AJAX Callback</option>
+          <option value="page_config" ${m.type === 'page_config' ? 'selected' : ''}>Page Permissions</option>
+          <option value="mock_service" ${m.type === 'mock_service' ? 'selected' : ''}>Service Mock Call</option>
+          <option value="exception" ${m.type === 'exception' ? 'selected' : ''}>Expect Exception</option>
+          <option value="export_flags" ${m.type === 'export_flags' ? 'selected' : ''}>PDF / Export Flag</option>
+          <option value="generic" ${m.type === 'generic' ? 'selected' : ''}>Generic Assert</option>
+        </select>
+        <button type="button" class="btn btn-ghost btn-xs text-error p-1 hover:bg-error/20" title="Remove Test Method" onclick="removeTestMethod(${idx})">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+        </button>
+      `;
+      list.appendChild(row);
+    });
+  }
+
+  function addTestMethod() {
+    phpunitMethods.push({
+      name: 'it_verifies_expected_behavior_' + (phpunitMethods.length + 1),
+      type: 'generic'
+    });
+    renderPhpUnitMethodsList();
+    generatePhpUnitTest();
+  }
+
+  function removeTestMethod(idx) {
+    if (phpunitMethods.length <= 1) return;
+    phpunitMethods.splice(idx, 1);
+    renderPhpUnitMethodsList();
+    generatePhpUnitTest();
+  }
+
+  function updateTestMethodName(idx, val) {
+    if (phpunitMethods[idx]) {
+      phpunitMethods[idx].name = val.trim() || 'test_case_' + idx;
+      generatePhpUnitTest();
+    }
+  }
+
+  function updateTestMethodType(idx, val) {
+    if (phpunitMethods[idx]) {
+      phpunitMethods[idx].type = val;
+      generatePhpUnitTest();
+    }
+  }
+
+  // Inject active sample data into PHPUnit test DataProvider
+  function injectDataGeneratorDataIntoTest() {
+    if (!lastGeneratedRecords || lastGeneratedRecords.length === 0) {
+      generateData();
+    }
+    customDataProviderRows = lastGeneratedRecords.slice(0, 10);
+
+    // Make sure data provider checkbox is on
+    const dpCb = document.getElementById('phpunitIncludeDataProvider');
+    if (dpCb) dpCb.checked = true;
+
+    // Ensure there is at least one data_provider method
+    if (!phpunitMethods.some(m => m.type === 'data_provider')) {
+      phpunitMethods.unshift({
+        name: 'it_evaluates_sample_records_dataset',
+        type: 'data_provider'
+      });
+      renderPhpUnitMethodsList();
+    }
+
+    generatePhpUnitTest();
+
+    // Visual feedback
+    const btnText = document.getElementById('btnCopyPhpUnitText');
+    if (btnText) {
+      const orig = btnText.textContent;
+      btnText.textContent = 'Sample Data Injected!';
+      setTimeout(() => { btnText.textContent = orig; }, 1800);
+    }
+  }
+
+  // Generate the PHPUnit Test Class
+  function generatePhpUnitTest() {
+    const framework = document.getElementById('phpunitFramework')?.value || 'phpunit-attributes';
+    const subjectClass = (document.getElementById('phpunitSubjectClass')?.value || 'SalesReceiptsAnalysis').trim();
+    let testClass = (document.getElementById('phpunitTestClass')?.value || subjectClass + 'Test').trim();
+    if (!testClass.endsWith('Test') && framework !== 'pest') testClass += 'Test';
+
+    const namespace = (document.getElementById('phpunitNamespace')?.value || 'Tests\\Unit').trim();
+    const strictTypes = document.getElementById('phpunitStrictTypes')?.checked ?? true;
+    const includeSetup = document.getElementById('phpunitIncludeSetup')?.checked ?? true;
+    const includeDataProvider = document.getElementById('phpunitIncludeDataProvider')?.checked ?? true;
+    const includeException = document.getElementById('phpunitIncludeException')?.checked ?? false;
+
+    let testCode = '';
+
+    if (framework === 'pest') {
+      testCode = buildPestTestString({
+        subjectClass,
+        namespace,
+        strictTypes,
+        includeSetup,
+        includeDataProvider,
+        includeException,
+        mocks: phpunitMocks,
+        methods: phpunitMethods,
+        dpRows: customDataProviderRows
+      });
+    } else {
+      testCode = buildPhpUnitTestClassString({
+        framework,
+        subjectClass,
+        testClass,
+        namespace,
+        strictTypes,
+        includeSetup,
+        includeDataProvider,
+        includeException,
+        mocks: phpunitMocks,
+        methods: phpunitMethods,
+        dpRows: customDataProviderRows
+      });
+    }
+
+    const pre = document.getElementById('phpunitCodePre');
+    const stats = document.getElementById('phpunitStats');
+    if (pre) pre.textContent = testCode;
+
+    if (stats) {
+      const lines = testCode.split('\n').length;
+      stats.textContent = `${phpunitMethods.length} tests \u2022 ${lines} lines \u2022 PSR-12`;
+    }
+  }
+
+  function buildPhpUnitTestClassString(cfg) {
+    const isAttr = cfg.framework === 'phpunit-attributes';
+    const lines = [];
+
+    lines.push('<?php');
+    lines.push('');
+    if (cfg.strictTypes) {
+      lines.push('declare(strict_types=1);');
+      lines.push('');
+    }
+
+    if (cfg.namespace) {
+      lines.push(`namespace ${cfg.namespace};`);
+      lines.push('');
+    }
+
+    // Imports
+    lines.push('use PHPUnit\\Framework\\TestCase;');
+    if (isAttr) {
+      lines.push('use PHPUnit\\Framework\\Attributes\\Test;');
+      if (cfg.includeDataProvider || cfg.methods.some(m => m.type === 'data_provider')) {
+        lines.push('use PHPUnit\\Framework\\Attributes\\DataProvider;');
+      }
+    }
+    if (cfg.mocks.length > 0) {
+      lines.push('use PHPUnit\\Framework\\MockObject\\MockObject;');
+    }
+    lines.push(`use App\\Services\\${cfg.subjectClass};`);
+    lines.push('');
+
+    // Class definition
+    lines.push(`final class ${cfg.testClass} extends TestCase`);
+    lines.push('{');
+
+    // Properties
+    const subjectProp = cfg.subjectClass.charAt(0).toLowerCase() + cfg.subjectClass.slice(1);
+    lines.push(`    private ${cfg.subjectClass} $${subjectProp};`);
+
+    cfg.mocks.forEach(m => {
+      lines.push(`    private MockObject&${m.type} $${m.name};`);
+    });
+
+    lines.push('');
+
+    // setUp
+    if (cfg.includeSetup) {
+      lines.push('    protected function setUp(): void');
+      lines.push('    {');
+      lines.push('        parent::setUp();');
+
+      if (cfg.mocks.length > 0) {
+        lines.push('');
+        cfg.mocks.forEach(m => {
+          lines.push(`        $this->${m.name} = $this->createMock(${m.type}::class);`);
+        });
+        lines.push('');
+        const ctorArgs = cfg.mocks.map(m => `$this->${m.name}`).join(', ');
+        lines.push(`        $this->${subjectProp} = new ${cfg.subjectClass}(${ctorArgs});`);
+      } else {
+        lines.push(`        $this->${subjectProp} = new ${cfg.subjectClass}();`);
+      }
+
+      lines.push('    }');
+      lines.push('');
+    }
+
+    // Test Methods
+    cfg.methods.forEach(m => {
+      const methodName = m.name.replace(/[^a-zA-Z0-9_]/g, '_');
+
+      if (isAttr) {
+        lines.push('    #[Test]');
+        if (m.type === 'data_provider') {
+          lines.push(`    #[DataProvider('monthlyTotalsDataProvider')]`);
+        }
+      } else {
+        lines.push('    /**');
+        lines.push('     * @test');
+        if (m.type === 'data_provider') {
+          lines.push('     * @dataProvider monthlyTotalsDataProvider');
+        }
+        lines.push('     */');
+      }
+
+      if (m.type === 'data_provider') {
+        lines.push(`    public function ${methodName}(string $month, float|int $total, float|int $expected): void`);
+        lines.push('    {');
+        lines.push('        $this->assertGreaterThan(0, $total);');
+        lines.push('        $this->assertSame($expected, $total);');
+        lines.push('    }');
+      } else if (m.type === 'chart_render') {
+        lines.push(`    public function ${methodName}(): void`);
+        lines.push('    {');
+        lines.push('        $sampleData = [');
+        lines.push("            ['month' => 'Jan', 'total' => 12500],");
+        lines.push("            ['month' => 'Feb', 'total' => 18500],");
+        lines.push("            ['month' => 'Mar', 'total' => 15500],");
+        lines.push('        ];');
+        lines.push('');
+        lines.push('        $chartConfig = \\App\\Charts\\Echarts::bar()');
+        lines.push('            ->setData($sampleData)');
+        lines.push("            ->setLabelKey('month')");
+        lines.push("            ->setMetrics(['Total Sales' => 'total'])");
+        lines.push('            ->render();');
+        lines.push('');
+        lines.push('        $this->assertIsArray($chartConfig);');
+        lines.push("        $this->assertArrayHasKey('chartDimensions', $chartConfig);");
+        lines.push("        $this->assertArrayHasKey('chartDataset', $chartConfig);");
+        lines.push('    }');
+      } else if (m.type === 'ajax_callback') {
+        lines.push(`    public function ${methodName}(): void`);
+        lines.push('    {');
+        lines.push("        $_SERVER['HTTP_X_REQUESTED_WITH'] = 'xmlhttprequest';");
+        lines.push('');
+        lines.push("        $isCallback = isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';");
+        lines.push('');
+        lines.push('        $this->assertTrue($isCallback);');
+        lines.push('    }');
+      } else if (m.type === 'page_config') {
+        lines.push(`    public function ${methodName}(): void`);
+        lines.push('    {');
+        lines.push(`        $page = $this->${subjectProp}->getPageConfig();`);
+        lines.push('');
+        lines.push("        $this->assertContains('Administrator', $page['groups']);");
+        lines.push("        $this->assertContains('AR', $page['groups']);");
+        lines.push("        $this->assertSame('Sales Receipts Analysis Charts', $page['title']);");
+        lines.push("        $this->assertSame('view', $page['roles']);");
+        lines.push('    }');
+      } else if (m.type === 'mock_service') {
+        const mockName = cfg.mocks[0]?.name || 'repository';
+        lines.push(`    public function ${methodName}(): void`);
+        lines.push('    {');
+        lines.push('        $sampleRows = [');
+        lines.push("            ['month' => 'Jan', 'total' => 12500],");
+        lines.push('        ];');
+        lines.push('');
+        lines.push(`        $this->${mockName}`);
+        lines.push('            ->expects($this->once())');
+        lines.push("            ->method('getSalesByPeriod')");
+        lines.push("            ->with('2026')");
+        lines.push('            ->willReturn($sampleRows);');
+        lines.push('');
+        lines.push(`        $result = $this->${subjectProp}->getMonthlySummary('2026');`);
+        lines.push('        $this->assertCount(1, $result);');
+        lines.push('    }');
+      } else if (m.type === 'exception') {
+        lines.push(`    public function ${methodName}(): void`);
+        lines.push('    {');
+        lines.push('        $this->expectException(\\InvalidArgumentException::class);');
+        lines.push("        $this->expectExceptionMessage('Invalid period specified');");
+        lines.push('');
+        lines.push(`        $this->${subjectProp}->getMonthlySummary('');`);
+        lines.push('    }');
+      } else if (m.type === 'export_flags') {
+        lines.push(`    public function ${methodName}(): void`);
+        lines.push('    {');
+        lines.push("        $_REQUEST['pdf'] = '1';");
+        lines.push("        $isPdf = array_key_exists('pdf', $_REQUEST) && $_REQUEST['pdf'];");
+        lines.push('');
+        lines.push('        $this->assertTrue((bool)$isPdf);');
+        lines.push('    }');
+      } else {
+        lines.push(`    public function ${methodName}(): void`);
+        lines.push('    {');
+        lines.push(`        $actual = $this->${subjectProp}->execute();`);
+        lines.push('        $this->assertNotNull($actual);');
+        lines.push('    }');
+      }
+
+      lines.push('');
+    });
+
+    // DataProvider implementation
+    if (cfg.includeDataProvider || cfg.methods.some(m => m.type === 'data_provider')) {
+      lines.push('    /**');
+      lines.push('     * @return array<string, array{string, float|int, float|int}>');
+      lines.push('     */');
+      lines.push('    public static function monthlyTotalsDataProvider(): array');
+      lines.push('    {');
+      lines.push('        return [');
+
+      if (cfg.dpRows && cfg.dpRows.length > 0) {
+        cfg.dpRows.forEach(row => {
+          const m = row['month'] || row['label'] || row['name'] || 'Item';
+          const t = row['total'] || row['amount'] || row['price'] || 12000;
+          lines.push(`            '${String(m).toLowerCase()} sales' => ['${m}', ${t}, ${t}],`);
+        });
+      } else {
+        lines.push("            'january sales'  => ['Jan', 12500, 12500],");
+        lines.push("            'february sales' => ['Feb', 18500, 18500],");
+        lines.push("            'march sales'    => ['Mar', 15500, 15500],");
+      }
+
+      lines.push('        ];');
+      lines.push('    }');
+      lines.push('');
+    }
+
+    lines.push('}');
+    return lines.join('\n');
+  }
+
+  function buildPestTestString(cfg) {
+    const lines = [];
+
+    lines.push('<?php');
+    lines.push('');
+    if (cfg.strictTypes) {
+      lines.push('declare(strict_types=1);');
+      lines.push('');
+    }
+
+    lines.push('use App\\Charts\\Echarts;');
+    lines.push(`use App\\Services\\${cfg.subjectClass};`);
+    lines.push('');
+
+    lines.push(`describe('${cfg.subjectClass}', function () {`);
+
+    if (cfg.includeSetup) {
+      lines.push('    beforeEach(function () {');
+      lines.push('        $this->sampleData = [');
+      lines.push("            ['month' => 'Jan', 'total' => 12500],");
+      lines.push("            ['month' => 'Feb', 'total' => 18500],");
+      lines.push('        ];');
+      lines.push(`        $this->subject = new ${cfg.subjectClass}();`);
+      lines.push('    });');
+      lines.push('');
+    }
+
+    cfg.methods.forEach(m => {
+      const desc = m.name.replace(/_/g, ' ');
+
+      if (m.type === 'chart_render') {
+        lines.push(`    it('${desc}', function () {`);
+        lines.push('        $chart = Echarts::bar()');
+        lines.push('            ->setData($this->sampleData)');
+        lines.push("            ->setLabelKey('month')");
+        lines.push("            ->setMetrics(['Total Sales' => 'total'])");
+        lines.push('            ->render();');
+        lines.push('');
+        lines.push('        expect($chart)->toBeArray()');
+        lines.push("            ->and($chart)->toHaveKey('chartDimensions')");
+        lines.push("            ->and($chart)->toHaveKey('chartDataset');");
+        lines.push('    });');
+      } else if (m.type === 'data_provider') {
+        lines.push(`    it('${desc}', function (string $month, float $total) {`);
+        lines.push('        expect($total)->toBeGreaterThan(0)');
+        lines.push('            ->and($month)->not->toBeEmpty();');
+        lines.push('    })->with([');
+        if (cfg.dpRows && cfg.dpRows.length > 0) {
+          cfg.dpRows.forEach(r => {
+            lines.push(`        ['${r['month'] || 'Jan'}', ${r['total'] || 12500}],`);
+          });
+        } else {
+          lines.push("        ['Jan', 12500],");
+          lines.push("        ['Feb', 18500],");
+          lines.push("        ['Mar', 15500],");
+        }
+        lines.push('    ]);');
+      } else if (m.type === 'ajax_callback') {
+        lines.push(`    it('${desc}', function () {`);
+        lines.push("        $_SERVER['HTTP_X_REQUESTED_WITH'] = 'xmlhttprequest';");
+        lines.push("        $isCallback = isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';");
+        lines.push('        expect($isCallback)->toBeTrue();');
+        lines.push('    });');
+      } else if (m.type === 'page_config') {
+        lines.push(`    it('${desc}', function () {`);
+        lines.push('        $page = $this->subject->getPageConfig();');
+        lines.push("        expect($page['groups'])->toContain('Administrator')");
+        lines.push("            ->and($page['groups'])->toContain('AR')");
+        lines.push("            ->and($page['title'])->toBe('Sales Receipts Analysis Charts');");
+        lines.push('    });');
+      } else {
+        lines.push(`    it('${desc}', function () {`);
+        lines.push('        $result = $this->subject->execute();');
+        lines.push('        expect($result)->not->toBeNull();');
+        lines.push('    });');
+      }
+      lines.push('');
+    });
+
+    lines.push('});');
+    return lines.join('\n');
+  }
+
+  function copyPhpUnitTestOutput() {
+    const text = document.getElementById('phpunitCodePre')?.textContent || '';
+    if (!text) return;
+
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('btnCopyPhpUnitOutput');
+      const btnText = document.getElementById('btnCopyPhpUnitText');
+      if (btnText) btnText.textContent = 'Copied! ✓';
+      if (btn) btn.classList.add('btn-outline');
+
+      setTimeout(() => {
+        if (btnText) btnText.textContent = 'Copy Test';
+        if (btn) btn.classList.remove('btn-outline');
+      }, 2000);
+    });
+  }
+
+  function downloadPhpUnitTestFile() {
+    const text = document.getElementById('phpunitCodePre')?.textContent || '';
+    if (!text) return;
+
+    const testClass = document.getElementById('phpunitTestClass')?.value || 'ExampleTest';
+    const filename = `${testClass}.php`;
+
+    const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
+    URL.revokeObjectURL(link.href);
+  }
+
+  // ==========================================
+  // 3. UUID GENERATOR STATE & LOGIC
+  // ==========================================
+  function setUuidCount(val) {
+    const input = document.getElementById('subUuidCount');
+    if (input) input.value = val;
+    generateUUIDs();
+  }
+
+  function generateUUIDs() {
+    const count = Math.min(100, Math.max(1, parseInt(document.getElementById('subUuidCount')?.value || '1')));
+    const formatStyle = document.getElementById('subUuidFormatStyle')?.value || 'standard';
+    const outputWrap = document.getElementById('subUuidOutputWrap')?.value || 'lines';
+    const outputPre = document.getElementById('subUuidOutputPre');
+    const status = document.getElementById('subUuidStatus');
+    if (!outputPre) return;
+
+    const uuids = [];
+    for (let i = 0; i < count; i++) {
+      let u = '';
+      if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+        u = crypto.randomUUID();
+      } else {
+        u = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+          const r = Math.random() * 16 | 0;
+          return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+        });
+      }
+
+      if (formatStyle === 'uppercase') {
+        u = u.toUpperCase();
+      } else if (formatStyle === 'nohyphen') {
+        u = u.replace(/-/g, '');
+      } else if (formatStyle === 'braces') {
+        u = `{${u}}`;
+      } else if (formatStyle === 'urn') {
+        u = `urn:uuid:${u}`;
+      }
+
+      uuids.push(u);
+    }
+
+    let result = '';
+    if (outputWrap === 'lines') {
+      result = uuids.join('\n');
+    } else if (outputWrap === 'php') {
+      result = `$uuids = [\n    '` + uuids.join("',\n    '") + `',\n];`;
+    } else if (outputWrap === 'json') {
+      result = JSON.stringify(uuids, null, 2);
+    } else if (outputWrap === 'sql') {
+      result = `'` + uuids.join(`', '`) + `'`;
+    }
+
+    outputPre.textContent = result;
+    if (status) status.textContent = `${count} UUID${count === 1 ? '' : 's'} (${formatStyle})`;
+  }
+
+  function clearUUID() {
+    const input = document.getElementById('subUuidCount');
+    const outputPre = document.getElementById('subUuidOutputPre');
+    if (input) input.value = '1';
+    if (outputPre) outputPre.textContent = '';
+    const status = document.getElementById('subUuidStatus');
+    if (status) status.textContent = 'Cleared';
+  }
+
+  function copyUUIDOutput() {
+    const text = document.getElementById('subUuidOutputPre')?.textContent || '';
+    if (!text) return;
+
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('btnCopyUuid');
+      if (btn) {
+        btn.textContent = 'Copied! ✓';
+        btn.classList.add('btn-success');
+        setTimeout(() => {
+          btn.textContent = 'Copy Result';
+          btn.classList.remove('btn-success');
+        }, 2000);
+      }
+    });
+  }
+
+  function downloadUuidOutput() {
+    const text = document.getElementById('subUuidOutputPre')?.textContent || '';
+    if (!text) return;
+    const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `uuids_${Date.now()}.txt`;
+    link.click();
+    URL.revokeObjectURL(link.href);
+  }
+
+  // Initialize on DOM ready
+  document.addEventListener('DOMContentLoaded', () => {
+    renderColumnsListUI();
+    generateData();
+    renderPhpUnitMocksList();
+    renderPhpUnitMethodsList();
+    generatePhpUnitTest();
+  });
+</script>

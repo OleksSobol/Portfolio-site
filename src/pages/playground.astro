@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ApiTester from "../components/playground/ApiTester.astro";
 import MarkdownPdfConverter from "../components/playground/MarkdownPdfConverter.astro";
+import Generators from "../components/playground/Generators.astro";
 ---
 
 <BaseLayout title="Developer Tools Playground" sideBarActiveItemID="playground">
@@ -11,7 +12,7 @@ import MarkdownPdfConverter from "../components/playground/MarkdownPdfConverter.
 
   <div class="mb-10">
     <p class="mb-6 text-lg">
-      Client-side interactive tools for Markdown to PDF conversion, API testing, Base64 encoding/decoding, JSON formatting, subnet calculations, and UUID generation.
+      Client-side interactive tools for Markdown to PDF conversion, API testing, Base64 encoding/decoding, JSON formatting, subnet calculations, mock sample data and UUID generators.
     </p>
 
     <!-- Loaded Share Banner (hidden by default) -->
@@ -60,7 +61,7 @@ import MarkdownPdfConverter from "../components/playground/MarkdownPdfConverter.
       <a class="tab" id="tab-base64" onclick="switchPgTab('base64', this)">Base64 Tool</a>
       <a class="tab" onclick="switchPgTab('json-formatter', this)">JSON Formatter</a>
       <a class="tab" onclick="switchPgTab('subnet-calc', this)">Subnet Calc</a>
-      <a class="tab" onclick="switchPgTab('uuid-gen', this)">UUID Gen</a>
+      <a class="tab" id="tab-generators" onclick="switchPgTab('generators', this)">Generators</a>
     </div>
 
     <!-- Markdown to PDF Converter -->
@@ -141,26 +142,9 @@ import MarkdownPdfConverter from "../components/playground/MarkdownPdfConverter.
       </div>
     </div>
 
-    <!-- UUID Generator -->
-    <div id="uuid-gen" class="pg-tab-content hidden">
-      <div class="card bg-base-200 shadow-xl">
-        <div class="card-body">
-          <h2 class="card-title text-success">UUID v4 Generator</h2>
-          <p class="text-sm mb-4">Generate unique UUID v4 strings for database keys or API tokens.</p>
-
-          <div class="flex gap-4 items-center mb-4">
-            <label class="label-text">Count:</label>
-            <input type="number" id="uuidCount" class="input input-bordered w-[90px]" value="1" min="1" max="50">
-          </div>
-
-          <div class="card-actions justify-start">
-            <button class="btn btn-primary" onclick="generateUUIDs()">Generate</button>
-            <button class="btn btn-outline" onclick="clearUUID()">Clear</button>
-          </div>
-
-          <div id="uuidOutput" class="pg-output" style="display: none;"></div>
-        </div>
-      </div>
+    <!-- Generators (Mock Data & UUID) -->
+    <div id="generators" class="pg-tab-content hidden">
+      <Generators />
     </div>
 
   </div>
@@ -174,7 +158,7 @@ import MarkdownPdfConverter from "../components/playground/MarkdownPdfConverter.
       t.classList.remove('block');
       t.classList.add('hidden');
     });
-    document.querySelectorAll('.tab').forEach(b => b.classList.remove('tab-active'));
+    document.querySelectorAll('#pgTabsContainer > .tab').forEach(b => b.classList.remove('tab-active'));
     
     const content = document.getElementById(tabId);
     if (content) {
@@ -388,26 +372,6 @@ import MarkdownPdfConverter from "../components/playground/MarkdownPdfConverter.
     document.getElementById('subnetOutput').style.display = 'none';
   }
 
-  function generateUUIDs() {
-    const count = parseInt(document.getElementById('uuidCount').value) || 1;
-    const output = document.getElementById('uuidOutput');
-    output.style.display = 'block';
-    const list = [];
-    for (let i = 0; i < count; i++) {
-      list.push('xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
-        const r = Math.random() * 16 | 0;
-        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-      }));
-    }
-    output.className = 'pg-output success';
-    output.textContent = list.join('\n');
-  }
-
-  function clearUUID() {
-    document.getElementById('uuidCount').value = '1';
-    document.getElementById('uuidOutput').style.display = 'none';
-  }
-
   /* Auto-Load Shared Links on Page Load */
   document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -428,6 +392,27 @@ import MarkdownPdfConverter from "../components/playground/MarkdownPdfConverter.
     } else if (tool === 'markdown' || tool === 'pdf' || tool === 'md') {
       const tabBtn = document.getElementById('tab-md-pdf');
       switchPgTab('md-pdf-converter', tabBtn);
+    } else if (tool === 'generators' || tool === 'data') {
+      const tabBtn = document.getElementById('tab-generators');
+      switchPgTab('generators', tabBtn);
+      const dataSubBtn = document.getElementById('gen-tab-btn-data');
+      if (typeof switchGenSubTab === 'function' && dataSubBtn) {
+        switchGenSubTab('data-gen', dataSubBtn);
+      }
+    } else if (tool === 'phpunit' || tool === 'test' || tool === 'tests') {
+      const tabBtn = document.getElementById('tab-generators');
+      switchPgTab('generators', tabBtn);
+      const phpunitSubBtn = document.getElementById('gen-tab-btn-phpunit');
+      if (typeof switchGenSubTab === 'function' && phpunitSubBtn) {
+        switchGenSubTab('phpunit-gen', phpunitSubBtn);
+      }
+    } else if (tool === 'uuid' || tool === 'uuid-gen') {
+      const tabBtn = document.getElementById('tab-generators');
+      switchPgTab('generators', tabBtn);
+      const uuidSubBtn = document.getElementById('gen-tab-btn-uuid');
+      if (typeof switchGenSubTab === 'function' && uuidSubBtn) {
+        switchGenSubTab('uuid-gen-sub', uuidSubBtn);
+      }
     }
   });
 </script>
