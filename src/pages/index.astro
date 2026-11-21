@@ -4,6 +4,7 @@ import HorizontalCard from "../components/HorizontalCard.astro";
 import { getCollection } from "astro:content";
 import createSlug from "../lib/createSlug";
 import { FEATURED_PROJECTS } from "../data/projects";
+import { SHOW_HOME_PROJECT_TAGS } from "../config";
 
 const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
@@ -36,7 +37,7 @@ const last_posts = posts.slice(0, 3);
             title={project.title}
             desc={project.desc}
             url={project.url}
-            techTags={project.techTags}
+            techTags={SHOW_HOME_PROJECT_TAGS ? project.techTags : undefined}
           />
           {idx < FEATURED_PROJECTS.length - 1 && <div class="divider my-0" />}
         </>

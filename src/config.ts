@@ -5,3 +5,4 @@ export const SITE_TITLE = 'Oleksandr Sobol';
 export const SITE_DESCRIPTION = 'Full Stack & Backend Developer | PHP, Python, Go, JS, MySQL, Docker, Networking';
 export const GENERATE_SLUG_FROM_TITLE = true
 export const TRANSITION_API = true
+export const SHOW_HOME_PROJECT_TAGS = false
