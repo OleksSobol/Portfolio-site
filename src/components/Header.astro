@@ -1,5 +1,5 @@
 <div
-  class="sticky lg:hidden top-0 z-30 flex h-16 w-full justify-center bg-opacity-90 backdrop-blur transition-all duration-100 bg-base-100 text-base-content shadow-sm"
+  class="sticky lg:hidden top-0 z-30 flex h-16 w-full justify-center backdrop-blur transition-all duration-100 bg-base-100/90 text-base-content shadow-sm"
 >
   <div class="navbar">
     <div class="navbar-start">
@@ -23,6 +23,23 @@
 </div>
 
 <script>
-  import { themeChange } from 'theme-change';
-  themeChange();
+  const setupThemeToggle = () => {
+    const toggle = document.querySelector<HTMLInputElement>('input[data-toggle-theme]');
+    if (!toggle) return;
+
+    const current = localStorage.getItem('theme') || document.documentElement.getAttribute('data-theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', current);
+    toggle.checked = current === 'light';
+
+    if (toggle.dataset.themeBound) return;
+    toggle.dataset.themeBound = 'true';
+
+    toggle.addEventListener('change', () => {
+      const next = toggle.checked ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+  };
+
+  document.addEventListener('astro:page-load', setupThemeToggle);
 </script>
