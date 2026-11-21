@@ -1,43 +1,186 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HorizontalCard from "../components/HorizontalCard.astro";
+import { getTechBadgeClass } from "../lib/techColors";
+import { PROJECTS as projects } from "../data/projects";
+
+const categories = [
+  { id: "all", label: "All", count: projects.length },
+  { id: "web", label: "Web", count: projects.filter((p) => p.category === "web").length },
+  { id: "mobile", label: "Mobile", count: projects.filter((p) => p.category === "mobile").length },
+  { id: "automation", label: "Automation & Bots", count: projects.filter((p) => p.category === "automation").length },
+];
+
+const allTechTags = Array.from(new Set(projects.flatMap((p) => p.techTags)));
 ---
 
 <BaseLayout title="Projects" sideBarActiveItemID="projects">
   <h1 class="text-3xl w-full font-bold mb-5">Projects & Case Studies</h1>
 
-  <HorizontalCard
-    title="Custom Wedding Website & Guest RSVP Platform"
-    desc="Designed and built a fast, mobile-first wedding website deployed on Cloudflare Pages — featuring a live countdown, Google Apps Script & Sheets RSVP backend (with song requests and dietary tracking), photo gallery, and guest uploads."
-    url="https://solstice2026.party"
-    badge="HTML/JS & CLOUDFLARE"
-  />
-  <div class="divider my-0"></div>
-  <HorizontalCard
-    title="CodeLedger: An Offline-First Time Tracking & Invoicing App for Freelance Developers"
-    desc="Built a Flutter mobile app from scratch to solve my own freelance billing problem — offline-first, encrypted backups, GitHub-integrated time tracking."
-    url="https://codeledger.osobol.com"
-    badge="FLUTTER"
-  />
-  <div class="divider my-0"></div>
-  <HorizontalCard
-    title="Automating ISP Equipment Management: 15+ Hours Saved Per Week"
-    desc="Multi-threaded DHCP lease processing for ISP operations."
-    url="https://github.com/OleksSobol/DHCP-LEASE-RUNNER---DLR"
-    badge="PYTHON"
-  />
-  <div class="divider my-0"></div>
-  <HorizontalCard
-    title="Expenses Tracker: A Privacy-First Personal Finance App"
-    desc="Built an offline-first Flutter app to track personal income, expenses, and recurring bills — no accounts, no cloud, no subscriptions."
-    url="https://expenses-tracker.osobol.com/"
-    badge="FLUTTER"
-  />
-  <div class="divider my-0"></div>
-  <HorizontalCard
-    title="How I Reduced ISP Customer Onboarding from 20 Minutes to Under 60 Seconds"
-    desc="Production automation serving 4000+ clients with 99.9% uptime."
-    url="https://github.com/OleksSobol/Utopia-Account-Creation---UAC"
-    badge="AUTOMATION"
-  />
+  <div role="tablist" aria-label="Filter projects by category" class="tabs tabs-box mb-3 flex-wrap gap-1">
+    {
+      categories.map((cat, idx) => (
+        <button
+          type="button"
+          role="tab"
+          data-project-tab={cat.id}
+          aria-selected={idx === 0 ? "true" : "false"}
+          class:list={["tab gap-2", { "tab-active": idx === 0 }]}
+        >
+          <span>{cat.label}</span>
+          <span class="badge badge-sm badge-ghost">{cat.count}</span>
+        </button>
+      ))
+    }
+  </div>
+
+  <div class="flex flex-wrap items-center gap-2 mb-6" role="group" aria-label="Filter projects by technology">
+    <span class="text-xs uppercase tracking-wider opacity-60 mr-1">Tech:</span>
+    {
+      allTechTags.map((tech) => (
+        <button
+          type="button"
+          data-tech-bar-btn={tech}
+          aria-pressed="false"
+          class={`badge badge-sm font-semibold cursor-pointer opacity-75 hover:opacity-100 transition ${getTechBadgeClass(tech)}`}
+        >
+          {tech}
+        </button>
+      ))
+    }
+    <button
+      type="button"
+      id="clear-tech-filter"
+      class="badge badge-sm badge-ghost cursor-pointer hidden"
+    >
+      ✕ Clear
+    </button>
+  </div>
+
+  <div id="projects-list">
+    {
+      projects.map((project, idx) => (
+        <div
+          data-project-item
+          data-category={project.category}
+          data-techs={project.techTags.join(",")}
+        >
+          <HorizontalCard
+            title={project.title}
+            desc={project.desc}
+            url={project.url}
+            techTags={project.techTags}
+            interactiveTechTags={true}
+          />
+          <div data-project-divider class:list={["divider my-0", { hidden: idx === projects.length - 1 }]} />
+        </div>
+      ))
+    }
+  </div>
+
+  <div id="projects-empty" class="hidden bg-base-200 rounded-lg p-6 text-center opacity-80">
+    No projects match that category &amp; tag combination.
+  </div>
 </BaseLayout>
+
+<script>
+  const setupProjectFilters = () => {
+    const tabs = document.querySelectorAll<HTMLButtonElement>("[data-project-tab]");
+    const techBarBtns = document.querySelectorAll<HTMLButtonElement>("[data-tech-bar-btn]");
+    const cardTechBtns = document.querySelectorAll<HTMLButtonElement>("[data-tech-filter]");
+    const clearBtn = document.getElementById("clear-tech-filter");
+    const emptyState = document.getElementById("projects-empty");
+    const items = document.querySelectorAll<HTMLElement>("[data-project-item]");
+    if (!tabs.length || !items.length) return;
+
+    let activeCategory = "all";
+    let activeTech: string | null = null;
+
+    const applyFilters = () => {
+      tabs.forEach((tab) => {
+        const isActive = tab.dataset.projectTab === activeCategory;
+        tab.classList.toggle("tab-active", isActive);
+        tab.setAttribute("aria-selected", String(isActive));
+      });
+
+      techBarBtns.forEach((btn) => {
+        const isSelected = btn.dataset.techBarBtn === activeTech;
+        btn.setAttribute("aria-pressed", String(isSelected));
+        btn.classList.toggle("opacity-100", isSelected || !activeTech);
+        btn.classList.toggle("opacity-75", !activeTech);
+        btn.classList.toggle("opacity-35", Boolean(activeTech && !isSelected));
+        btn.classList.toggle("ring-2", isSelected);
+        btn.classList.toggle("ring-offset-1", isSelected);
+        btn.classList.toggle("ring-base-content/50", isSelected);
+      });
+
+      clearBtn?.classList.toggle("hidden", !activeTech);
+
+      const visible: HTMLElement[] = [];
+      items.forEach((item) => {
+        const matchesCat = activeCategory === "all" || item.dataset.category === activeCategory;
+        const techs = (item.dataset.techs || "").split(",");
+        const matchesTech = !activeTech || techs.includes(activeTech);
+        const show = matchesCat && matchesTech;
+        item.classList.toggle("hidden", !show);
+        if (show) visible.push(item);
+      });
+
+      visible.forEach((item, idx) => {
+        const divider = item.querySelector("[data-project-divider]");
+        if (divider) {
+          divider.classList.toggle("hidden", idx === visible.length - 1);
+        }
+      });
+
+      emptyState?.classList.toggle("hidden", visible.length > 0);
+    };
+
+    const toggleTech = (tech: string, resetCategory = false) => {
+      activeTech = activeTech === tech ? null : tech;
+      if (resetCategory && activeTech) {
+        activeCategory = "all";
+      }
+      applyFilters();
+    };
+
+    tabs.forEach((tab) => {
+      if (tab.dataset.filterBound) return;
+      tab.dataset.filterBound = "true";
+      tab.addEventListener("click", () => {
+        activeCategory = tab.dataset.projectTab || "all";
+        applyFilters();
+      });
+    });
+
+    techBarBtns.forEach((btn) => {
+      if (btn.dataset.filterBound) return;
+      btn.dataset.filterBound = "true";
+      btn.addEventListener("click", () => {
+        const tech = btn.dataset.techBarBtn;
+        if (tech) toggleTech(tech, false);
+      });
+    });
+
+    cardTechBtns.forEach((btn) => {
+      if (btn.dataset.filterBound) return;
+      btn.dataset.filterBound = "true";
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const tech = btn.dataset.techFilter;
+        if (tech) toggleTech(tech, true);
+      });
+    });
+
+    if (clearBtn && !clearBtn.dataset.filterBound) {
+      clearBtn.dataset.filterBound = "true";
+      clearBtn.addEventListener("click", () => {
+        activeTech = null;
+        applyFilters();
+      });
+    }
+  };
+
+  document.addEventListener("astro:page-load", setupProjectFilters);
+</script>

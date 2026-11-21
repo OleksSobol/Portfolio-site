@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import { getTechBadgeClass } from "../lib/techColors";
 
 export interface Props {
   title: string;
@@ -7,11 +8,23 @@ export interface Props {
   desc?: string;
   url?: string;
   badge?: string;
+  techTags?: string[];
+  interactiveTechTags?: boolean;
   tags?: string[];
   target?: string;
 }
 
-const { title, img, desc, url, badge, tags, target = "_blank" } = Astro.props;
+const {
+  title,
+  img,
+  desc,
+  url,
+  badge,
+  techTags,
+  interactiveTechTags = false,
+  tags,
+  target = "_blank",
+} = Astro.props;
 const tag_url = url ? url.split("/").slice(0, -1).join("/") + "/tag" : "";
 const hasLink = Boolean(url && url !== "#");
 const rel = target === "_blank" ? "noopener noreferrer" : undefined;
@@ -46,6 +59,28 @@ const rel = target === "_blank" ? "noopener noreferrer" : undefined;
         }
         {badge && <span class="badge badge-secondary mx-2">{badge}</span>}
       </h3>
+      {
+        techTags && techTags.length > 0 && (
+          <div class="flex flex-wrap gap-1.5 mt-2 relative z-10">
+            {techTags.map((tech) =>
+              interactiveTechTags ? (
+                <button
+                  type="button"
+                  data-tech-filter={tech}
+                  class={`badge badge-sm font-semibold cursor-pointer hover:brightness-110 transition ${getTechBadgeClass(tech)}`}
+                  title={`Filter by ${tech}`}
+                >
+                  {tech}
+                </button>
+              ) : (
+                <span class={`badge badge-sm font-semibold ${getTechBadgeClass(tech)}`}>
+                  {tech}
+                </span>
+              )
+            )}
+          </div>
+        )
+      }
       {desc && <p class="py-1 text-base">{desc}</p>}
       {
         tags && tags.length > 0 && (
