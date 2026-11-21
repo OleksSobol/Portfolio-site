@@ -7,6 +7,15 @@ import { ClientRouter } from "astro:transitions";
 
 import { SITE_TITLE, SITE_DESCRIPTION, TRANSITION_API } from "../config";
 
+export interface Props {
+  image?: string;
+  title?: string;
+  description?: string;
+  includeSidebar?: boolean;
+  sideBarActiveItemID?: string;
+  ogType?: string;
+}
+
 const {
   image,
   title = SITE_TITLE,
@@ -20,7 +29,7 @@ const {
 <!doctype html>
 <html lang="en" data-theme="dark">
   <head>
-    <BaseHead title={title} description={description} image={image} , ogType={ogType} />
+    <BaseHead title={title} description={description} image={image} ogType={ogType} />
     {TRANSITION_API && <ClientRouter />}
     <script is:inline>
       const applyTheme = (doc = document) => {

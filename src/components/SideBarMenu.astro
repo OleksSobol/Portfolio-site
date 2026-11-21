@@ -1,22 +1,66 @@
 ---
+export interface Props {
+  sideBarActiveItemID?: string;
+}
+
 const { sideBarActiveItemID } = Astro.props;
-const activeClass = "bg-base-300"; // For primary color replace with `active` class
+const activeClass = "bg-base-300";
+
+const mainLinks = [
+  { id: "home", href: "/", label: "Home" },
+  { id: "projects", href: "/projects", label: "Projects" },
+  { id: "services", href: "/services", label: "Services" },
+  { id: "blog", href: "/blog/", label: "Blog" },
+  { id: "cv", href: "/cv", label: "CV" },
+  { id: "contact", href: "/contact", label: "Contact" },
+];
+
+const labLinks = [
+  { id: "playground", href: "/playground", label: "Playground" },
+  { id: "videos", href: "/videos", label: "Drone & Aerial" },
+];
 ---
 
-<ul class="menu w-full grow shrink menu-md overflow-y-auto">
-    <li><a class="py-3 text-base" id="home" href="/">Home</a></li>
-    <li><a class="py-3 text-base" id="projects" href="/projects">Projects</a></li>
-    <li><a class="py-3 text-base" id="services" href="/services">Services</a></li>
-    <li><a class="py-3 text-base" id="blog" href="/blog/">Blog</a></li>
-    <li><a class="py-3 text-base" id="cv" href="/cv">CV</a></li>
-    <li><a class="py-3 text-base" id="contact" href="/contact">Contact</a></li>
-    
-    <div class="divider my-1">Lab</div>
-    <li><a class="py-3 text-base" id="playground" href="/playground">Playground</a></li>
-    <li><a class="py-3 text-base" id="videos" href="/videos">Drone & Aerial</a></li>
-</ul>
+<nav aria-label="Primary" class="grow shrink overflow-y-auto">
+  <ul class="menu w-full menu-md">
+    {
+      mainLinks.map(({ id, href, label }) => {
+        const isActive = sideBarActiveItemID === id;
+        return (
+          <li>
+            <a
+              class:list={["py-3 text-base", { [activeClass]: isActive }]}
+              id={id}
+              href={href}
+              aria-current={isActive ? "page" : undefined}
+            >
+              {label}
+            </a>
+          </li>
+        );
+      })
+    }
 
-<script define:vars={{ sideBarActiveItemID: sideBarActiveItemID, activeClass: activeClass }}>
-const activeItemElem = document.getElementById(sideBarActiveItemID);
-activeItemElem && activeItemElem.classList.add(activeClass);
-</script>
+    <li class="pointer-events-none my-1 p-0" aria-hidden="true">
+      <div class="divider my-0 w-full">Lab</div>
+    </li>
+
+    {
+      labLinks.map(({ id, href, label }) => {
+        const isActive = sideBarActiveItemID === id;
+        return (
+          <li>
+            <a
+              class:list={["py-3 text-base", { [activeClass]: isActive }]}
+              id={id}
+              href={href}
+              aria-current={isActive ? "page" : undefined}
+            >
+              {label}
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</nav>
