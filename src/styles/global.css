@@ -1,6 +1,23 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@plugin "daisyui" {
+  themes: light, dark --default --prefersdark;
+  logs: false;
+}
+
+@plugin "daisyui/theme" {
+  name: "dark";
+  default: true;
+  prefersdark: true;
+  --color-primary: #3b82f6;
+  --color-secondary: #eab308;
+}
+
+@plugin "daisyui/theme" {
+  name: "light";
+  --color-primary: #3b82f6;
+  --color-secondary: #eab308;
+}
 
 .time-line-container>div:last-child .education__time>.education__line {
     display: none;
