@@ -29,13 +29,13 @@
 
     const current = localStorage.getItem('theme') || document.documentElement.getAttribute('data-theme') || 'dark';
     document.documentElement.setAttribute('data-theme', current);
-    toggle.checked = current === 'light';
+    toggle.checked = current === 'dark';
 
     if (toggle.dataset.themeBound) return;
     toggle.dataset.themeBound = 'true';
 
     toggle.addEventListener('change', () => {
-      const next = toggle.checked ? 'light' : 'dark';
+      const next = toggle.checked ? 'dark' : 'light';
       document.documentElement.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
     });

@@ -9,14 +9,19 @@
   name: "dark";
   default: true;
   prefersdark: true;
+  --color-base-content: #a6adbb;
   --color-primary: #3b82f6;
+  --color-primary-content: #ffffff;
   --color-secondary: #eab308;
+  --color-secondary-content: #1f2937;
 }
 
 @plugin "daisyui/theme" {
   name: "light";
   --color-primary: #3b82f6;
+  --color-primary-content: #ffffff;
   --color-secondary: #eab308;
+  --color-secondary-content: #1f2937;
 }
 
 .time-line-container>div:last-child .education__time>.education__line {
